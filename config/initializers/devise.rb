@@ -1,4 +1,3 @@
-config.secret_key = ENV['8525ca10cdb2d9329bb4200d65b8cdcab03bc2ca3cc97bf43e4f56c13b6df2fd8d3aa1605e16b812c38452ce0c283d523528e40ee92bde81770bcd52b39e8db1']
 # frozen_string_literal: true
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
