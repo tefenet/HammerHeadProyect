@@ -11,4 +11,16 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-# Rails.application.config.assets.precompile += %w( admin.js admin.css )
+Rails.application.config.assets.precompile += %w( admin.js admin.css )
+Rails.application.config.assets.precompile += %w( bootstrap.css )
+Rails.application.config.assets.precompile += %w( bootstrap.min.css )
+Rails.application.config.assets.precompile += %w( jquery.idealforms.css )
+Rails.application.config.assets.precompile += %w( slicknav.css )
+Rails.application.config.assets.precompile += %w( rides.css )
+Rails.application.config.assets.precompile += %w( application.scss )
+Rails.application.config.assets.precompile += %w( font-awesome.min.css )
+Rails.application.config.assets.precompile += %w( jquery.idealselect.css )
+Rails.application.config.assets.precompile += %w( style.css )
+Rails.application.config.assets.precompile += %w( modernizr.js )
+Rails.application.config.assets.precompile += %w( form.css )
+Rails.application.config.assets.precompile += %w( form.js )

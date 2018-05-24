@@ -1,0 +1,428 @@
+!!!
+/[if IE 7] <html class="ie7 no-js" lang="en">
+/[if lte IE 8] <html class="ie8 no-js" lang="en">
+/[if (gte IE 9)|!(IE)] <html class="not-ie no-js" lang="en">
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    / Basic Page Needs
+    %meta{:charset => "utf-8"}/
+    %title My ride
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "author"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    / Mobile Specific Metas
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Styles
+    / Bootstrap
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Forms
+    %link{:href => "css/jquery.idealforms.css", :rel => "stylesheet"}/
+    / Select
+    %link{:href => "css/jquery.idealselect.css", :rel => "stylesheet"}/
+    / Slicknav
+    %link{:href => "css/slicknav.css", :rel => "stylesheet"}/
+    / Main style
+    %link{:href => "css/style.css", :rel => "stylesheet"}/
+    / Modernizr
+    %script{:src => "js/modernizr.js"}
+    / Fonts
+    %link{:href => "css/font-awesome.min.css", :rel => "stylesheet"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Montserrat", :rel => "stylesheet", :type => "text/css"}/
+    / HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    / WARNING: Respond.js doesn't work if you view the page via file://
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.min.js@1.4.2/respond.min.js"></script>
+  %body
+    %header.header
+      .top-menu
+        %section.container
+          .row
+            .col-md-4.col-sm-4.col-xs-12
+              .user-log
+                %a{"data-target" => "#loginModal", "data-toggle" => "modal"}
+                Log in
+                \/
+                = link_to "New Contact", sign_up_path, remote: true, class: "btn btn-primary"
+                \/
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"> Launch demo modal </button>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              / end .user-log
+            / end .col-sm-4
+            .col-md-8.col-sm-8.col-xs-12
+              %ul.social-icons
+                %li
+                  %a.facebook{:href => "#"}
+                    %i.fa.fa-facebook
+                %li
+                  %a.twitter{:href => "#"}
+                    %i.fa.fa-twitter
+                %li
+                  %a.google{:href => "#"}
+                    %i.fa.fa-google-plus
+            / end .col-sm-8
+          / end .row
+        / end .container
+      / end .top-menu
+      .main-baner
+        .fullscreen.background.parallax.clearfix{"data-img-height" => "1064", "data-img-width" => "1600", :style => "background-image:url('img/tumblr_n7yhhvUQtx1st5lhmo1_1280.jpg');"}
+          .main-parallax-content
+            .second-parallax-content
+              %section.container
+                .row
+                  .main-header-container.clearfix
+                    .col-md-4.col-sm-12.col-xs-12
+                      .logo
+                        %h1 My ride
+                      / end .logo
+                    / end .col-sm-4
+                    .col-md-8.col-sm-8.col-xs-12
+                      %nav#nav.main-navigation
+                        %ul.navigation
+                          %li
+                            %a{:href => "/"} Home
+                          %li
+                            %a{:href => "rides.html"} rides
+                          %li
+                            %a{:href => "add-ride.html"} Submit
+                          %li
+                            %a{:href => "#"} Pages
+                            %ul.sub-menu
+                              %li
+                                %a{:href => "events.html"} Events
+                              %li
+                                %a{:href => "single-post.html"} Single post
+                              %li
+                                %a{:href => "single-article.html"} Single article
+                          %li
+                            %a{:href => "blog.html"} Blog
+                          %li
+                            %a{:href => "contact-page.html"} Contact
+                      / end .main-navigation
+                    / end .col-md-8
+                  / end .main-header-container
+                / end .row
+              / end .container
+            / end .second-parallax-content
+          / end .main-parallax-content
+        / end .background .parallax
+      / end .main-baner
+    / end .header
+    %section.main-content
+      .container
+        .row
+          .page-content
+            .services.clearfix
+              .col-md-12.col-sm-12.col-xs-12
+                .page-sub-title.textcenter
+                  %h2 Services
+                  .line
+                / end .page-sub-title
+              / end .col-md-12 col-sm-12 col-xs-12
+              .col-md-4.col-sm-4.col-xs-12
+                %article.service
+                  %i.fa.fa-car
+                  %h3 Share your ride
+                  %p Are you getting sick of traveling alone and spent so much money on gas? Share your ride today,and forget about this problems.
+                / end .service
+              / end .col-md-4
+              .col-md-4.col-sm-4.col-xs-12
+                %article.service
+                  %i.fa.fa-users
+                  %h3 Find new friends
+                  %p Finding new friends is easier than ever,nothing makes better friendship than spending few hours casually chatting with some interesting people.
+                / end .service
+              / end .col-md-4
+              .col-md-4.col-sm-4.col-xs-12
+                %article.service
+                  %i.fa.fa-map-marker
+                  %h3 Go to new places
+                  %p Find some new favourite place to chill out,you have no longer got excuse for not travelling and discovering.
+                / end .service
+              / end .col-md-4
+            / end .services
+            .clearfix
+            .col-md-12.col-sm-12.col-xs-12
+              .background.parallax{"data-img-height" => "1064", "data-img-width" => "1600", :style => "background-image:url('img/XWBIL5.jpg');"}
+                .main-parallax-content
+                  .second-parallax-content
+                    .parallax-content.clearfix
+                      .col-md-4.col-sm-4.col-xs-12
+                        .site-stat
+                          %span.counter 5,000
+                          %span Happy users
+                      .col-md-4.col-sm-4.col-xs-12
+                        .site-stat
+                          %span.counter 7,000
+                          %span Successful rides
+                      .col-md-4.col-sm-4.col-xs-12
+                        .site-stat
+                          %span.counter 600,000
+                          %span Miles traveled in a good company
+                    / end .parallax-content
+                  / end .main-parallax-content
+                / end .paralax
+              / end .fullscreen .background .parallax
+            / end .col-md-12
+            .clearfix
+            .last-rides
+              .col-md-12.col-sm-12.col-xs-12
+                .page-sub-title.textcenter
+                  %h2 Last rides
+                  .line
+                / end .page-sub-title
+              .col-md-12.col-sm-12.col-xs-12
+                %article.ride-box.clearfix
+                  .ride-content
+                    %h3>
+                      %a{:href => "#"} From Plovdiv to Sofia
+                    ride by
+                    %a{:href => "#"} Stefan Valkov
+                  %ul.ride-meta
+                    %li.ride-date
+                      %a.tooltip-link{"data-original-title" => "Date", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-calendar
+                        July 20, 2014 at 19:00 PM
+                    / end .ride-date
+                    %li.ride-people
+                      %a.tooltip-link{"data-original-title" => "Number of seats", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-user
+                        1
+                    / end .ride-people
+                    %li
+                      %a{:href => "#"}
+                        %i.fa.fa-file
+                        Read more
+                  / end .ride-meta
+                / end .ride-box
+                %article.ride-box.clearfix
+                  .ride-content
+                    %h3>
+                      %a{:href => "#"} From Milano to Rome
+                    ride by
+                    %a{:href => "#"} Carlo Corti
+                  %ul.ride-meta
+                    %li.ride-date
+                      %a.tooltip-link{"data-original-title" => "Date", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-calendar
+                        July 18, 2014 at 06:00 AM
+                    / end .ride-date
+                    %li.ride-people
+                      %a.tooltip-link{"data-original-title" => "Number of seats", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-user
+                        4
+                    / end .ride-people
+                    %li
+                      %a{:href => "#"}
+                        %i.fa.fa-file
+                        Read more
+                  / end .ride-meta
+                / end .ride-box
+                %article.ride-box.clearfix
+                  .ride-content
+                    %h3>
+                      %a{:href => "#"} From Lyon to Paris
+                    ride by
+                    %a{:href => "#"} Antoine Bonnet
+                  %ul.ride-meta
+                    %li.ride-date
+                      %a.tooltip-link{"data-original-title" => "Date", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-calendar
+                        July 15, 2014 at 20:00 PM
+                    / end .ride-date
+                    %li.ride-people
+                      %a.tooltip-link{"data-original-title" => "Number of seats", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-user
+                        3
+                    / end .ride-people
+                    %li
+                      %a{:href => "#"}
+                        %i.fa.fa-file
+                        Read more
+                  / end .ride-meta
+                / end .ride-box
+                %article.ride-box.clearfix
+                  .ride-content
+                    %h3>
+                      %a{:href => "#"} From Barcelona to Madrid
+                    ride by
+                    %a{:href => "#"} Adriana Bello
+                  %ul.ride-meta
+                    %li.ride-date
+                      %a.tooltip-link{"data-original-title" => "Date", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-calendar
+                        July 10, 2014 at 09:00 AM
+                    / end .ride-date
+                    %li.ride-people
+                      %a.tooltip-link{"data-original-title" => "Number of seats", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-user
+                        2
+                    / end .ride-people
+                    %li
+                      %a{:href => "#"}
+                        %i.fa.fa-file
+                        Read more
+                  / end .ride-meta
+                / end .ride-box
+                %article.ride-box.clearfix
+                  .ride-content
+                    %h3>
+                      %a{:href => "#"} From Munich to Berlin
+                    ride by
+                    %a{:href => "#"} Albert Becker
+                  %ul.ride-meta
+                    %li.ride-date
+                      %a.tooltip-link{"data-original-title" => "Date", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-calendar
+                        July 08, 2014 at 22:00 PM
+                    / end .ride-date
+                    %li.ride-people
+                      %a.tooltip-link{"data-original-title" => "Number of seats", "data-toggle" => "tooltip", :href => "#"}
+                        %i.fa.fa-user
+                        1
+                    / end .ride-people
+                    %li
+                      %a{:href => "#"}
+                        %i.fa.fa-file
+                        Read more
+                  / end .ride-meta
+                / end .ride-box
+                .clearfix
+                .read-all.pagination-margin
+                  %a{:href => "rides.html"} Read all
+              / end .col-md-12 col-sm-12 col-xs-12
+            / end .last-rides
+            .clearfix
+            .events.box-fix
+              .col-md-12.col-sm-12.col-xs-12
+                .page-sub-title.textcenter
+                  %h2 Events
+                  .line
+                / end .page-sub-title
+              / end .col-md-12 col-sm-12 col-xs-12
+              .col-md-4.col-sm-4.col-xs-12
+                .event.vertical.vertical-two
+                  %figure
+                    %img{:alt => "", :src => "img/events/event-1.jpg"}/
+                  .event-info
+                    .box.event-name
+                      %h3 Live concert
+                    .box.event-ride
+                      10 ride
+                    .box.event-read
+                      %a{:href => "#"} View all
+              .col-md-8.col-sm-8.col-xs-12
+                .event.horizontal-one
+                  %figure
+                    %img{:alt => "", :src => "img/events/event-2.jpg"}/
+                  .event-info
+                    .box.event-name
+                      %h3 Live concert
+                    .box.event-ride
+                      200 ride
+                    .box.event-read
+                      %a{:href => "#"} View all
+              .col-md-8.col-sm-8.col-xs-12
+                .event.horizontal-one
+                  %figure
+                    %img{:alt => "", :src => "img/events/event-3.jpg"}/
+                  .event-info
+                    .box.event-name
+                      %h3 Live concert
+                    .box.event-ride
+                      100 ride
+                    .box.event-read
+                      %a{:href => "#"} View all
+              .col-md-12.col-sm-12.col-xs-12
+                .read-all.pagination-margin
+                  %a{:href => "events.html"} Show all events
+              / end .col-md-12 col-sm-12 col-xs-12
+            / end .events
+          / end .page-content
+        / end .row
+      / end .container
+    / end .main-content
+    %footer#footer
+      .footer-copyright
+        .container
+          .row
+            .col-md-12.col-sm-12.col-xs-12
+              Copyright by My ride
+          / end .row
+        / end .container
+      / end .footer-copyright
+    / end #footer
+    #loginModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          / end .modal-header
+          .modal-body
+            %form.idealforms.login{:action => "", :autocomplete => "off", :novalidate => ""}
+              .log-header
+                %span.log-in Log in
+              .field
+                %input{:name => "username", :placeholder => "Username", :type => "text"}/
+                %span.error
+              .field
+                %input{:name => "password", :placeholder => "Password", :type => "password"}/
+                %span.error
+              .field.buttons
+                %button.submit.btn.green-color{:type => "submit"} Log in
+              %a.log-twitter.twitter{:href => "#"}
+                %i.fa.fa-twitter>
+                Twitter
+              %a.log-facebook.facebook{:href => "#"}
+                %i.fa.fa-facebook>
+                Facebook
+              .clearfix
+            / end .login
+          / end .modal-body
+        / end .modal-content
+      / end .modal-dialog
+    / end .modal
+    #newUser.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+
+    / Javascript
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"}
+    / Bootstrap
+    %script{:src => "js/bootstrap.min.js", :type => "text/javascript"}
+    / Main jQuery
+    %script{:src => "js/jquery.main.js", :type => "text/javascript"}
+    / Form
+    %script{:src => "js/jquery.idealforms.min.js", :type => "text/javascript"}
+    %script{:src => "js/jquery.idealselect.min.js", :type => "text/javascript"}
+    %script{:src => "js/jquery-ui-1.10.4.custom.min.js", :type => "text/javascript"}
+    / Menu
+    %script{:src => "js/hoverIntent.js", :type => "text/javascript"}
+    %script{:src => "js/superfish.js", :type => "text/javascript"}
+    / Counter-Up
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js", :type => "text/javascript"}
+    %script{:src => "js/jquery.counterup.min.js", :type => "text/javascript"}
+    / Rating
+    %script{:src => "js/bootstrap-rating-input.min.js", :type => "text/javascript"}
+    / Slicknav
+    %script{:src => "js/jquery.slicknav.min.js", :type => "text/javascript"}

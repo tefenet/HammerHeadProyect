@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Origen:</strong>
+  <%= @viaje.origen %>
+</p>
+
+<p>
+  <strong>Destino:</strong>
+  <%= @viaje.destino %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @viaje.fecha %>
+</p>
+
+<p>
+  <strong>Hora:</strong>
+  <%= @viaje.hora %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @viaje.precio %>
+</p>
+
+<p>
+  <strong>Duracion:</strong>
+  <%= @viaje.duracion %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @viaje.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_viaje_path(@viaje) %> |
+<%= link_to 'Back', viajes_path %>

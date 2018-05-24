@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  origen: MyString
+  destino: MyString
+  fecha: 2018-05-24
+  hora: 2018-05-24 14:18:30
+  precio: 1.5
+  duracion: 2018-05-24 14:18:30
+  descripcion: MyText
+
+two:
+  origen: MyString
+  destino: MyString
+  fecha: 2018-05-24
+  hora: 2018-05-24 14:18:30
+  precio: 1.5
+  duracion: 2018-05-24 14:18:30
+  descripcion: MyText
