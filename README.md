@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -23,3 +24,16 @@ Things you may want to cover:
 
 * ...
 # aventonSQLite
+=======
+# Aventón
+
+Comparti tu viaje y ahorra plata
+
+## Autores
+
+* **Santiago Losa**
+
+* **Pablo Kepes**
+
+* **Facundo Olasagarre**
+>>>>>>> 0798c5ae25639b62c3ac4d56c8928369a56a6b52
