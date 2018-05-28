@@ -223,6 +223,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   bootsnap (>= 1.1.0)
   bootstrap
   bootstrap-sass

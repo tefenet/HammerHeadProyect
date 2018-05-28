@@ -31,3 +31,12 @@
 
 en:
   hello: "Hello world"
+
+en:
+  activerecord:
+    attributes:
+      user:
+        first_name: "Nombre"
+        last_name: "Apellido"
+        birth_date: "Fecha de nacimiento"
+        password: "Contraseña"
