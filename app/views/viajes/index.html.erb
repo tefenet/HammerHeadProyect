@@ -46,50 +46,55 @@
 
         <header class="header">
 
-            <div class="top-menu">
+          <div class="top-menu">
 
-                <section class="container">
-                    <div class="row">
+              <section class="container">
+                  <div class="row">
 
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="user-log">
+                      <div class="col-md-4 col-sm-4 col-xs-12">
+                          <div class="user-log">
+                              <% if user_signed_in? %>
+                              <li><%= link_to "Mi perfil", current_user %><li>
+                              <li>
+                                  <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
+                              </li>
+                              <% else %>
+                              <li>
+                                <a href="/users/sign_up">Registrarse</a>
+                            </li>
+                              <%= link_to('Iniciar Sesion', new_user_session_path)  %>
+                          </a> /
+                          <% end %>
+                      </div><!-- end .user-log -->
+                  </div><!-- end .col-sm-4 -->
 
-                                <a data-toggle="modal" data-target="#loginModal">
-                                    Log in
-                                </a> /
-                                <a data-toggle="modal" data-target="#regModal">
-                                    Sign up
-                                </a>
+                  <!-- BEGIN: Top social net work buttons -->
+                  <div class="col-md-8 col-sm-8 col-xs-12">
 
-                            </div><!-- end .user-log -->
-                        </div><!-- end .col-sm-4 -->
+                      <ul class="social-icons">
+                          <li>
+                              <a class="facebook" href="#">
+                                  <i class="fa fa-facebook"></i>
+                              </a>
+                          </li>
+                          <li>
+                              <a class="twitter" href="#">
+                                  <i class="fa fa-twitter"></i>
+                              </a>
+                          </li>
+                          <li>
+                              <a class="google" href="#">
+                                  <i class="fa fa-google-plus"></i>
+                              </a>
+                          </li>
+                      </ul>
+                  </div><!-- end .col-sm-8 -->
+                  <!-- END: Top social net work buttons -->
 
-                        <div class="col-md-8 col-sm-8 col-xs-12">
+              </div><!-- end .row -->
+          </section><!-- end .container -->
 
-                            <ul class="social-icons">
-                                <li>
-                                    <a class="facebook" href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="google" href="#">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div><!-- end .col-sm-8 -->
-
-                    </div><!-- end .row -->
-                </section><!-- end .container -->
-
-            </div><!-- end .top-menu -->
+      </div><!-- end .top-menu -->
 
             <div class="main-baner">
 
