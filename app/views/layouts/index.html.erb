@@ -57,13 +57,13 @@
                             <% if user_signed_in? %>
                             Mi perfil <!-- aca va el href a perfil de usuario -->
                             <li>
-                                <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+                                <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>        
                             </li>
                             <% else %>
                             <li>
                               <a href="/users/sign_up">Registrarse</a>
                           </li>
-                            <%= link_to('Login', new_user_session_path)  %>
+                            <%= link_to('Iniciar Sesion', new_user_session_path)  %>
                         </a> /
                         <% end %> 
                     </div><!-- end .user-log -->
