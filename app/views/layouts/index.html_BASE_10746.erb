@@ -55,25 +55,20 @@
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="user-log">
                             <% if user_signed_in? %>
-                            <li><%= link_to "Mi perfil", current_user %><li>
+                            Mi perfil <!-- aca va el href a perfil de usuario -->
                             <li>
-<<<<<<< HEAD
-                                <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-=======
-                                <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>        
->>>>>>> 1800dc73111d8f28988ed1aa26f1604833473f27
+                                <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
                             </li>
                             <% else %>
                             <li>
                               <a href="/users/sign_up">Registrarse</a>
                           </li>
-                            <%= link_to('Iniciar Sesion', new_user_session_path)  %>
+                            <%= link_to('Login', new_user_session_path)  %>
                         </a> /
-                        <% end %>
+                        <% end %> 
                     </div><!-- end .user-log -->
                 </div><!-- end .col-sm-4 -->
 
-                <!-- BEGIN: Top social net work buttons -->
                 <div class="col-md-8 col-sm-8 col-xs-12">
 
                     <ul class="social-icons">
@@ -93,8 +88,8 @@
                             </a>
                         </li>
                     </ul>
+
                 </div><!-- end .col-sm-8 -->
-                <!-- END: Top social net work buttons -->
 
             </div><!-- end .row -->
         </section><!-- end .container -->
