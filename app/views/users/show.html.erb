@@ -22,7 +22,7 @@
                         <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="/viajes">viajes</a>
+                        <a href="">viajes</a>
                     </li>
                     <li>
                         <a href="/viajes/new">publicar viaje</a>
@@ -37,7 +37,7 @@
                                 <a href="single-post.html">calificaciones</a>
                             </li>
                             <li>
-                              <%= link_to "Cambiar contraseña", edit_user_registration_path %>
+                              <%= link_to "Recuperar contraseña", current_user %>
                             </li>
                         </ul>
                     </li>
@@ -51,67 +51,62 @@
     </section><!-- end .container -->
 </div><!-- end .top-menu -->
 
+<section class="main-content">
+  <div class="container">
+    <div class="background parallax" style="background-image:url(image_path('camino.jpg'));" data-img-width="1600" data-img-height="1064">
 
-<%= @user_viajes.each do |viaje| %>
-    <%= link_to "Viaje de:", viaje_path(viaje)%>
-    <%= link_to "usuario", user_path%>
-<% end %>
+<!-- con esto se muedtar informacion del usuario
+    <%= @user_viajes.each do |viaje| %>
+        <%= link_to "Viaje de:", viaje_path(viaje)%>
+        <%= link_to "usuario", user_path%>
+    <% end %>
+-->
+    <div class="last-rides">
 
-<div class="last-rides">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-    <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="page-sub-title textcenter">
+                <h2>Mis datos</h2>
+                <a href="#">
+                <div class="line"></div>
+            </div><!-- end .page-sub-title -->
 
-        <div class="page-sub-title textcenter">
-            <h2>Mis viajes</h2>
-            <a href="#">
-            <div class="line"></div>
-        </div><!-- end .page-sub-title -->
-
-    </div>
-
-    <div class="col-md-12 col-sm-12 col-xs-12">
-
-        <article class="ride-box clearfix">
-
-            <div class="ride-content">
-                <h3><a href="#">From Plovdiv to Sofia</a></h3>ride by <a href="#">Stefan Valkov</a>
-            </div>
-
-            <ul class="ride-meta">
-
-                <li class="ride-date">
-                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                        <i class="fa fa-calendar"></i>
-                        July 20, 2014 at 19:00 PM
-                    </a>
-                </li><!-- end .ride-date -->
-
-                <li class="ride-people">
-                    <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
-                        <i class="fa fa-user"></i>
-                        1
-                    </a>
-                </li><!-- end .ride-people -->
-
-                <li>
-                        <i class="fa fa-file"></i>
-                        Read more
-                    </a>
-                </li>
-
-            </ul><!-- end .ride-meta -->
-
-        </article><!-- end .ride-box -->
-
-        <div class="clearfix"></div>
-
-        <div class="read-all pagination-margin">
-            <a href="rides.html">Read all</a>
         </div>
 
-    </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-</div><!-- end .last-rides -->
+            <article class="ride-box clearfix">
+
+                <div class="ride-content">
+                    <h3><%=@user.first_name%> <%=@user.last_name%></h3>nacido el <h3><%=@user.birth_date%></h3>
+                </div>
+
+                <ul class="ride-meta">
+
+                    <li class="ride-date">
+                        <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+
+                            con numero de tarjeta <%=@user.credit_card_number%>
+                        </a>
+                    </li><!-- end .ride-date -->
+
+                </ul><!-- end .ride-meta -->
+
+            </article><!-- end .ride-box -->
+
+            <div class="clearfix"></div>
+
+            <div class="read-all pagination-margin">
+                <a href="">Editar perfil</a>
+            </div>
+
+        </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+    </div><!-- end .last-rides -->
+  </div>
+</section>
+
+
 
 
 
