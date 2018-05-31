@@ -1,8 +1,8 @@
-$body-bg: #c1bdba;
-$form-bg: #13232f;
-$white: #ffffff;
+$body-bg: transparent;
+$form-bg: #ffffff;
+$white: #d9534f;
 
-$main: #1ab188;
+$main: #f17376;
 $main-light: lighten($main,5%);
 $main-dark: darken($main,5%);
 
@@ -23,7 +23,14 @@ html {
 }
 
 body {
-  background:$body-bg;
+  background-image:url(image_path('camino.jpg'));
+  background-repeat:no-repeat;
+  background-position: center;
+
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -163,16 +170,16 @@ textarea {
 }
 
 .button {
-  border:0;
+  border:0 0;
   outline:none;
-  border-radius:0;
-  padding:15px 0;
+  border-radius:0 0;
+  padding:0 0;
   font-size:2rem;
   font-weight:$bold;
   text-transform:uppercase;
   letter-spacing:.1em;
-  background:$main;
-  color:$white;
+  background:$main-dark;
+  color:$main;
   transition:all.5s ease;
   -webkit-appearance: none;
   &:hover, &:focus {
