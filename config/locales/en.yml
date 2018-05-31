@@ -40,3 +40,5 @@ en:
         last_name: "Apellido"
         birth_date: "Fecha de nacimiento"
         password: "Contraseña"
+        password_confirmation: "Confirmar Contraseña"
+        current_password: "Contraseña actual"
