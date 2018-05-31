@@ -14,7 +14,7 @@ class ViajesController < ApplicationController
 
   # GET /viajes/new
   def new
-    @viaje = Viaje.new
+    @viaje = current_user.viajes.build
   end
 
   # GET /viajes/1/edit
@@ -24,7 +24,7 @@ class ViajesController < ApplicationController
   # POST /viajes
   # POST /viajes.json
   def create
-    @viaje = Viaje.new(viaje_params)
+    @viaje = current_user.viajes.build(viaje_params)
 
     respond_to do |format|
       if @viaje.save

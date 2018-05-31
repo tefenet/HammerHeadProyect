@@ -19,7 +19,7 @@ class User < ApplicationRecord
           errors.add(:birth_date, 'Deberias ser mayor de 18 años.')
       end
   end
-  
-  has_and_belongs_to_many :viajes
+
+  has_many :viajes
 
 end
