@@ -52,6 +52,6 @@
 </div><!-- end .top-menu -->
 
 <%= @user_viajes.each do |viaje| %>
-    <%= link_to viaje, viaje_path(viaje)%>
-    <%= link_to viaje.user_id, user_path%>
+    <%= link_to "Viaje de:", viaje_path(viaje)%>
+    <%= link_to "Usuario", user_path%>
 <% end %>
