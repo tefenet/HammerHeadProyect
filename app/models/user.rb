@@ -21,5 +21,5 @@ class User < ApplicationRecord
   end
 
   has_many :viajes
-
+  has_many :cars
 end

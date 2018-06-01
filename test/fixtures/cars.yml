@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plate: MyString
+  seats: 1
+  brand: MyString
+  model: MyString
+
+two:
+  plate: MyString
+  seats: 1
+  brand: MyString
+  model: MyString

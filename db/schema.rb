@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_31_232646) do
+ActiveRecord::Schema.define(version: 2018_06_01_210431) do
+
+  create_table "cars", force: :cascade do |t|
+    t.string "plate"
+    t.integer "seats"
+    t.string "brand"
+    t.string "model"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,6 +41,7 @@ ActiveRecord::Schema.define(version: 2018_05_31_232646) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.integer "credit_card_number"
+    t.integer "car_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
