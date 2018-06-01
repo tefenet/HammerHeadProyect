@@ -1,0 +1,50 @@
+<%= form_for @user, url: user_path(@user) do |f| %>
+<%= stylesheet_link_tag    'form' %>
+<%= javascript_include_tag 'form' %>
+<div class="form">
+
+      <h1>Editar perfil<img src="<%= asset_path 'Logo.jpg' %>" width="100" height="100"></h1>
+      <em>(edite solo los campos que dese cambiar)</em>
+      <form action="/" method="post">
+
+        <div class="top-row">
+          <div class="field-wrap">
+            <%= f.label :first_name, 'Nombre' %><br />
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+          </div>
+
+          <div class="field-wrap">
+            <%= f.label :last_name, 'Apellido' %><br />
+            <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <%= f.label :email, 'Tu Email' %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <div class="field-wrap">
+          <%= f.label :birth_date, 'Fecha de nacimiento' %><br />
+          <%=  f.date_field :birth_date,as: :date, value: f.object.birth_date %>
+        </div>
+
+        <div class="field-wrap">
+          <%= f.label :credit_card_number, 'Numero de tarjeta de credito' %><br />
+          <%=  f.number_field :credit_card_number, autofocus: true, autocomplete: "credit_card_number" %>
+          <em>(Opcional, podes agregarla luego!)</em><br />
+        </div>
+
+        <button type="submit" class="button button-block"/>
+        <%= f.submit "Confirmar edicion" %>
+      </button>
+
+      <% end %>
+
+      <%= link_to "Volver atras", :back %>
+
+    </form>
+
+  </div>
+
+</div>
