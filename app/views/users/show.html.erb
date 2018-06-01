@@ -9,6 +9,10 @@
                     <li>
                         <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
                     </li>
+                    <li>
+                        <%= link_to "Mi perfil", current_user  %>
+                    </li>
+                    <!-- lo volves a borrar y vas a saber como no hay que usar unas tijeras de jardin -->
                 </div><!-- end .user-log -->
             </div><!-- end .col-sm-4 -->
 
@@ -22,7 +26,7 @@
                         <a href="">viajes</a>
                     </li>
                     <li>
-                        <a href="/viajes/new">publicar viaje</a>
+                        <%= link_to "Publicar viaje", new_viaje_path %>
                     </li>
                     <li>
                         <a href="#">opciones</a>
@@ -34,7 +38,7 @@
                                 <a href="single-post.html">calificaciones</a>
                             </li>
                             <li>
-                              <%= link_to "Recuperar contraseña", current_user %>
+                              <%= link_to "Cambiar contraseña", edit_user_registration_path %>
                             </li>
                         </ul>
                     </li>

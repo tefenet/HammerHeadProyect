@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
 
   resources :viajes
 
@@ -7,8 +6,11 @@ Rails.application.routes.draw do
 
   resources :users
 
-=======
->>>>>>> 9e55228f2ab404fffd2800e9bb09f41c8540bb0a
+#  resources :viajes
+#  devise_for :users, :path => 'u', :controllers => { registrations: 'registrations' }
+#  resources :users, path: 'balance' do get :balance end
+#  get "users/balance", to: "users#balance", as: "balance"
+
   root "application#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
