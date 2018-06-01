@@ -27,4 +27,4 @@ private
     render "users/balance"
 >>>>>>> 9e55228f2ab404fffd2800e9bb09f41c8540bb0a
   end
-
+end
