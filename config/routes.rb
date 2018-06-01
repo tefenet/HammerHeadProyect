@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cars
   resources :viajes
 
   devise_for :users, :controllers => { registrations: 'registrations' }
