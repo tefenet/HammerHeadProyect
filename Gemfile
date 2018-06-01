@@ -17,6 +17,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'modernizr-rails'
 #compila haml y lo renderiza como html
 gem "haml"
 # Use Uglifier as compressor for JavaScript assets

@@ -350,8 +350,7 @@ hr
 div[class*="col-xs-"], div[class*="col-sm-"], div[class*="col-md-"], div[class*="col-lg-"]
 {
     padding: 0;
-    margin: 0;
-    color: #ef94965c;
+    margin: 0;    
 }
 .row
 {
@@ -397,16 +396,8 @@ div[class*="col-xs-"], div[class*="col-sm-"], div[class*="col-md-"], div[class*=
 /* === Paralax === */
 .fullscreen, .main-parallax-content
 {
-  background-image:url(image_path('camino.jpg'));
-  background-repeat:no-repeat;
-  background-position: center;
-
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-    width: 100%;
-    min-height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 .not-fullscreen, .not-fullscreen .main-parallax-content, .fullscreen.not-overflow, .fullscreen.not-overflow .main-parallax-content
 {
@@ -426,6 +417,14 @@ div[class*="col-xs-"], div[class*="col-sm-"], div[class*="col-md-"], div[class*=
     padding: 1em 0;
     color: #fff;
     text-transform: uppercase;
+}
+.background.parallax.clearfix
+{
+  background-size: cover;
+  background-position: 50%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
 }
 /* === Main header === */
 .main-header-container
