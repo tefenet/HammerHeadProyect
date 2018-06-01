@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :first_name, presence: { message: ": Por favor ingrese su nombre" }
   validates :last_name, presence: { message: ": Por favor ingrese su apellido" }
 
-  validates :password, presence: { message: ": Por favor ingrese una contraseña" }
+  validates :password, presence: { message: ": Por favor ingrese una contraseña" }, on: [:create, :new]
 
   private
 
