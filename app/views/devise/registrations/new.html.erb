@@ -42,6 +42,12 @@
           <%=  f.date_field :birth_date, autofocus: true, autocomplete: "birth_date" %>
         </div>
 
+        <div class="field-wrap">
+          <%= f.label :credit_card_number, 'Numero de tarjeta de credito' %><br />
+          <%=  f.number_field :credit_card_number, autofocus: true, autocomplete: "credit_card_number" %>
+          <em>(Opcional, podes agregarla luego!)</em><br />
+        </div>
+
 
         <button type="submit" class="button button-block"/>
         <%= f.submit "Registrarse" %>

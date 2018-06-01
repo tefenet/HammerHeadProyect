@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-
+  before_action :configure_permitted_parameters, if: :devise_controller?
   def index
     render "layouts/index"
   end
 
-  def datepicker_input form, field
-    content_tag :td, :data => {:provide => 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-autoclose' => 'true'} do
-      form.text_field field, class: 'form-control', placeholder: 'YYYY-MM-DD'
-    end
+  def configure_permitted_parameters
+    update_attrs = [:password, :password_confirmation, :current_password]
+    devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
+
 end

@@ -19,7 +19,7 @@
                         <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="/viajes">viajes</a>
+                        <a href="">viajes</a>
                     </li>
                     <li>
                         <a href="/viajes/new">publicar viaje</a>
@@ -48,7 +48,85 @@
     </section><!-- end .container -->
 </div><!-- end .top-menu -->
 
-<%= @user_viajes.each do |viaje| %>
-    <%= link_to viaje, viaje_path(viaje)%>
-    <%= link_to viaje.user_id, user_path%>
-<% end %>
+<section class="main-content">
+  <div class="container">
+    <div class="background parallax" style="background-image:url(image_path('camino.jpg'));" data-img-width="1600" data-img-height="1064">
+
+<!-- con esto se muedtar informacion del usuario
+    <%= @user_viajes.each do |viaje| %>
+        <%= link_to "Viaje de:", viaje_path(viaje)%>
+        <%= link_to "usuario", user_path%>
+    <% end %>
+-->
+    <div class="last-rides">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="page-sub-title textcenter">
+                <h2>Mis datos</h2>
+                <a href="#">
+                <div class="line"></div>
+            </div><!-- end .page-sub-title -->
+
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <article class="ride-box clearfix">
+
+                <div class="ride-content">
+                    <h3><%=@user.first_name%> <%=@user.last_name%></h3>nacido el <h3><%=@user.birth_date%></h3>
+                </div>
+
+                <ul class="ride-meta">
+
+                    <li class="ride-date">
+                        <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+
+                            con numero de tarjeta <%=@user.credit_card_number%>
+                        </a>
+                    </li><!-- end .ride-date -->
+
+                </ul><!-- end .ride-meta -->
+
+            </article><!-- end .ride-box -->
+
+            <div class="clearfix"></div>
+
+            <div class="read-all pagination-margin">
+                <a href="">Editar perfil</a>
+            </div>
+
+        </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+    </div><!-- end .last-rides -->
+  </div>
+</section>
+
+
+
+
+
+<!-- Javascript -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- Main jQuery -->
+<script type="text/javascript" src="js/jquery.main.js"></script>
+<!-- Form -->
+<script type="text/javascript" src="js/jquery.idealforms.min.js"></script>
+<script type="text/javascript" src="js/jquery.idealselect.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+<!-- Menu -->
+<script type="text/javascript" src="js/hoverIntent.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+<!-- Counter-Up  -->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+<script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+<!-- Rating  -->
+<script type="text/javascript" src="js/bootstrap-rating-input.min.js"></script>
+<!-- Slicknav  -->
+<script type="text/javascript" src="js/jquery.slicknav.min.js"></script>
+
+</body>
+</html>
