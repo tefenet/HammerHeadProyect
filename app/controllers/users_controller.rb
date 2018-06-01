@@ -18,9 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def balance
-    render "users/balance"
-  end
 
 private
   def user_params

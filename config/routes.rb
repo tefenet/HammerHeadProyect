@@ -6,10 +6,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-#  resources :viajes
-#  devise_for :users, :path => 'u', :controllers => { registrations: 'registrations' }
-#  resources :users, path: 'balance' do get :balance end
-#  get "users/balance", to: "users#balance", as: "balance"
+  get "/balance", to: "application#balance", as: "balance"
 
   root "application#index"
 

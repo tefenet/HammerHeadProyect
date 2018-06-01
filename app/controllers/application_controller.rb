@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
     render "layouts/index"
   end
 
+  def balance
+    render "layouts/balance"
+  end
+
   def configure_permitted_parameters
     update_attrs = [:password, :password_confirmation, :current_password]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
