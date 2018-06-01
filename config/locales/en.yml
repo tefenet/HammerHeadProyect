@@ -42,3 +42,12 @@ en:
         password: "Contraseña"
         password_confirmation: "Confirmar Contraseña"
         current_password: "Contraseña actual"
+
+en:
+  activerecord:
+    attributes:
+      car:
+        plate: "Patente"
+        seats: "Asientos"
+        brand: "Marca"
+        model: "Modelo"
