@@ -14,7 +14,7 @@ class CarsController < ApplicationController
 
   # GET /cars/new
   def new
-    @car = Car.new
+    @car =current_user.cars.build
   end
 
   # GET /cars/1/edit
@@ -24,7 +24,7 @@ class CarsController < ApplicationController
   # POST /cars
   # POST /cars.json
   def create
-    @car = Car.new(car_params)
+    @car =current_user.cars.build(car_params)
 
     respond_to do |format|
       if @car.save

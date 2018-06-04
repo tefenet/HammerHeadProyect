@@ -1,37 +1,56 @@
-<%= form_with(model: car, local: true) do |form| %>
-  <% if car.errors.any? %>
+<%= stylesheet_link_tag    'form' %>
+<%= javascript_include_tag 'form' %>
+
+<div class="form">
+
+  <div id="login">
+    <h1>Registrar auto
+      <img src="<%= asset_path 'Logo.jpg' %>" width="100" height="100">
+    </h1>
+
+    <%= form_with(model: car, local: true) do |form| %>
+    <% if car.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
 
       <ul>
-      <% car.errors.full_messages.each do |message| %>
+        <% car.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
-  <% end %>
+    <% end %>
 
-  <div class="field">
-    <%= form.label :plate %>
-    <%= form.text_field :plate %>
-  </div>
+    <div class="field-wrap">
+        <%= form.label :plate %><br />
+        <%= form.text_field :plate %>
+    </div>
 
-  <div class="field">
-    <%= form.label :seats %>
-    <%= form.number_field :seats %>
-  </div>
+    <div class="field-wrap">
+      <div class="field">
+        <%= form.label :seats %><br />
+        <%= form.number_field :seats %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :brand %>
-    <%= form.text_field :brand %>
-  </div>
+    <div class="field-wrap">
+      <div class="field">
+        <%= form.label :brand %><br />
+        <%= form.text_field :brand %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :model %>
-    <%= form.text_field :model %>
-  </div>
+    <div class="field-wrap">
+      <div class="field">
+        <%= form.label :model %><br />
+        <%= form.text_field :model %>
+      </div>
+    </div>
 
-  <div class="actions">
+    <button type="submit" class="button button-block"/>
     <%= form.submit %>
-  </div>
+  </button>
+
 <% end %>
+
+</div>
