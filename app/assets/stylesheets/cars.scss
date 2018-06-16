@@ -1,3 +1,16 @@
 // Place all the styles related to the cars controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background-color: #dee5ef;
+}
+table{
+    border: 4px solid;
+    border-color: #a70f0f;
+    margin: 20px;
+    padding: 40px;
+    align-self: center;
+}
+td{
+  text-align: center;
+}

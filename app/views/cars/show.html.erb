@@ -1,24 +1,47 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <%= stylesheet_link_tag 'cars' %>
+  </head>
+  <body>
+    <center>
+      <p id="notice"><h1><strong><%= notice %></strong></h1></p>
+<br>
+<table border="4" style="background-color:white" width="42%">
+  <col width="100">
+  <col width="100">
+  <tr>
+    <td><p>
+      <strong>Patente:</strong>
+      </p>
+    </td>
+    <td><%= @car.plate %></td>
+  </tr>
+  <tr>
+    <td><p>
+      <strong>Asientos:</strong>
+      </p>
+    </td>
+    <td><%= @car.seats %></td>
+  </tr>
+  <tr>
+    <td><p>
+      <strong>Marca:</strong>
+        </p>
+    </td>
+    <td>  <%= @car.brand %></td>
+  </tr>
+  <td><p>
+    <strong>Modelo:</strong>
+      </p>
+  </td>
+  <td><%= @car.model %></td>
+</table>
+<%= link_to 'Editar', edit_car_path(@car) %> |
+<%= link_to 'Volver', root_path %>
+</center>
 
-<p>
-  <strong>Plate:</strong>
-  <%= @car.plate %>
-</p>
-
-<p>
-  <strong>Seats:</strong>
-  <%= @car.seats %>
-</p>
-
-<p>
-  <strong>Brand:</strong>
-  <%= @car.brand %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @car.model %>
-</p>
-
-<%= link_to 'Edit', edit_car_path(@car) %> |
-<%= link_to 'Back', cars_path %>
+  </body>
+</html>
