@@ -1,5 +1,8 @@
 <%= stylesheet_link_tag    'form' %>
 <%= javascript_include_tag 'form' %>
+<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
 
 <div class="form">
 
