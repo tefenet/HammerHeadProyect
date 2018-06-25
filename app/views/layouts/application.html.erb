@@ -1,15 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>aventon</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag :modernizr %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Aca van a estar todos los estilos de la barra de navegacion para las fuentes y letras -->
+
+  <title>aventon</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag :modernizr %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <%= stylesheet_link_tag 'font-awesome.min'%>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+  <!-- Desde aca pone todo lo que quieras que tenga la barra de navegacion -->
+  <header class="header">
+    <div class="top-menu">
+      <section class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="user-log">
+              <li>
+                <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
+              </li>
+              <li>
+                <%= link_to "Mi perfil", current_user  %>
+              </li>
+              <!-- lo volves a borrar y vas a saber como no hay que usar unas tijeras de jardin -->
+            </div><!-- end .user-log -->
+          </div><!-- end .col-sm-4 -->
+
+          <nav id="nav" class="main-navigation">
+
+            <ul class="navigation">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/viajes">viajes</a>
+              </li>
+              <li>
+                <%= link_to "Publicar viaje", new_viaje_path %>
+              </li>
+              <li>
+                <a href="#">opciones</a>
+                <ul class="sub-menu">
+                  <li>
+                    <%= link_to "balance", balance_path  %>
+                  </li>
+                  <li>
+                    <a href="single-post.html">calificaciones</a>
+                  </li>
+                  <li>
+                    <%= link_to "Cambiar contraseña", edit_user_registration_path %>
+                  </li>
+                  <li>
+                    <%= link_to "cargar auto", new_car_path  %>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="contact-page.html">Contacto</a>
+              </li>
+            </ul>
+          </nav><!-- end .main-navigation -->
+        </div><!-- end .row -->
+      </section><!-- end .container -->
+    </div><!-- end .top-menu -->
+  </header><!-- end .header -->
+
+  <%= yield %>
+
+
+</body>
 </html>

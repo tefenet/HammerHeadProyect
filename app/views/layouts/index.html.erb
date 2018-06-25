@@ -3,28 +3,11 @@
 <!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" lang="en">  <!--<![endif]-->
 
+<%= yield %>
+
 <body>
 
-    <header class="header">
-
-        <div class="top-menu">
-
-            <section class="container">
-                <div class="row">
-
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="user-log">
-                            <li>
-                                <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
-                            </li>
-                            <li>
-                                <%= link_to "Mi perfil", current_user  %>
-                            </li>
-                        </div><!-- end .user-log -->
-                </div><!-- end .col-sm-4 -->
-            </div><!-- end .row -->
-        </section><!-- end .container -->
-    </div><!-- end .top-menu -->
+  <header class="header">
 
     <div class="main-baner">
 
@@ -37,55 +20,21 @@
                     <section class="container">
 
                         <div class="row">
+                          <div class="main-header-container clearfix">
 
-                            <div class="main-header-container clearfix">
+                              <div class="col-md-4 col-sm-12 col-xs-12">
 
-                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                  <div class="logo">
+                                      <h1><img src="<%= asset_path 'LOGO.svg' %>" width="260" height="260"></h1>
+                                  </div><!-- end .logo -->
 
-                                    <div class="logo">
-                                        <h1><img src="<%= asset_path 'LOGO.svg' %>" width="260" height="260"></h1>
-                                    </div><!-- end .logo -->
 
-                                </div><!-- end .col-sm-4 -->
+                                  <!-- Si queres algo al lado del logo de la app ponelo aca -->
 
-                                <div class="col-md-8 col-sm-8 col-xs-12">
 
-                                    <nav id="nav" class="main-navigation">
+                              </div><!-- end .col-sm-4 -->
 
-                                        <ul class="navigation">
-                                            <li>
-                                                <a href="/">Home</a>
-                                            </li>
-                                            <li>
-                                                <a href="/viajes">viajes</a>
-                                            </li>
-                                            <li>
-                                                <a href="/viajes/new">publicar viaje</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">opciones</a>
-                                                <ul class="sub-menu">
-                                                    <li>
-                                                        <%= link_to "balance", balance_path  %>
-                                                    </li>
-                                                    <li>
-                                                        <a href="single-post.html">calificaciones</a>
-                                                    </li>
-                                                    <li>
-                                                      <%= link_to "Mi perfil", current_user %>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                  <%= link_to "cargar auto", new_car_path  %>>
-                                            </li>
-                                        </ul>
-
-                                    </nav><!-- end .main-navigation -->
-
-                                </div><!-- end .col-md-8 -->
-
-                            </div><!-- end .main-header-container -->
+                          </div><!-- end .main-header-container -->
 
                         </div><!-- end .row -->
 
@@ -99,7 +48,7 @@
 
     </div><!-- end .main-baner -->
 
-</header><!-- end .header -->
+  </header><!-- end .header -->
 
 <section class="main-content">
 
