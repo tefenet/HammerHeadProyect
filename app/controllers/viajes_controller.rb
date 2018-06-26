@@ -1,21 +1,27 @@
 class ViajesController < ApplicationController
-  before_action :set_viaje, only: [:show, :edit, :update, :destroy]
+before_action :set_viaje, only: [:show, :edit, :update, :destroy]
 
   # GET /viajes
   # GET /viajes.json
-  def index
-    @viajes = Viaje.all
-  end
+def index
+  @viajes = Viaje.all
+end
 
   # GET /viajes/1
   # GET /viajes/1.json
-  def show
-  end
+def show
+end
 
   # GET /viajes/new
-  def new
+def new
+  @user = current_user
+  if (@user.can_publish())
     @viaje = current_user.viajes.build
+  else
+    flash[:notice] = 'Usted no puede publicar viajes, por favor lea los terminos y condiciones.'
+    redirect_to root_path
   end
+end
 
   # GET /viajes/1/edit
   def edit
@@ -70,5 +76,5 @@ class ViajesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def viaje_params
       params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion)
-    end
+    end  
 end

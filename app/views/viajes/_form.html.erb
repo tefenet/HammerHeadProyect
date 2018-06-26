@@ -1,3 +1,12 @@
+<%= stylesheet_link_tag    'form' %>
+<%= javascript_include_tag 'form' %>
+
+<div class="form">
+
+  <div id="login">
+    <h1>Publicar viaje
+      <img src="<%= asset_path 'Logo.jpg' %>" width="100" height="100">
+    </h1>
 <%= form_with(model: viaje, local: true) do |form| %>
   <% if viaje.errors.any? %>
     <div id="error_explanation">
@@ -11,42 +20,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :origen %>
-    <%= form.text_field :origen %>
+  <div class="field-wrap">
+    <div class="field">
+        <%= form.label :origen %><br />
+        <%= form.text_field :origen %>
+      </div>
   </div>
 
-  <div class="field">
-    <%= form.label :destino %>
-    <%= form.text_field :destino %>
+  <div class="field-wrap">
+    <div class="field">
+        <%= form.label :destino %><br />
+        <%= form.text_field :destino %>
+      </div>
   </div>
 
-  <div class="field">
-    <%= form.label :fecha %>
-    <%= form.date_select :fecha %>
+
+  <div class="field-wrap">
+    <div class="field">
+      <%= form.label :fecha %><br />
+      <%= form.date_field :fecha %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :hora %>
-    <%= form.time_select :hora %>
+  <div class="field-wrap">
+    <div class="field">
+      <%= form.label :hora %><br />
+      <%= form.time_field :hora %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :precio %>
-    <%= form.text_field :precio %>
+  <div class="field-wrap">
+    <div class="field">
+      <%= form.label :precio %><br />
+      <%= form.text_field :precio %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :duracion %>
-    <%= form.time_select :duracion %>
+  <div class="field-wrap">
+    <div class="field">
+      <%= form.label :duracion %><br />
+      <%= form.time_select :duracion %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :descripcion %>
-    <%= form.text_area :descripcion %>
+  <div class="field-wrap">
+    <div class="field">
+      <%= form.label :descripcion %><br />
+      <%= form.text_area :descripcion %>
+    </div>
   </div>
 
-  <div class="actions">
+  <button type="submit" class="button button-block"/>
     <%= form.submit %>
-  </div>
+  </button>
 <% end %>
+</div>
