@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 7]> <html class="ie7 no-js" lang="en"> <![endif]-->
-<!--[if lte IE 8]> <html class="ie8 no-js" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]> <![endif]-->
-<%= yield %>
+<!--[if IE 7]>                  <html class="ie7 no-js" lang="en">     <![endif]-->
+<!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" lang="en">  <!--<![endif]-->
 
-<<<<<<< HEAD
 <body>
 
     <header class="header">
@@ -13,13 +11,23 @@
         <% end %>
 
         <div class="top-menu">
-=======
-<html class="not-ie no-js" lang="en">
->>>>>>> 65df20b7c96b581fd6b3a8e2b2d0fa710b65e9d5
 
-<body>
+            <section class="container">
+                <div class="row">
 
-  <header class="header">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="user-log">
+                            <li>
+                                <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
+                            </li>
+                            <li>
+                                <%= link_to "Mi perfil", current_user  %>
+                            </li>
+                        </div><!-- end .user-log -->
+                </div><!-- end .col-sm-4 -->
+            </div><!-- end .row -->
+        </section><!-- end .container -->
+    </div><!-- end .top-menu -->
 
     <div class="main-baner">
 
@@ -32,21 +40,55 @@
                     <section class="container">
 
                         <div class="row">
-                          <div class="main-header-container clearfix">
 
-                              <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="main-header-container clearfix">
 
-                                  <div class="logo">
-                                      <h1><img src="<%= asset_path 'LOGO.svg' %>" width="260" height="260"></h1>
-                                  </div><!-- end .logo -->
+                                <div class="col-md-4 col-sm-12 col-xs-12">
 
+                                    <div class="logo">
+                                        <h1><img src="<%= asset_path 'LOGO.svg' %>" width="260" height="260"></h1>
+                                    </div><!-- end .logo -->
 
-                                  <!-- Si queres algo al lado del logo de la app ponelo aca -->
+                                </div><!-- end .col-sm-4 -->
 
+                                <div class="col-md-8 col-sm-8 col-xs-12">
 
-                              </div><!-- end .col-sm-4 -->
+                                    <nav id="nav" class="main-navigation">
 
-                          </div><!-- end .main-header-container -->
+                                        <ul class="navigation">
+                                            <li>
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="/viajes">viajes</a>
+                                            </li>
+                                            <li>
+                                                <a href="/viajes/new">publicar viaje</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">opciones</a>
+                                                <ul class="sub-menu">
+                                                    <li>
+                                                        <%= link_to "balance", balance_path  %>
+                                                    </li>
+                                                    <li>
+                                                        <a href="single-post.html">calificaciones</a>
+                                                    </li>
+                                                    <li>
+                                                      <%= link_to "Mi perfil", current_user %>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                  <%= link_to "cargar auto", new_car_path  %>>
+                                            </li>
+                                        </ul>
+
+                                    </nav><!-- end .main-navigation -->
+
+                                </div><!-- end .col-md-8 -->
+
+                            </div><!-- end .main-header-container -->
 
                         </div><!-- end .row -->
 
@@ -60,7 +102,7 @@
 
     </div><!-- end .main-baner -->
 
-  </header><!-- end .header -->
+</header><!-- end .header -->
 
 <section class="main-content">
 
@@ -105,7 +147,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-file"></i>
-                                        Leer mas
+                                        Read more
                                     </a>
                                 </li>
 
@@ -138,7 +180,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-file"></i>
-                                        Leer mas
+                                        Read more
                                     </a>
                                 </li>
 
@@ -171,7 +213,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-file"></i>
-                                        Leer mas
+                                        Read more
                                     </a>
                                 </li>
 
@@ -204,7 +246,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-file"></i>
-                                        Leer mas
+                                        Read more
                                     </a>
                                 </li>
 
@@ -237,7 +279,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-file"></i>
-                                        Leer mas
+                                        Read more
                                     </a>
                                 </li>
 
@@ -248,7 +290,7 @@
                         <div class="clearfix"></div>
 
                         <div class="read-all pagination-margin">
-                            <a href="">Leer mas mas</a>
+                            <a href="rides.html">Leer mas</a>
                         </div>
 
                 </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
