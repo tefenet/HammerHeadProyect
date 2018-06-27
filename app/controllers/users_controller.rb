@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def show
     @user =User.find(params[:id])
-    @user_viajes =@user.viajes
   end
 
   def edit
@@ -15,6 +14,15 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       render 'edit'
+    end
+  end
+
+  def viajes
+    @user =User.find(params[:id])
+    @viajesComoChofer = @user.viajesComoChofer
+    @viajesComoPasajero = nil
+    if (@user.viajesComoPasajero != nil)
+      @viajesComoPasajero = @user.viajesComoPasajero
     end
   end
 

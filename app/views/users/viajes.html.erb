@@ -1,0 +1,49 @@
+Viajes comming soon for <%= @user.full_name %>
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+    <article class="ride-box clearfix">
+
+    	<h1>Viajes Como chofer</h1>
+    	<% @viajesComoChofer.each do |viaje| %>
+        <div class="ride-content">
+            <h3>Desde <%= viaje.origen %> hasta <%= viaje.destino %></h3>
+        </div>
+
+        <ul class="ride-meta">
+
+            <li class="ride-date">
+            	Fecha de salida
+            	<%= viaje.fecha %>
+            </li><!-- end .ride-date -->
+        <% end %>
+
+    </article><!-- end .ride-box -->
+
+    <div class="clearfix"></div>
+
+
+</div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+    <article class="ride-box clearfix">
+
+    	<h1>Viajes Como pasajero</h1>
+    	<% @viajesComoPasajero.each do |vpasajero| %>
+        <div class="ride-content">
+            <h3>Desde <%= vpasajero.origen %> hasta <%= vpasajero.destino %></h3>
+        </div>
+
+        <ul class="ride-meta">
+
+            <li class="ride-date">
+            	<%= vpasajero.fecha %>
+            </li><!-- end .ride-date -->
+        <% end %>
+
+    </article><!-- end .ride-box -->
+
+    <div class="clearfix"></div>
+
+
+</div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
