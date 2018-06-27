@@ -2,6 +2,7 @@
 <html>
 <head>
 
+
   <!-- Aca van a estar todos los estilos de la barra de navegacion para las fuentes y letras -->
 
   <title>aventon</title>
@@ -34,6 +35,9 @@
 
 </head>
 <body>
+
+  <% if (controller_name == "application") || (controller_name == "viajes") || (controller_name == "users") %>
+
   <!-- Desde aca pone todo lo que quieras que tenga la barra de navegacion -->
   <header class="header">
     <div class="top-menu">
@@ -47,10 +51,9 @@
               <li>
                 <%= link_to "Mi perfil", current_user  %>
               </li>
-              <!-- lo volves a borrar y vas a saber como no hay que usar unas tijeras de jardin -->
             </div><!-- end .user-log -->
           </div><!-- end .col-sm-4 -->
-
+          <% end %>
           <nav id="nav" class="main-navigation">
 
             <ul class="navigation">
@@ -90,6 +93,7 @@
     </div><!-- end .top-menu -->
   </header><!-- end .header -->
 
+  <% end %>
   <%= yield %>
 
 </body>

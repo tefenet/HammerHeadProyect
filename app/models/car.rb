@@ -1,7 +1,7 @@
 class Car < ApplicationRecord
   belongs_to :user
-  validates :plate, uniqueness: true, :length => {:minimum => 6, :maximum => 6, message:"la patente debe tener 6 caracteres"}, format:{with: /\A([a-zA-Z]{3})-?([0-9]{3})$\z/i, message:"la patente comienza con 3 letras y termina con 3 numeros"}
-  validates :seats, numericality: {greater_than: 0, less_than:8, message:"vehiculos hasta 8 asientos"}
+  validates :plate, uniqueness: true, :length => {:minimum => 6, :maximum => 7, message:"Patente invalida"}, format:{with:/\A([A-Z]{2}+[0-9]{3}+[A-Z]{2})\z|\A([A-Z]{3}+[0-9]{3})$\z/i, message:"Formato invalido"}
+  validates :seats, numericality: {greater_than: 0, message:"El minimo de acientos es 1"}
   before_validation :clean_data
 
 def clean_data
