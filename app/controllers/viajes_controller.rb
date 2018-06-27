@@ -7,6 +7,10 @@ def index
   @viajes = Viaje.all
 end
 
+def add_Pasajero(user)
+  @viaje.add_Pasajero(current_user)
+end
+
   # GET /viajes/1
   # GET /viajes/1.json
 def show
@@ -16,7 +20,7 @@ end
 def new
   @user = current_user
   if (@user.can_publish())
-    @viaje = current_user.viajes.build
+    @viaje = current_user.viajesComoChofer.build
   else
     flash[:notice] = 'Usted no puede publicar viajes, por favor lea los terminos y condiciones.'
     redirect_to root_path
@@ -30,7 +34,7 @@ end
   # POST /viajes
   # POST /viajes.json
   def create
-    @viaje = current_user.viajes.build(viaje_params)
+    @viaje = current_user.viajesComoChofer.build(viaje_params)
 
     respond_to do |format|
       if @viaje.save
@@ -75,6 +79,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def viaje_params
-      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion)
-    end  
+      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_plate)
+    end
 end
