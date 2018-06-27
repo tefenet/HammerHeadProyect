@@ -43,14 +43,14 @@
     <div class="top-menu">
       <section class="container">
         <div class="row">
+
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="user-log">
-              <li>
-                <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
-              </li>
-              <li>
-                <%= link_to "Mi perfil", current_user  %>
-              </li>
+                <%= link_to image_tag(current_user.avatar.url(:thumb)), current_user  %>
+                <%= current_user.full_name %>
+                <li>
+                  <%= link_to('Cerrar Sesion', destroy_user_session_path, method: :delete) %>
+                </li>
             </div><!-- end .user-log -->
           </div><!-- end .col-sm-4 -->
           <nav id="nav" class="main-navigation">

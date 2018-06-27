@@ -20,6 +20,11 @@
         </div>
 
         <div class="field-wrap">
+          <%= f.label :avatar, 'Imagen de ususario'%><br />
+          <%= f.file_field :avatar %>
+        </div>
+
+        <div class="field-wrap">
           <%= f.label :email, 'Tu Email' %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
