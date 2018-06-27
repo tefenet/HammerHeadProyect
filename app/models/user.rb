@@ -36,6 +36,10 @@ class User < ApplicationRecord
     end
   end
 
+  def full_name
+    return self.first_name+' '+self.last_name
+  end
+
 
   def pending_califications
     return true #Temporal
