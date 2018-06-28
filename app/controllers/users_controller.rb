@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def show
     @user =User.find(params[:id])
+<<<<<<< HEAD
+    @user_viajes =@user.viajesComoChofer
+=======
+>>>>>>> refs/remotes/origin/develop
   end
 
   def edit
