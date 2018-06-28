@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/user/:id/viajes', to: 'users#viajes', as: 'misviajes'
 
+  get '/user/:id/cars', to: 'users#cars', as: 'misautos'
+
   root "application#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

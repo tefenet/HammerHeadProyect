@@ -1,0 +1,42 @@
+
+<div class="container">
+        <div class="row">
+            <div class="page-content">
+                <div class="last-rides">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="page-sub-title textcenter">
+                            <h2>Mis autos</h2>
+                            <div class="line"></div>
+                        </div><!-- end .page-sub-title -->
+
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <% @cars.each do |car| %>
+
+                        <article class="ride-box clearfix">
+
+                            <div class="ride-content">
+                                <h3><a href="#"><%= car.model %> a <%= car.brand %></a></h3>del usuario <a href="#"> <%= current_user.full_name %></a>
+                            </div>
+
+                        </article><!-- end .ride-box -->
+
+                    <% end %>
+
+                        <div class="clearfix"></div>
+
+                       <!-- <div class="read-all pagination-margin">
+                            <a href="">Leer mas mas</a>
+                        </div> -->
+
+                </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+            </div><!-- end .last-rides -->
+
+        </div><!-- end .row -->
+
+    </div><!-- end .container -->

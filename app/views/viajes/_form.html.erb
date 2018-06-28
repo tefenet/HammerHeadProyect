@@ -34,7 +34,6 @@
       </div>
   </div>
 
-
   <div class="field-wrap">
     <div class="field">
       <%= form.label :fecha %><br />
@@ -51,6 +50,13 @@
 
   <div class="field-wrap">
     <div class="field">
+      <%= form.label :car_plate, 'Auto' %><br />
+      <%= form.collection_select(:car_plate, current_user.cars, :id, :plate ,prompt: true) %>
+    </div>
+  </div>
+
+  <div class="field-wrap">
+    <div class="field">
       <%= form.label :precio %><br />
       <%= form.text_field :precio %>
     </div>
@@ -58,8 +64,8 @@
 
   <div class="field-wrap">
     <div class="field">
-      <%= form.label :duracion %><br />
-      <%= form.time_select :duracion %>
+      <%= form.label :duracion, 'Duracion en horas' %><br />
+      <%= form.number_field :duracion %>
     </div>
   </div>
 

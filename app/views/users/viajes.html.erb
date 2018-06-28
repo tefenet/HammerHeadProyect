@@ -1,49 +1,134 @@
-Viajes comming soon for <%= @user.full_name %>
-<div class="col-md-12 col-sm-12 col-xs-12">
 
-    <article class="ride-box clearfix">
+<div class="container">
+        <div class="row">
+            <div class="page-content">
+                <div class="last-rides">
 
-    	<h1>Viajes Como chofer</h1>
-    	<% @viajesComoChofer.each do |viaje| %>
-        <div class="ride-content">
-            <h3>Desde <%= viaje.origen %> hasta <%= viaje.destino %></h3>
-        </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
 
-        <ul class="ride-meta">
+                        <div class="page-sub-title textcenter">
+                            <h2>Viajes como Chofer</h2>
+                            <div class="line"></div>
+                        </div><!-- end .page-sub-title -->
 
-            <li class="ride-date">
-            	Fecha de salida
-            	<%= viaje.fecha %>
-            </li><!-- end .ride-date -->
-        <% end %>
+                    </div>
 
-    </article><!-- end .ride-box -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
 
-    <div class="clearfix"></div>
+                    <% @viajesComoChofer.each do |viaje| %>
 
+                        <article class="ride-box clearfix">
 
-</div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+                            <div class="ride-content">
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= current_user.full_name %></a>
+                            </div>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
+                            <ul class="ride-meta">
 
-    <article class="ride-box clearfix">
+                                <li class="ride-date">
+                                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+                                        <i class="fa fa-calendar"></i>
+                                        <%= viaje.fecha %>
+                                    </a>
+                                </li><!-- end .ride-date -->
 
-    	<h1>Viajes Como pasajero</h1>
-    	<% @viajesComoPasajero.each do |vpasajero| %>
-        <div class="ride-content">
-            <h3>Desde <%= vpasajero.origen %> hasta <%= vpasajero.destino %></h3>
-        </div>
+                                <li class="ride-people">
+                                    <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
+                                        <i class="fa fa-user"></i>
+                                        <%= (Car.find_by_plate(viaje.car_plate)).seats %> <!-- HACER QUE FUNCIONE -->
+                                    </a>
+                                </li><!-- end .ride-people -->
 
-        <ul class="ride-meta">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-file"></i>
+                                        Leer mas
+                                    </a>
+                                </li>
 
-            <li class="ride-date">
-            	<%= vpasajero.fecha %>
-            </li><!-- end .ride-date -->
-        <% end %>
+                            </ul><!-- end .ride-meta -->
 
-    </article><!-- end .ride-box -->
+                        </article><!-- end .ride-box -->
 
-    <div class="clearfix"></div>
+                    <% end %>
 
+                        <div class="clearfix"></div>
 
-</div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+                       <!-- <div class="read-all pagination-margin">
+                            <a href="">Leer mas mas</a>
+                        </div> -->
+
+                </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+            </div><!-- end .last-rides -->
+
+        </div><!-- end .row -->
+
+    </div><!-- end .container -->
+
+<div class="container">
+        <div class="row">
+            <div class="page-content">
+                <div class="last-rides">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="page-sub-title textcenter">
+                            <h2>Viajes como Pasajero</h2>
+                            <div class="line"></div>
+                        </div><!-- end .page-sub-title -->
+
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <% @viajesComoPasajero.each do |viaje| %>
+
+                        <article class="ride-box clearfix">
+
+                            <div class="ride-content">
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %></a>
+                            </div>
+
+                            <ul class="ride-meta">
+
+                                <li class="ride-date">
+                                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+                                        <i class="fa fa-calendar"></i>
+                                        <%= viaje.fecha %>
+                                    </a>
+                                </li><!-- end .ride-date -->
+
+                                <li class="ride-people">
+                                    <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
+                                        <i class="fa fa-user"></i>
+                                        <%= Car.find(plate = viaje.car_plate).seats %> <!-- HACER QUE FUNCIONE -->
+                                    </a>
+                                </li><!-- end .ride-people -->
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-file"></i>
+                                        Leer mas
+                                    </a>
+                                </li>
+
+                            </ul><!-- end .ride-meta -->
+
+                        </article><!-- end .ride-box -->
+
+                    <% end %>
+
+                        <div class="clearfix"></div>
+
+                       <!-- <div class="read-all pagination-margin">
+                            <a href="">Leer mas mas</a>
+                        </div> -->
+
+                </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+            </div><!-- end .last-rides -->
+
+        </div><!-- end .row -->
+
+    </div><!-- end .container -->

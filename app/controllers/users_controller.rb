@@ -26,6 +26,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def cars
+    @user =User.find(params[:id])
+    @cars = @user.cars
+  end
+
 
 private
   def user_params
