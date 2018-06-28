@@ -20,31 +20,29 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= current_user.full_name %> Auto  <%= viaje.car_plate %></a>
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>viaje de <a href="#"> <%= current_user.full_name %> Auto  <%= viaje.car_plate %></a>
                             </div>
 
                             <ul class="ride-meta">
 
                                 <li class="ride-date">
                                     <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                        <i class="fa fa-calendar"></i>
                                         <%= viaje.fecha %>
                                     </a>
                                 </li><!-- end .ride-date -->
 
                                 <li class="ride-people">
                                     <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        <i class="fa fa-user"></i>
-                                        <%= (Car.find_by_plate(viaje.car_plate)).seats %> <!-- HACER QUE FUNCIONE -->
+                                        <%= (Car.find_by_plate(viaje.car_plate)).seats %>
                                     </a>
                                 </li><!-- end .ride-people -->
 
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-file"></i>
                                         Leer mas
                                     </a>
                                 </li>
+                                <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
 
                             </ul><!-- end .ride-meta -->
 
