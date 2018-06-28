@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_27_143659) do
+ActiveRecord::Schema.define(version: 2018_06_27_235554) do
 
   create_table "cars", force: :cascade do |t|
     t.string "plate"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2018_06_27_143659) do
     t.date "fecha"
     t.time "hora"
     t.float "precio"
-    t.time "duracion"
+    t.integer "duracion"
     t.text "descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
