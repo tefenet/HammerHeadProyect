@@ -21,6 +21,8 @@
 
                             <div class="ride-content">
                                 <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= current_user.full_name %> Auto  <%= viaje.car_plate %></a>
+                                <%= link_to 'Destroy', viaje, method: :delete, data: { confirm: 'Are you sure?' } %>
+                                <%= link_to 'Edit', edit_viaje_path(viaje) %>
                             </div>
 
                             <ul class="ride-meta">

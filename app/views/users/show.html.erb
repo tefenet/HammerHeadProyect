@@ -35,12 +35,14 @@
                 </ul><!-- end .ride-meta -->
 
             </article><!-- end .ride-box -->
+            <p id="notice"><strong><%= notice %></strong></p>
             <% current_user.cars.each do |car| %>
 
                 <article class="ride-box clearfix">
 
                     <div class="ride-content">
-                        <h3><%= link_to car.brand, car_path%> <%=  car.model %>    <%= car.plate %></h3>
+                        <h3><%= link_to car.brand, car_path(car.id)%> <%=  car.model %>    <%= car.plate %></h3>
+                        <%= link_to 'Eliminar Auto', car, method: :delete, data: { confirm: 'si vas a eliminar el auto de tu cuenta, no debes tener viajes publicados con el mismo' } %>
                     </div>
 
                 </article><!-- end .ride-box -->

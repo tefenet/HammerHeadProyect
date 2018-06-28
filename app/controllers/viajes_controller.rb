@@ -7,8 +7,10 @@ def index
   @viajes = Viaje.all
 end
 
-def add_Pasajero(user)
+def add_Pasajero
+  @viaje =Viaje.find(params[:id])
   @viaje.add_Pasajero(current_user)
+  current_user.addViajeComoPasajero(@viaje)
 end
 
   # GET /viajes/1

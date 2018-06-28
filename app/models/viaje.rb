@@ -6,4 +6,9 @@ class Viaje < ApplicationRecord
   def add_Pasajero(aUser)
     self.pasajeros<<aUser
   end
+
+  def self.searchByRange (range)
+    where(fecha:range.begin..range.end)
+  end
+
 end

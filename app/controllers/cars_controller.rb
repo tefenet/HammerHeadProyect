@@ -19,6 +19,7 @@ class CarsController < ApplicationController
 
   # GET /cars/1/edit
   def edit
+    return redirect_to current_user ,notice: 'no puedes editar un auto si tiene viajes pendientes' unless (User.current.viajesPendientesCon(@car)).empty?
   end
 
   # POST /cars
@@ -42,7 +43,7 @@ class CarsController < ApplicationController
   def update
     respond_to do |format|
       if @car.update(car_params)
-        format.html { redirect_to @car, notice: 'Car was successfully updated.' }
+        format.html { redirect_to @car, notice: 'Actualizaste los datos del Auto' }
         format.json { render :show, status: :ok, location: @car }
       else
         format.html { render :edit }
@@ -54,10 +55,17 @@ class CarsController < ApplicationController
   # DELETE /cars/1
   # DELETE /cars/1.json
   def destroy
-    @car.destroy
-    respond_to do |format|
-      format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
-      format.json { head :no_content }
+    if (User.current.viajesPendientesCon(@car)).any?
+        respond_to do |format|
+          format.html { redirect_to current_user, notice: 'no puede borrar el auto porque tiene viajes pendientes' }
+          format.json { head :no_content }
+        end
+    else
+      @car.destroy
+      respond_to do |format|
+        format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

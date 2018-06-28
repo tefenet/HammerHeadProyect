@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :cars
-  resources :viajes
+  resources :viajes  do
+    member do
+      put :add_Pasajero
+    end
+  end
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 
@@ -14,6 +18,7 @@ Rails.application.routes.draw do
   get '/user/:id/cars', to: 'users#cars', as: 'misautos'
 
   root "application#index"
+  get "search/balance" => 'search#balance'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -45,7 +45,21 @@ class User < ApplicationRecord
     return true #Temporal
   end
 
-  private
+  def self.current
+      Thread.current[:user]
+  end
+  def self.current=(user)
+      Thread.current[:user] = user
+  end
+  def viajesPendientesCon(aCar)
+      self.viajesComoChofer.where('car_plate=? and fecha>=?',aCar.plate,Date.today)
+  end
+
+  def addViajeComoPasajero(unViaje)
+    self.viajesComoPasajero<<unViaje
+  end
+
+    private
 
   def validate_age
       if birth_date.present? && birth_date.to_date > 18.years.ago.to_date
