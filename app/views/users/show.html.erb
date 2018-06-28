@@ -35,6 +35,17 @@
                 </ul><!-- end .ride-meta -->
 
             </article><!-- end .ride-box -->
+            <% current_user.cars.each do |car| %>
+
+                <article class="ride-box clearfix">
+
+                    <div class="ride-content">
+                        <h3><%= link_to car.brand, car_path%> <%=  car.model %>    <%= car.plate %></h3>
+                    </div>
+
+                </article><!-- end .ride-box -->
+
+            <% end %>
 
             <div class="clearfix"></div>
 
