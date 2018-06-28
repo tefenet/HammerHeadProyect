@@ -53,7 +53,7 @@ class User < ApplicationRecord
       end
   end
 
-  has_and_belongs_to_many :viajesComoPasajero, :class_name => "Viaje", :foreign_key => 'pasajero_id'
+  has_many :viajesComoPasajero, :class_name => "Viaje", :foreign_key => 'pasajero_id'
   has_many :viajesComoChofer, :class_name => "Viaje", :foreign_key => 'chofer_id'
   has_many :cars
 
