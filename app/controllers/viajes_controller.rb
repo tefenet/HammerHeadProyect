@@ -40,7 +40,7 @@ end
 
     respond_to do |format|
       if @viaje.save
-        format.html { redirect_to @viaje, notice: 'Viaje was successfully created.' }
+        format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }
         format.json { render :show, status: :created, location: @viaje }
       else
         format.html { render :new }
@@ -54,7 +54,7 @@ end
   def update
     respond_to do |format|
       if @viaje.update(viaje_params)
-        format.html { redirect_to @viaje, notice: 'Viaje was successfully updated.' }
+        format.html { redirect_to @viaje, notice: 'El viaje a sido modificado.' }
         format.json { render :show, status: :ok, location: @viaje }
       else
         format.html { render :edit }
@@ -68,7 +68,7 @@ end
   def destroy
     @viaje.destroy
     respond_to do |format|
-      format.html { redirect_to viajes_url, notice: 'Viaje was successfully destroyed.' }
+      format.html { redirect_to viajes_url, notice: 'El viaje se a eliminado correctamente.' }
       format.json { head :no_content }
     end
   end

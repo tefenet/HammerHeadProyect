@@ -29,24 +29,22 @@
 
                                 <li class="ride-date">
                                     <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                        <i class="fa fa-calendar"></i>
                                         <%= viaje.fecha %>
                                     </a>
                                 </li><!-- end .ride-date -->
 
                                 <li class="ride-people">
                                     <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        <i class="fa fa-user"></i>
-                                        <%= (Car.find_by_plate(viaje.car_plate)).seats %> <!-- HACER QUE FUNCIONE -->
+                                        <%= (Car.find_by_plate(viaje.car_plate)).seats %>
                                     </a>
                                 </li><!-- end .ride-people -->
 
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-file"></i>
                                         Leer mas
                                     </a>
                                 </li>
+                                <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
 
                             </ul><!-- end .ride-meta -->
 
