@@ -50,8 +50,8 @@
 
   <div class="field-wrap">
     <div class="field">
-      <%= form.label :car_plate, 'Auto' %><br />
-      <%= form.collection_select(:car_plate, current_user.cars, :plate, :plate ,prompt: true) %>
+      <%= form.label :car_id, 'Auto' %><br />
+      <%= form.collection_select(:car_id, current_user.cars, :id, :plate, prompt: true) %>
     </div>
   </div>
 

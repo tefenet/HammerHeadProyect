@@ -37,6 +37,13 @@ end
   # POST /viajes.json
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
+    print ('ID de auto')
+    @viaje.car = Car.find(@viaje.car_id)
+    print (@viaje.car_id)
+    print (@viaje.car_id)
+    print (@viaje.car.id)
+    print (@viaje.car.id)
+    @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
 
     respond_to do |format|
       if @viaje.save
@@ -81,6 +88,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def viaje_params
-      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_plate)
+      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_id)
     end
 end
