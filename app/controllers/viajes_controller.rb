@@ -43,8 +43,12 @@ class ViajesController < ApplicationController
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
     @viaje.chofer_id = current_user.id
-    @viaje.car = Car.find(@viaje.car_id)
-    @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
+    auto=Car.find(@viaje.car_id)
+    @viaje.car = auto
+    @viaje.asientos_libres = auto.seats
+    @viaje.car_plate= auto.plate
+    auto.viajes<<@viaje
+
     respond_to do |format|
       if @viaje.save
         format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }

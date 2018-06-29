@@ -33,7 +33,7 @@ class User < ApplicationRecord
       Thread.current[:user] = user
   end
   def viajesPendientesCon(aCar)
-      self.viajesComoChofer.where('car_plate=? and fecha>=?',aCar.plate,Date.today)
+      self.viajesComoChofer.where('car_id=? and fecha>=?',aCar.id,Date.today)
   end
 
   def addViajeComoPasajero(unViaje)

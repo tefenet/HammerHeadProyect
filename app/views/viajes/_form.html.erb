@@ -10,7 +10,7 @@
 <%= form_with(model: viaje, local: true) do |form| %>
   <% if viaje.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(viaje.errors.count, "error") %> prohibited this viaje from being saved:</h2>
+      <h2><%= pluralize(viaje.errors.count, "error") %> evitaron que este viaje fuera fuardado:</h2>
 
       <ul>
       <% viaje.errors.full_messages.each do |message| %>

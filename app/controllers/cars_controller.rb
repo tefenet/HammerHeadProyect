@@ -55,7 +55,7 @@ class CarsController < ApplicationController
   # DELETE /cars/1
   # DELETE /cars/1.json
   def destroy
-    if (current_user.viajesComoChofer.where(car_id: @car.id))
+    if (current_user.viajesPendientesCon(@car).any?)
         respond_to do |format|
           format.html { redirect_to current_user, notice: 'no puede borrar el auto porque tiene viajes pendientes' }
           format.json { head :no_content }

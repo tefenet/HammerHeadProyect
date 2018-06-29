@@ -55,15 +55,13 @@ class Viaje < ApplicationRecord
       if (self.startT > self.finishT)
         errors.add(:base, 'El viaje no puede terminar antes de la hora de inicio')
       end
-      if User.current.viajesComoChofer.select{ |un_viaje| (self.startT.between?(un_viaje.startT, un_viaje.finishT))}
-        #|| (self.finishT.between?(un_viaje.startT, un_viaje.finishT)) 
+      if (chofer.viajesComoChofer.select{ |un_viaje| (startT..finishT).overlaps?(un_viaje.finishT..un_viaje.startT)}.count >= 1)
         errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
       end
     end
-
   end
 
-  def validate_usuario_no_tiene_solicitudes_en_ese_horario
+  def validate_no_pending_requests
     if inicio.present? && fin.present?
       usuario.solicitud.where(aceptada: true).where(finalizado: false).or(usuario.solicitud.where(aceptada: false).where(rechazada: false)).each do |solicitud|
       if (solicitud.viaje.inicio < (inicio + 3.hours) && solicitud.viaje.fin > (inicio + 3.hours)) || (solicitud.viaje.inicio < (fin + 3.hours) && solicitud.viaje.fin > (fin + 3.hours)) || (solicitud.viaje.inicio > (inicio + 3.hours) && solicitud.viaje.fin < (fin + 3.hours))
