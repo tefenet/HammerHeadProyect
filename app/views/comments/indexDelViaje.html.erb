@@ -1,0 +1,21 @@
+<h1>Preguntas Del Viaje</h1>
+<%if params[:flash].present?%>
+	<% params[:flash].each do |name, msg| -%>
+      <h3><%= content_tag :div, msg, class: name %></h3>
+	<% end -%>
+<%end%>
+<% @comments.each do |comment| %>
+    <%if comment.respondida == false %>    
+        <h5> pregunta: <%=comment.pregunta%><h5>
+        	<%= form_for(comment) do |f| %>
+    			<div class="field">
+       				<%= f.text_field :respuesta, autofocus: true, autocomplete: "respuesta",:size=>"100" %>
+    			</div><br/>
+    			<%= f.hidden_field :pregunta, value: comment.pregunta %>
+    			<%= f.hidden_field :respondida, value: true %>
+    			<div class="actions">
+      				<button class="btn btn-lg btn-danger " type="update">responder</button>
+   				</div>
+   			<%end%>	<br>
+    <%end%>    
+<%end%> 

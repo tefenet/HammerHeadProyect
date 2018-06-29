@@ -2,6 +2,7 @@ class Viaje < ApplicationRecord
   belongs_to :chofer, :class_name => "User"
   has_and_belongs_to_many :pasajeros, :class_name => "User"
   has_one :car
+  has_many :comments
 
   validates :origen, presence: { message: ": Por favor ingrese el origen del viaje"}, on: [:create, :new, :update]
 	validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
