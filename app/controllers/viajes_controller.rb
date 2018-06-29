@@ -46,7 +46,7 @@ class ViajesController < ApplicationController
     @viaje.car = Car.find(@viaje.car_id)
     @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
     respond_to do |format|
-      if @viaje.save!
+      if @viaje.save
         format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }
         format.json { render :show, status: :created, location: @viaje }
       else
