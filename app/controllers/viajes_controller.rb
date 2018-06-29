@@ -86,15 +86,8 @@ class ViajesController < ApplicationController
     @viaje = Viaje.find(params[:id])
   end
 
-<<<<<<< HEAD
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def viaje_params
-    params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_plate)
-  end
-=======
     # Never trust parameters from the scary internet, only allow the white list through.
     def viaje_params
       params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_id)
     end
->>>>>>> 85a2e26543f3acba30925b3866afb6fb4926993a
 end

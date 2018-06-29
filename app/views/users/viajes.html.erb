@@ -20,11 +20,7 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-<<<<<<< HEAD
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>viaje de <a href="#"> <%= current_user.full_name %> Auto  <%= viaje.car_plate %></a>
-=======
                                 <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <a href="#"> <%= current_user.full_name %> Auto  <%= Car.find(viaje.car.id).brand %>  <%= Car.find(viaje.car.id).model %>  <%= Car.find(viaje.car.id).plate %></a>
->>>>>>> 85a2e26543f3acba30925b3866afb6fb4926993a
                             </div>
 
                             <ul class="ride-meta">
@@ -90,11 +86,7 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-<<<<<<< HEAD
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>viaje de <a href="#"> <%= User.find(viaje.chofer_id).full_name %></a>
-=======
                                 <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %>Auto  <%= Car.find(viaje.car.id).brand %>  <%= Car.find(viaje.car.id).model %>  <%= Car.find(viaje.car.id).plate %></a>
->>>>>>> 85a2e26543f3acba30925b3866afb6fb4926993a
                             </div>
 
                             <ul class="ride-meta">
