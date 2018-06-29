@@ -26,6 +26,12 @@
 </p>
 
 <p>
+  <strong>Chofer:</strong>
+  <%= link_to User.find(@viaje.chofer_id).full_name ,User.find(@viaje.chofer_id) %>
+</p>
+
+
+<p>
   <strong>Duracion:</strong>
   <%= @viaje.duracion %>
 </p>
@@ -35,5 +41,7 @@
   <%= @viaje.descripcion %>
 </p>
 
-<%= link_to 'Edit', edit_viaje_path(@viaje) %> |
-<%= link_to 'Back', viajes_path %>
+<% if (current_user.id==@viaje.chofer_id) %>
+  <%= link_to 'Edit', edit_viaje_path(@viaje) %> |
+  <%= link_to 'Back', viajes_path %>
+<% end %>

@@ -1,0 +1,63 @@
+<% flash.each do |name, msg| -%>
+      <h1><%= content_tag :div, msg, class: name %></h1>
+<% end -%>
+<div class="container">
+        <div class="row">
+            <div class="page-content">
+                <div class="last-rides">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="page-sub-title textcenter">
+                            <h2>Tus Tarjetas</h2>
+                            <div class="line"></div>
+                        </div><!-- end .page-sub-title -->
+
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <% current_user.card.each do |card| %>
+
+                        <article class="ride-box clearfix">
+
+                            <div class="ride-content">
+                                <h3>Numero <%= card.numero %>. Codigo de seguridad <%= card.numeroSeguridad %></h3>
+                            </div>
+
+                            <ul class="ride-meta">
+
+                                <li class="ride-date">
+                                      Fecha de vencimiento
+                                        <%= card.vencimiento %>
+                                </li><!-- end .ride-date -->
+
+                                <li>
+                                    <a href="#">
+                                        Ver Tarjeta
+                                    </a>
+                                </li>
+                                <%= link_to 'Eliminar tarjeta', card, method: :delete, data: { confirm: "Estas seguro?" } %>
+                            </ul><!-- end .ride-meta -->
+
+                        </article><!-- end .ride-box -->
+
+                    <% end %>
+
+                    <div class="read-all pagination-margin">
+                        <%= link_to "Agregar tarjeta", cards_new_path %>
+                    </div><br>
+
+                        <div class="clearfix"></div>
+
+                       <!-- <div class="read-all pagination-margin">
+                            <a href="">Leer mas mas</a>
+                        </div> -->
+
+                </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+            </div><!-- end .last-rides -->
+
+        </div><!-- end .row -->
+<%= link_to 'Back', current_user %>
+    </div><!-- end .container -->

@@ -78,17 +78,18 @@
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                      <% Viaje.all.each do |viaje| %>
+                      <% Viaje.all.order(created_at: :desc).each do |viaje| %>
+
+                        <% if (viaje.asientos_libres !=0)%>
 
                           <article class="ride-box clearfix">
 
                               <div class="ride-content">
-                                  <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %> Auto  <%= viaje.car_plate %></a>
+                                  <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %></a>
                                   <%= link_to add_Pasajero_viaje_path(viaje), method: :put do %>
-                                  <button type="submit">
-                                  postularme a este viaje
-                                  </button>
-
+                                    <button type="submit">
+                                      postularme a este viaje
+                                    </button>
                                   <% end %>
                               </div>
 
@@ -97,6 +98,7 @@
                                   <li class="ride-date">
                                       <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
                                           <i class="fa fa-calendar"></i>
+                                          Fecha
                                           <%= viaje.fecha %>
                                       </a>
                                   </li><!-- end .ride-date -->
@@ -104,20 +106,20 @@
                                   <li class="ride-people">
                                       <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
                                           <i class="fa fa-user"></i>
-                                          <%= (Car.find_by_plate(viaje.car_plate)).seats %> <!-- HACER QUE FUNCIONE -->
+                                          Asientos Libres
+                                          <%= viaje.asientos_libres %>
                                       </a>
                                   </li><!-- end .ride-people -->
 
                                   <li>
-                                      <a href="#">
-                                          <i class="fa fa-file"></i>
-                                          Leer mas
-                                      </a>
+                                       <%= link_to "Leer mas", viaje_path(viaje.id)  %>
                                   </li>
 
                               </ul><!-- end .ride-meta -->
 
                           </article><!-- end .ride-box -->
+
+                          <% end %>
 
                       <% end %>
 

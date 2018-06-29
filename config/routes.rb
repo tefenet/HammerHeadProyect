@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
+
+  get 'cards/new'
+  resources :cards
   resources :cars
   resources :viajes  do
+    resources :comentarios
     member do
       put :add_Pasajero
     end
