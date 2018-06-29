@@ -13,27 +13,7 @@ class User < ApplicationRecord
   validates :password, presence: { message: ": Por favor ingrese una contraseña" }, on: [:create, :new]
 
   def can_publish
-    print ('IMPRIMO AUTOS')
-    print ('IMPRIMO AUTOS')
-    print ('IMPRIMO AUTOS')
-    print ('IMPRIMO AUTOS')
-    print (self.cars)
-    print (self.cars.any?)
-    print (self.cars.any?)
-    print (self.cars.any?)
-    print ('IMPRIMO TARJETA')
-    print ('IMPRIMO TARJETA')
-    print ('IMPRIMO TARJETA')
-    print ('IMPRIMO TARJETA')
-    print (self.credit_card_number)
-    print (self.credit_card_number != nil)
-    print (self.credit_card_number != nil)
-    print (self.credit_card_number != nil)
-    if ((self.cars.any?) & (self.credit_card_number != nil) & pending_califications())
-      return true
-    else
-      return false
-    end
+    return (has_credit_card & has_any_car & pending_califications)
   end
 
   def full_name
@@ -42,7 +22,8 @@ class User < ApplicationRecord
 
 
   def pending_califications
-    return true #Temporal
+    return true
+    #Temporal hasta que pongamos calificaciones
   end
 
   def self.current
@@ -59,7 +40,15 @@ class User < ApplicationRecord
     self.viajesComoPasajero<<unViaje
   end
 
-    private
+  def has_credit_card
+    return !self.credit_card_number.nil?
+  end
+
+  def has_any_car
+    return self.cars.any?
+  end
+
+  private
 
   def validate_age
       if birth_date.present? && birth_date.to_date > 18.years.ago.to_date
@@ -71,8 +60,18 @@ class User < ApplicationRecord
   has_many :viajesComoChofer, :class_name => "Viaje", :foreign_key => 'chofer_id'
   has_many :cars
 
-  #aca podes cambiar el tamañop de la imagen e usuario
+  #aca podes cambiar el tamañop de la imagen de usuario
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+#  def can_publish
+#    print ('IMPRIMO AUTOS')
+#    print (self.cars)
+#    print (self.cars.any?)
+#    print ('IMPRIMO TARJETA')
+#    print (self.credit_card_number)
+#    print (self.credit_card_number != nil)
+#    return ((self.cars.any?) & has_credit_card & pending_califications())
+#  end
 
 end
