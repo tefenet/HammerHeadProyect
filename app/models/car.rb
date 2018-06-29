@@ -1,6 +1,6 @@
 class Car < ApplicationRecord
   belongs_to :user
-  has_many :viajes
+  has_many :viajes, dependent: :nullify
   validates :plate, uniqueness: true, :length => {:minimum => 6, :maximum => 7, message:"Patente invalida"}, format:{with:/\A([A-Z]{2}+[0-9]{3}+[A-Z]{2})\z|\A([A-Z]{3}+[0-9]{3})$\z/i, message:"Formato invalido"}
   validates :seats, numericality: {greater_than: 0, message:"El minimo de acientos es 1"}
   before_validation :clean_data
