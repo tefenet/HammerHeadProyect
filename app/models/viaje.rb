@@ -3,6 +3,7 @@ class Viaje < ApplicationRecord
   has_and_belongs_to_many :pasajeros, :class_name => "User"
   has_one :car
 
+<<<<<<< HEAD
   validates :origen, presence: { message: ": Por favor ingrese el origen del viaje"}, on: [:create, :new, :update]
 	validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
   validates :fecha, presence: {message: ": Por favor ingrese una fecha para el viaje"}, on: [:create, :new, :update]
@@ -10,6 +11,10 @@ class Viaje < ApplicationRecord
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
 
+=======
+  attr_accessor :car_id
+  
+>>>>>>> 85a2e26543f3acba30925b3866afb6fb4926993a
   def add_Pasajero(aUser)
     self.pasajeros<<aUser
   end
