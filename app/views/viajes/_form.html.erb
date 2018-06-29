@@ -49,8 +49,9 @@
   </div>
 
   <div class="field-wrap">
-          <%= form.label :patente_del_vehiculo %><br>
-          <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
+          <%= form.label :car_id, 'Patente del vehiculo' %><br>
+          <%= form.collection_select(:car_id, current_user.cars.all, :id, :plate, {:prompt => "Seleccione un auto para el viaje"}) %>
+          <%= f.hidden_field :id_auto, value: :car_id %>
   </div>
 
   <div class="field-wrap">
