@@ -24,8 +24,12 @@ class ViajesController < ApplicationController
     if (@user.can_publish())
       @viaje = current_user.viajesComoChofer.build
     else
-      flash[:notice] = 'Usted no puede publicar viajes, por favor lea los terminos y condiciones.'
-      redirect_to root_path
+      unless @user.has_any_car
+        redirect_to root_path and return flash[:notice] = 'Debe cargar un auto antes de publicar un viaje.'
+      end
+      unless @user.has_credit_card
+        redirect_to root_path and return flash[:notice] = 'Debe cargar una tarjeta de credito antes de publicar un viaje.'
+      end
     end
   end
 
