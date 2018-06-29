@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_29_074723) do
+ActiveRecord::Schema.define(version: 2018_06_29_194038) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -31,6 +31,18 @@ ActiveRecord::Schema.define(version: 2018_06_29_074723) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "viaje_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "pregunta"
+    t.string "respuesta", default: ""
+    t.boolean "respondida", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "viaje_id"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["viaje_id"], name: "index_comments_on_viaje_id"
   end
 
   create_table "users", force: :cascade do |t|

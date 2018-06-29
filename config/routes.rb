@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   resources :cards
   resources :cars
   resources :viajes  do
-    resources :comentarios
     member do
       put :add_Pasajero
     end
   end
+  resources :comments
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 

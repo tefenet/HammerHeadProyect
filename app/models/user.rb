@@ -60,6 +60,7 @@ class User < ApplicationRecord
   has_many :viajesComoChofer, :class_name => "Viaje", :foreign_key => 'chofer_id'
   has_many :cars
   has_many :card
+  has_many :comments
 
   #aca podes cambiar el tamañop de la imagen de usuario
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"

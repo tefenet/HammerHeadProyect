@@ -1,0 +1,27 @@
+<h1 class="h3 mb-3 font-weight-normal">Pregunta</h1>
+
+<%if params[:flash].present?%>
+  <% params[:flash].each do |name, msg| -%>
+      <h3><%= content_tag :div, msg, class: name %></h3>
+  <% end -%>
+<%end%> 
+
+  <%= form_for(@comment) do |f| %>
+
+    <% @comment.errors.full_messages.each do |mensaje| %>
+      *<%= mensaje %><br/>
+    <% end %><br/>
+
+    <div class="field">
+       <%= f.text_field :pregunta, autofocus: true, autocomplete: "Pregunta",:size=>"100" %>
+    </div><br/>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :viaje_id, value: params[:idViaje] %>
+    <%= f.hidden_field :idViaje, value: params[:idViaje] %>
+
+    <div class="actions">
+       <button type="submit">Confirmar</button>
+    </div>
+   <br/>
+  <% end %>
+</body>
