@@ -1,15 +1,15 @@
 class CommentsController < ApplicationController
 
-    def indexDelViaje
-		@comments = Viaje.find(params[:id]).comment	
+    def preguntasViaje
+		@comments = Viaje.find(params[:id]).comments
 	end
 
 	def update
 		@comment =Comment.find(params[:id])
 		if @comment.update(comment_params)
-			redirect_to :action => "indexDelViaje", :id => @comment.viaje.id, :flash => { :notice => "Respuesta guardada" }
+			redirect_to :action => "preguntasViaje", :id => @comment.viaje.id, :flash => { :notice => "Respuesta guardada" }
 		else
-		 	redirect_to :action => "indexDelViaje", :id => @comment.viaje.id, :flash => { :notice => @comment.errors.full_messages.join(', ') }
+		 	redirect_to :action => "preguntasViaje", :id => @comment.viaje.id, :flash => { :notice => @comment.errors.full_messages.join(', ') }
 		end 		
 	end
 
