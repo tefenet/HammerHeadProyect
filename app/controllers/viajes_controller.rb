@@ -23,7 +23,7 @@ class ViajesController < ApplicationController
   def new
     @user = current_user
     if (@user.can_publish())
-      @viaje = current_user.viajesComoChofer.build(viaje_params)
+      @viaje = current_user.viajesComoChofer.build
     else
       unless @user.has_any_car
         redirect_to root_path and return flash[:notice] = 'Debe cargar un auto antes de publicar un viaje.'
@@ -43,9 +43,8 @@ class ViajesController < ApplicationController
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
     @viaje.chofer_id = current_user.id
-    @viaje.car_id = Car.find(params[:viajẹ][:id_auto])
-    @viaje.asientos_libres = (Car.find(params[:viajẹ][:id_auto])).seats
-
+    @viaje.car = Car.find(@viaje.car_id)
+    @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
     respond_to do |format|
       if @viaje.save!
         format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }
@@ -74,13 +73,14 @@ class ViajesController < ApplicationController
   # DELETE /viajes/1
   # DELETE /viajes/1.json
   def destroy
+    if (User.current.viajesPendientesCon(@car)).any?
     @viaje.destroy
     respond_to do |format|
       format.html { redirect_to viajes_url, notice: 'El viaje se a eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
-
+end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_viaje

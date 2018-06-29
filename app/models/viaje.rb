@@ -14,7 +14,7 @@ class Viaje < ApplicationRecord
   validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
   #validate :validate_viajes_overlaping
 
-  
+
   def add_Pasajero(aUser)
     self.pasajeros<<aUser
   end
