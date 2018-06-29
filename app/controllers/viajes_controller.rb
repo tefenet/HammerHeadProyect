@@ -23,7 +23,7 @@ class ViajesController < ApplicationController
   def new
     @user = current_user
     if (@user.can_publish())
-      @viaje = current_user.viajesComoChofer.build
+      @viaje = current_user.viajesComoChofer.build(viaje_params)
     else
       unless @user.has_any_car
         redirect_to root_path and return flash[:notice] = 'Debe cargar un auto antes de publicar un viaje.'
@@ -43,11 +43,11 @@ class ViajesController < ApplicationController
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
     @viaje.chofer_id = current_user.id
-    #@viaje.car = Car.find(@viaje.car_id)
-    #@viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
+    @viaje.car_id = Car.find(params[:viajẹ][:id_auto])
+    @viaje.asientos_libres = (Car.find(params[:viajẹ][:id_auto])).seats
 
     respond_to do |format|
-      if @viaje.save
+      if @viaje.save!
         format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }
         format.json { render :show, status: :created, location: @viaje }
       else
