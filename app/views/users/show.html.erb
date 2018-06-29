@@ -31,7 +31,7 @@
                         <li class="ride-date">
 
                             <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                con numero de tarjeta <%=@user.credit_card_number%>
+                                con numero de tarjeta <%= %>
                             </a>
                         </li><!-- end .ride-date -->
 
@@ -62,6 +62,10 @@
             <% if (current_user.id == @user.id) %>
 
                 <div class="clearfix"></div>
+
+                <div class="read-all pagination-margin">
+                        <%= link_to "Ver tarjetas", href="/cards#index" %>
+                    </div><br>
 
                     <div class="read-all pagination-margin">
                         <%= link_to "Editar perfil", edit_user_path(@user) %>

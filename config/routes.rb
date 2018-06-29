@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :comentarios do
-    resources :respuesta
-  end
-  resources :solicitudes
+
+  get 'cards/new'
+  resources :cards
   resources :cars
   resources :viajes  do
     resources :comentarios

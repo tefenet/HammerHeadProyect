@@ -41,29 +41,7 @@
   <%= @viaje.descripcion %>
 </p>
 
-<% if (curren_user.id==@viaje.chofer_id) %>
+<% if (current_user.id==@viaje.chofer_id) %>
   <%= link_to 'Edit', edit_viaje_path(@viaje) %> |
   <%= link_to 'Back', viajes_path %>
 <% end %>
-
-<h1> Comentarios <h1>
-
-   <% @viaje.comentarios.each do |comentario| %>
-
-      <% comentario.text %> <br> 
-      <% comentario.autor.full_name %>
-
-      <%if (comentario.respuesta) %>
-
-        <% comentario.respuesta.text %>
-        <% comentario.respuesta.autor.full_name %>
-
-      <% else %>
-
-        <% if (curren_user.id==@viaje.chofer_id) %>
-          <%= render 'comentarios/form' %>
-        <% end %>
-
-      <% end %>
-
-   <% end %>

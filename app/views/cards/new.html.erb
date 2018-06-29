@@ -1,0 +1,33 @@
+<%= yield %>
+<%= form_for(@card) do |f| %>
+
+<div class="form">
+
+ <h1>Dar de alta Tarjeta<img src="<%= asset_path 'Logo.jpg' %>" width="100" height="100"></h1>
+    <% @card.errors.full_messages.each do |mensaje| %>
+      *<%= mensaje %><br/>
+    <% end %><br/>
+
+    <div class="field-wrap">
+     <%= f.label :numero, 'Numero' %><br />
+      <%= f.number_field :numero, autofocus: true, autocomplete: "numero" %>
+   </div><br/>
+
+   <div class="field-wrap">
+      <%= f.label :numeroSeguridad, 'Numero de seguridad' %><br />
+      <%= f.number_field :numeroSeguridad, autofocus: true, autocomplete: "numeroSeguridad" %>
+    </div><br/>
+
+    <div class="field-wrap">
+      <%= f.label :vencimiento, 'Fecha de vencimiento' %><br />
+     <%=  f.date_field :vencimiento, autofocus: true, autocomplete: "vencimiento" %>
+    </div><br/>
+
+
+   <button type="submit" class="button button-block"/>
+		<%= f.submit "Confirmar" %>
+	</button>
+  <% end %>
+
+  <%= link_to 'Back', current_user %>
+</div>
