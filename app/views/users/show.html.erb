@@ -24,15 +24,20 @@
                     <h3><%=@user.first_name%> <%=@user.last_name%></h3>nacido el <h3><%=@user.birth_date%></h3>
                 </div>
 
-                <ul class="ride-meta">
+                <% if (current_user.id == @user.id) %>
 
-                    <li class="ride-date">
-                        <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                            con numero de tarjeta <%=@user.credit_card_number%>
-                        </a>
-                    </li><!-- end .ride-date -->
+                    <ul class="ride-meta">
 
-                </ul><!-- end .ride-meta -->
+                        <li class="ride-date">
+
+                            <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+                                con numero de tarjeta <%=@user.credit_card_number%>
+                            </a>
+                        </li><!-- end .ride-date -->
+
+                    </ul><!-- end .ride-meta -->
+
+                <% end %>
 
             </article><!-- end .ride-box -->
             <p id="notice"><strong><%= notice %></strong></p>
@@ -42,19 +47,27 @@
 
                     <div class="ride-content">
                         <h3><%= link_to car.brand, car_path(car.id)%> <%=  car.model %>    <%= car.plate %></h3>
-                        <%= link_to 'Eliminar Auto', car, method: :delete, data: { confirm: 'si vas a eliminar el auto de tu cuenta, no debes tener viajes publicados con el mismo' } %>
+
+                        <% if (current_user.id == @user.id) %>
+
+                            <%= link_to 'Eliminar Auto', car, method: :delete, data: { confirm: 'si vas a eliminar el auto de tu cuenta, no debes tener viajes publicados con el mismo' } %>
+
+                        <% end %>
                     </div>
 
                 </article><!-- end .ride-box -->
 
             <% end %>
 
-            <div class="clearfix"></div>
+            <% if (current_user.id == @user.id) %>
 
-            <div class="read-all pagination-margin">
-              <%= link_to "Editar perfil", edit_user_path(@user) %>
-            </div>
+                <div class="clearfix"></div>
 
+                    <div class="read-all pagination-margin">
+                        <%= link_to "Editar perfil", edit_user_path(@user) %>
+                    </div>
+
+            <% end %>
         </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
 
     </div><!-- end .last-rides -->

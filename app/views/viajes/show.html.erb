@@ -26,6 +26,12 @@
 </p>
 
 <p>
+  <strong>Chofer:</strong>
+  <%= link_to User.find(@viaje.chofer_id).full_name ,User.find(@viaje.chofer_id) %>
+</p>
+
+
+<p>
   <strong>Duracion:</strong>
   <%= @viaje.duracion %>
 </p>
@@ -35,5 +41,29 @@
   <%= @viaje.descripcion %>
 </p>
 
-<%= link_to 'Edit', edit_viaje_path(@viaje) %> |
-<%= link_to 'Back', viajes_path %>
+<% if (curren_user.id==@viaje.chofer_id) %>
+  <%= link_to 'Edit', edit_viaje_path(@viaje) %> |
+  <%= link_to 'Back', viajes_path %>
+<% end %>
+
+<h1> Comentarios <h1>
+
+   <% @viaje.comentarios.each do |comentario| %>
+
+      <% comentario.text %> <br> 
+      <% comentario.autor.full_name %>
+
+      <%if (comentario.respuesta) %>
+
+        <% comentario.respuesta.text %>
+        <% comentario.respuesta.autor.full_name %>
+
+      <% else %>
+
+        <% if (curren_user.id==@viaje.chofer_id) %>
+          <%= render 'comentarios/form' %>
+        <% end %>
+
+      <% end %>
+
+   <% end %>

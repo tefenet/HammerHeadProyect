@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :comentarios do
+    resources :respuesta
+  end
+  resources :solicitudes
   resources :cars
   resources :viajes  do
+    resources :comentarios
     member do
       put :add_Pasajero
     end

@@ -16,6 +16,7 @@ class ViajesController < ApplicationController
   # GET /viajes/1
   # GET /viajes/1.json
   def show
+    @viaje = Viaje.find(params[:id])
   end
 
   # GET /viajes/new
@@ -37,12 +38,8 @@ class ViajesController < ApplicationController
   # POST /viajes.json
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
-    print ('ID de auto')
+    @viaje.chofer_id = current_user
     @viaje.car = Car.find(@viaje.car_id)
-    print (@viaje.car_id)
-    print (@viaje.car_id)
-    print (@viaje.car.id)
-    print (@viaje.car.id)
     @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
 
     respond_to do |format|
