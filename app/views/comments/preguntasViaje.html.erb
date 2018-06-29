@@ -14,8 +14,9 @@
     			<%= f.hidden_field :pregunta, value: comment.pregunta %>
     			<%= f.hidden_field :respondida, value: true %>
     			<div class="actions">
-      				<button class="btn btn-lg btn-danger " type="update">responder</button>
+      				<button type="submit">Responder</button>
    				</div>
    			<%end%>	<br>
     <%end%>    
 <%end%> 
+<%= link_to 'Back', root_path %>

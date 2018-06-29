@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
   get 'cards/new'
+  get 'comments/preguntasViaje'
   resources :cards
   resources :cars
   resources :viajes  do
