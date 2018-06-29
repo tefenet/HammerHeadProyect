@@ -14,18 +14,25 @@
                     </div>
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
+                      <p id="notice"><strong><%= notice %></strong></p>
+                      <% current_user.cars.each do |car| %>
 
-                    <% @cars.each do |car| %>
+                          <article class="ride-box clearfix">
 
-                        <article class="ride-box clearfix">
+                              <div class="ride-content">
+                                  <h3><%= link_to car.brand, car_path(car.id)%> <%=  car.model %>    <%= car.plate %></h3>
 
-                            <div class="ride-content">
-                                <h3><a href="#"><%= car.model %> a <%= car.brand %></a></h3>del usuario <a href="#"> <%= current_user.full_name %></a>
-                            </div>
+                                  <% if (current_user.id == @user.id) %>
 
-                        </article><!-- end .ride-box -->
+                                      <%= link_to 'Eliminar Auto', car, method: :delete, data: { confirm: 'si vas a eliminar el auto de tu cuenta, no debes tener viajes publicados con el mismo' } %>
 
-                    <% end %>
+                                  <% end %>
+                              </div>
+
+                          </article><!-- end .ride-box -->
+
+                      <% end %>
+
 
                         <div class="clearfix"></div>
 

@@ -18,6 +18,7 @@
 
         <div class="col-md-12 col-sm-12 col-xs-12">
 
+
             <article class="ride-box clearfix">
 
                 <div class="ride-content">
@@ -37,24 +38,6 @@
                 <% end %>
 
             </article><!-- end .ride-box -->
-            <p id="notice"><strong><%= notice %></strong></p>
-            <% current_user.cars.each do |car| %>
-
-                <article class="ride-box clearfix">
-
-                    <div class="ride-content">
-                        <h3><%= link_to car.brand, car_path(car.id)%> <%=  car.model %>    <%= car.plate %></h3>
-
-                        <% if (current_user.id == @user.id) %>
-
-                            <%= link_to 'Eliminar Auto', car, method: :delete, data: { confirm: 'si vas a eliminar el auto de tu cuenta, no debes tener viajes publicados con el mismo' } %>
-
-                        <% end %>
-                    </div>
-
-                </article><!-- end .ride-box -->
-
-            <% end %>
 
             <% if (current_user.id == @user.id) %>
 
