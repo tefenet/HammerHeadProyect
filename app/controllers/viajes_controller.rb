@@ -1,33 +1,33 @@
 class ViajesController < ApplicationController
-before_action :set_viaje, only: [:show, :edit, :update, :destroy]
+  before_action :set_viaje, only: [:show, :edit, :update, :destroy]
 
   # GET /viajes
   # GET /viajes.json
-def index
-  @viajes = Viaje.all
-end
+  def index
+    @viajes = Viaje.all
+  end
 
-def add_Pasajero
-  @viaje =Viaje.find(params[:id])
-  @viaje.add_Pasajero(current_user)
-  current_user.addViajeComoPasajero(@viaje)
-end
+  def add_Pasajero
+    @viaje =Viaje.find(params[:id])
+    @viaje.add_Pasajero(current_user)
+    current_user.addViajeComoPasajero(@viaje)
+  end
 
   # GET /viajes/1
   # GET /viajes/1.json
-def show
-end
+  def show
+  end
 
   # GET /viajes/new
-def new
-  @user = current_user
-  if (@user.can_publish())
-    @viaje = current_user.viajesComoChofer.build
-  else
-    flash[:notice] = 'Usted no puede publicar viajes, por favor lea los terminos y condiciones.'
-    redirect_to root_path
+  def new
+    @user = current_user
+    if (@user.can_publish())
+      @viaje = current_user.viajesComoChofer.build
+    else
+      flash[:notice] = 'Usted no puede publicar viajes, por favor lea los terminos y condiciones.'
+      redirect_to root_path
+    end
   end
-end
 
   # GET /viajes/1/edit
   def edit
@@ -74,13 +74,13 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_viaje
-      @viaje = Viaje.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_viaje
+    @viaje = Viaje.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def viaje_params
-      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_plate)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def viaje_params
+    params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_plate)
+  end
 end

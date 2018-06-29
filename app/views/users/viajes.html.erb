@@ -20,9 +20,7 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= current_user.full_name %> Auto  <%= viaje.car_plate %></a>
-                                <%= link_to 'Destroy', viaje, method: :delete, data: { confirm: 'Are you sure?' } %>
-                                <%= link_to 'Edit', edit_viaje_path(viaje) %>
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>viaje de <a href="#"> <%= current_user.full_name %> Auto  <%= viaje.car_plate %></a>
                             </div>
 
                             <ul class="ride-meta">
@@ -45,7 +43,7 @@
                                     </a>
                                 </li>
                                 <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
-
+                                <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
                             </ul><!-- end .ride-meta -->
 
                         </article><!-- end .ride-box -->
@@ -87,7 +85,7 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %></a>
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>viaje de <a href="#"> <%= User.find(viaje.chofer_id).full_name %></a>
                             </div>
 
                             <ul class="ride-meta">
