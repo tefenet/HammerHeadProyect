@@ -42,7 +42,7 @@ class ViajesController < ApplicationController
   # POST /viajes.json
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
-    @viaje.chofer_id = current_user
+    @viaje.chofer_id = current_user.id
     #@viaje.car = Car.find(@viaje.car_id)
     #@viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
 

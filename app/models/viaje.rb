@@ -11,7 +11,7 @@ class Viaje < ApplicationRecord
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
   validate :validate_inicio
   validate :validate_fecha
-  validates :car, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
+  validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
   #validate :validate_viajes_overlaping
 
   attr_accessor :car_id
@@ -37,7 +37,7 @@ class Viaje < ApplicationRecord
   end
 
   def validate_car
-    if car
+    if car_id.nil?
       errors.add(:inicio, ':Debe seleccionar un auto')
     end
   end
