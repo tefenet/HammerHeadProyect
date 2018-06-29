@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_29_051040) do
+ActiveRecord::Schema.define(version: 2018_06_29_074723) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 2018_06_29_051040) do
     t.integer "chofer_id"
     t.string "car_plate"
     t.integer "asientos_libres"
+    t.integer "car_id"
+    t.index ["car_id"], name: "index_viajes_on_car_id"
     t.index ["chofer_id"], name: "index_viajes_on_chofer_id"
     t.index ["pasajero_id"], name: "index_viajes_on_pasajero_id"
   end

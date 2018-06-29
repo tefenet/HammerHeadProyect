@@ -2,18 +2,17 @@ class Viaje < ApplicationRecord
   belongs_to :chofer, :class_name => "User"
   has_and_belongs_to_many :pasajeros, :class_name => "User"
   has_one :car
-  has_many :comentarios
-
-  attr_accessor :car_id
 
   validates :origen, presence: { message: ": Por favor ingrese el origen del viaje"}, on: [:create, :new, :update]
-  validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
+	validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
   validates :fecha, presence: {message: ": Por favor ingrese una fecha para el viaje"}, on: [:create, :new, :update]
   validates :hora, presence: {message: ": Por favor ingrese una hora para el viaje"}, on: [:create, :new, :update]
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
   validate :validate_inicio
   validate :validate_fecha
+  validates :car, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
+  #validate :validate_viajes_overlaping
 
   attr_accessor :car_id
 
@@ -26,8 +25,7 @@ class Viaje < ApplicationRecord
   end
 
   def validate_inicio
-    initial_hour = DateTime.parse(fecha.to_s + ' ' + hora.to_s)
-    if fecha && hora && (initial_hour < 12.hour.from_now)
+    if fecha && hora && (DateTime.parse(fecha.to_s + ' ' + hora.to_s) < 12.hour.from_now)
       errors.add(:inicio, ':El viaje no puede comenzar en menos de 12 horas')
     end
   end
@@ -38,10 +36,15 @@ class Viaje < ApplicationRecord
     end
   end
 
-  def validate_usuario_no_tiene_viajes_en_ese_horario
-  initial_hour = DateTime.parse(fecha.to_s + ' ' + hora.to_s)
-    if inicio && fin && usuario.viaje
-      #if usuario.viaje.where(auto_id: auto_id).where("inicio < ? and fin > ?"  ,(inicio+ 3.hours),(inicio+3.hours)).or(usuario.viaje.where(auto_id: auto_id).where("inicio < ? and fin > ?"  ,(fin+3.hours),(fin+3.hours))).or(usuario.viaje.where(auto_id: auto_id).where("inicio > ? and fin < ?"  ,(inicio+3.hours),(fin+3.hours))).count >= 1
+  def validate_car
+    if car
+      errors.add(:inicio, ':Debe seleccionar un auto')
+    end
+  end
+
+  def validate_viajes_overlaping
+    if fecha && hora && usuario.viaje
+      viajes=usuario.viaje.select{ |un_viaje| un_viaje.fecha == fecha }
       if usuario.viaje.where("inicio < ? and fin > ?"  ,(inicio+ 3.hours),(inicio+3.hours)).or(usuario.viaje.where("inicio < ? and fin > ?"  ,(fin+3.hours),(fin+3.hours))).or(usuario.viaje.where("inicio > ? and fin < ?"  ,(inicio+3.hours),(fin+3.hours))).count >= 1
         errors.add(:base, 'el usuario ya posee viaje en ese momento')
       end
@@ -52,11 +55,10 @@ class Viaje < ApplicationRecord
     if inicio.present? && fin.present?
       usuario.solicitud.where(aceptada: true).where(finalizado: false).or(usuario.solicitud.where(aceptada: false).where(rechazada: false)).each do |solicitud|
       if (solicitud.viaje.inicio < (inicio + 3.hours) && solicitud.viaje.fin > (inicio + 3.hours)) || (solicitud.viaje.inicio < (fin + 3.hours) && solicitud.viaje.fin > (fin + 3.hours)) || (solicitud.viaje.inicio > (inicio + 3.hours) && solicitud.viaje.fin < (fin + 3.hours))
-        #usuario.solicitud.where("viaje.inicio < ? and viaje.fin > ?"  ,(viaje.inicio+ 3.hours),(viaje.inicio+3.hours)).or(usuario.solicitud.where("viaje.inicio < ? and viaje.fin > ?"  ,(viaje.fin+3.hours),(viaje.fin+3.hours))).or(usuario.solicitud.where("viaje.inicio > ? and viaje.fin < ?"  ,(viaje.inicio+3.hours),(viaje.fin+3.hours))).count >= 1
         errors.add(:base, 'el usuario ya posee una solicitud en ese momento')
+        end
       end
     end
   end
-end
 
 end

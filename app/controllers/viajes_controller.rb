@@ -43,8 +43,8 @@ class ViajesController < ApplicationController
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
     @viaje.chofer_id = current_user
-    @viaje.car = Car.find(@viaje.car_id)
-    @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
+    #@viaje.car = Car.find(@viaje.car_id)
+    #@viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
 
     respond_to do |format|
       if @viaje.save

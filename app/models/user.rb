@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def has_credit_card
-    return !self.credit_card_number.nil?
+    return self.card.any?
   end
 
   def has_any_car
