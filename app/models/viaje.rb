@@ -13,7 +13,7 @@ class Viaje < ApplicationRecord
   validate :validate_inicio
   validate :validate_fecha
   validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
-  #validate :validate_viajes_overlaping
+  validate :validate_viajes_overlaping
 
 
   def add_Pasajero(aUser)
@@ -42,13 +42,25 @@ class Viaje < ApplicationRecord
     end
   end
 
+  def startT
+    return (DateTime.parse(fecha.to_s + ' ' + hora.to_s))
+  end
+
+  def finishT
+    return DateTime.parse(fecha.to_s + ' ' + hora.to_s).advance(:hours => +duracion)
+  end
+
   def validate_viajes_overlaping
-    if fecha && hora && usuario.viaje
-      viajes=usuario.viaje.select{ |un_viaje| un_viaje.fecha == fecha }
-      if usuario.viaje.where("inicio < ? and fin > ?"  ,(inicio+ 3.hours),(inicio+3.hours)).or(usuario.viaje.where("inicio < ? and fin > ?"  ,(fin+3.hours),(fin+3.hours))).or(usuario.viaje.where("inicio > ? and fin < ?"  ,(inicio+3.hours),(fin+3.hours))).count >= 1
-        errors.add(:base, 'el usuario ya posee viaje en ese momento')
+    if fecha && hora && duracion
+      if (self.startT > self.finishT)
+        errors.add(:base, 'El viaje no puede terminar antes de la hora de inicio')
+      end
+      if User.current.viajesComoChofer.select{ |un_viaje| (self.startT.between?(un_viaje.startT, un_viaje.finishT))}
+        #|| (self.finishT.between?(un_viaje.startT, un_viaje.finishT)) 
+        errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
       end
     end
+
   end
 
   def validate_usuario_no_tiene_solicitudes_en_ese_horario
