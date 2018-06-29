@@ -3,7 +3,6 @@ class Viaje < ApplicationRecord
   has_and_belongs_to_many :pasajeros, :class_name => "User"
   has_one :car
   has_many :comments
-
   validates :origen, presence: { message: ": Por favor ingrese el origen del viaje"}, on: [:create, :new, :update]
 	validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
   validates :fecha, presence: {message: ": Por favor ingrese una fecha para el viaje"}, on: [:create, :new, :update]
@@ -53,22 +52,15 @@ class Viaje < ApplicationRecord
   def validate_viajes_overlaping
     if fecha && hora && duracion
       if (self.startT > self.finishT)
-        errors.add(:base, 'El viaje no puede terminar antes de la hora de inicio')
+        errors.add(:base, 'El viaje no puede terminar antes de la hora de inicio(ingrese un numero mayor a 0)')
       end
-      if (chofer.viajesComoChofer.select{ |un_viaje| (startT..finishT).overlaps?(un_viaje.finishT..un_viaje.startT)}.count >= 1)
+      if (chofer.viajesComoChofer.select{ |un_viaje| (startT..finishT).overlaps?(un_viaje.finishT..un_viaje.startT)}.any?)
         errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
       end
     end
   end
 
   def validate_no_pending_requests
-    if inicio.present? && fin.present?
-      usuario.solicitud.where(aceptada: true).where(finalizado: false).or(usuario.solicitud.where(aceptada: false).where(rechazada: false)).each do |solicitud|
-      if (solicitud.viaje.inicio < (inicio + 3.hours) && solicitud.viaje.fin > (inicio + 3.hours)) || (solicitud.viaje.inicio < (fin + 3.hours) && solicitud.viaje.fin > (fin + 3.hours)) || (solicitud.viaje.inicio > (inicio + 3.hours) && solicitud.viaje.fin < (fin + 3.hours))
-        errors.add(:base, 'el usuario ya posee una solicitud en ese momento')
-        end
-      end
-    end
   end
 
 end
