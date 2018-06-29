@@ -43,11 +43,10 @@ class ViajesController < ApplicationController
   def create
     @viaje = current_user.viajesComoChofer.build(viaje_params)
     @viaje.chofer_id = current_user.id
-    #@viaje.car = Car.find(@viaje.car_id)
-    #@viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
-
+    @viaje.car = Car.find(@viaje.car_id)
+    @viaje.asientos_libres = (Car.find(@viaje.car_id)).seats
     respond_to do |format|
-      if @viaje.save
+      if @viaje.save!
         format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }
         format.json { render :show, status: :created, location: @viaje }
       else
@@ -74,13 +73,14 @@ class ViajesController < ApplicationController
   # DELETE /viajes/1
   # DELETE /viajes/1.json
   def destroy
+    if (User.current.viajesPendientesCon(@car)).any?
     @viaje.destroy
     respond_to do |format|
       format.html { redirect_to viajes_url, notice: 'El viaje se a eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
-
+end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_viaje

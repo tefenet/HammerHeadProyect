@@ -49,8 +49,8 @@
   </div>
 
   <div class="field-wrap">
-          <%= form.label :patente_del_vehiculo %><br>
-          <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
+    <%= form.label :patente_del_vehiculo %><br>
+-          <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
   </div>
 
   <div class="field-wrap">
