@@ -4,7 +4,7 @@
    License: none (public domain)
 */
 $main:#ef9496;
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, images, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, images, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
 {
     margin: 0;
     padding: 0;
@@ -41,6 +41,15 @@ table
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+.table-dark{
+  background-color: #868da9;
+  &:hover {
+    color: #b1d0a1;
+
+  }}
+th{padding: .75rem; vertical-align: top; border-top: 1px solid #e9ecef;}
+td{padding: .75rem; vertical-align: top; text-align: left;border-top: 1px solid #e9ecef;}
 /* === End Reset === */
 /* === General === */
 html, body
@@ -77,9 +86,9 @@ a
     -moz-transition: all  0.3s ease-in-out 0s;
     -ms-transition: all  0.3s ease-in-out 0s;
     -o-transition: all  0.3s ease-in-out 0s;
-    transition: all  0.3s ease-in-out 0s;
+    transition: all  -0.7s ease-in-out 0s;
     text-decoration: none;
-    color: #c7ba73;
+    color: #2a70ef;
 }
 a:focus
 {
@@ -118,7 +127,6 @@ p:last-child
 /* === Headers === */
 h1, h2, h3, h4, h5
 {
-    margin-bottom: 1em;
     line-height: 1.5em;
     color: #1F2F3F;
 }
@@ -307,13 +315,28 @@ input[type="search"]::-webkit-search-decoration
     color: #fff;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    border-radius: 0;
+    border-radius: 15px;
+    background: #515151;
 }
 .btn:hover
 {
+    color: #515151;
+    background: #e3e000;
+}
+.btn2
+{
     color: #fff;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 15px;
     background: #515151;
 }
+.btn2:hover
+{
+    color: #515151;
+    background: #44d477;
+}
+
 button::-moz-focus-inner, input::-moz-focus-inner
 {
     border: 0;
@@ -1434,11 +1457,11 @@ form.idealforms textarea
 }
 input, button, select, textarea
 {
-    -webkit-transition: all  0.3s ease-in-out 0s;
+    -webkit-transition: all  0.0s ease-in-out 0s;
     -moz-transition: all  0.3s ease-in-out 0s;
     -ms-transition: all  0.3s ease-in-out 0s;
     -o-transition: all  0.3s ease-in-out 0s;
-    transition: all  0.3s ease-in-out 0s;
+    transition: all  -0.7s ease-in-out 0s;
 }
 input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
 {

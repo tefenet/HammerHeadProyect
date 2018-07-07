@@ -1,7 +1,41 @@
 <%= yield %>
-
-  <strong>llevas gastando = <%= @gasto %> pesos |
-llevas ahorrando = <%= @ahorro %> pesos</strong>
+<%= render :partial => "layouts/search_box" %>
+<p id="notice"><strong><%= notice %></strong></p>
+<%= image_tag @bar %>
 <br>
 <br><br>
-<strong> <%= link_to "volver", balance_path%> </strong>
+<table class="table table-hover table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">Trayecto</th>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Precio</th>
+                          <th scope="col">Detalle</th>
+                          <th scope="col">Transacción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% (@viajesDeUsuarioenRango|@viajesDeUsuarioenRangoP).sort_by {|e| e.created_at}.each do |viaje| %>
+
+                            <tr>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                  <td>
+                                  <div class="ride-content">
+                                      <h3>Desde <%= viaje.origen %> a <%= viaje.destino %></h3></div>
+                                  </td>
+                                  <td>  <%= l viaje.fecha, locale: :es %> </td>
+                                  <td>  <%= viaje.precio %> </td>
+                                  <td>  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button> </td>
+                                  <td>   <% if (viaje.pasajeros.include?current_user)%>
+                                            out
+                                          <%else%>
+                                            in
+                                          <%end%>
+                                  </td>
+                              </div>
+                          <% end %>
+                          </tr>
+                      </tbody>
+                    </table>

@@ -20,11 +20,10 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <a href="#"> <%= current_user.full_name %>
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <a href="#"> <%= User.find(viaje.chofer_id).full_name %>
                                   <%=viaje.car_plate%>
                                  </a>
                             </div>
-
                             <ul class="ride-meta">
 
                                 <li class="ride-date">
@@ -50,7 +49,10 @@
                                 <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
                                 <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
                             </ul><!-- end .ride-meta -->
-
+                            <br>
+                            <p>Pasajeros: <% viaje.pasajeros.each do |pa| %>
+                              <%= pa.full_name %>
+                              <%end%></p>
                         </article><!-- end .ride-box -->
 
                     <% end %>
@@ -90,7 +92,7 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %>Auto  <%= Car.find(viaje.car_id).brand %>  <%= Car.find(viaje.car_id).model %>  <%= Car.find(viaje.car_id).plate %></a>
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %>Auto  <%= viaje.car.brand %>  <%= viaje.car.model %>  <%= viaje.car.plate %></a>
                             </div>
 
                             <ul class="ride-meta">

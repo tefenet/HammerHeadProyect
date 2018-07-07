@@ -1,3 +1,22 @@
 // Place all the styles related to the search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+input[type="date"]{
+  background-color: #c8e2d8;
+}
+input[type="date"]::-webkit-clear-button {
+    display: none;
+  }
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+input[type="date"]::-webkit-calendar-picker-indicator{
+    font-size: 30px;
+    background: orange;
+
+ }
+input::-webkit-datetime-edit-text {
+     color: red;
+     font-size: 28px;
+     -webkit-user-modify: read-only !important;
+   }

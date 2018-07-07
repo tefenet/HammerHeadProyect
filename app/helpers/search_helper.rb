@@ -16,5 +16,9 @@ end
   textYear,textMonth,textDay=fecha[:m].split('-');
   f=Date.new(textYear.to_i,textMonth.to_i,textDay.to_i)
   (s..f)
-end
+  end
+
+  def self.viajesdeUser(user)
+    Viaje.all.select{|v| v.pasajeros.include?user}
+  end
 end

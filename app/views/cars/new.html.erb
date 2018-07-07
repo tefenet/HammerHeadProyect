@@ -1,9 +1,7 @@
 <%= stylesheet_link_tag    'form' %>
 <%= javascript_include_tag 'form' %>
-<div class="form">
-<h1>Registrar Auto</h1>
-
 <%= render 'form', car: @car %>
-</div>
-
-<%= link_to 'Back', cars_path %>
+<br></br>
+<button class="button button-mid" type="submit" name="button"><%= button_to "Cancel",
+          :back,
+          method: :get %></button>

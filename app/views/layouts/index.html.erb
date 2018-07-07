@@ -60,12 +60,10 @@
     </div><!-- end .main-baner -->
 
   </header><!-- end .header -->
-
-<section class="main-content">
-
+    <section class="main-content">
     <div class="container">
-        <div class="row">
-            <div class="page-content">
+      <div>
+          <div class="page-content">
                 <div class="last-rides">
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -76,43 +74,36 @@
                         </div><!-- end .page-sub-title -->
 
                     </div>
-
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                      <% Viaje.all.order(created_at: :desc).each do |viaje| %>
+                    <% Viaje.all.order(created_at: :desc).each do |viaje| %>
 
                         <% if (viaje.asientos_libres !=0)%>
-
+                            <div class="col-md-12 col-sm-12 col-xs-12">
                           <article class="ride-box clearfix">
 
                               <div class="ride-content">
-                                  <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %></a>
-                                  <%= link_to add_Pasajero_viaje_path(viaje), method: :put do %>
-                                    <button type="submit">
-                                      postularme a este viaje
-                                    </button>
-                                  <% end %>
+                                  <h3>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
                               </div>
 
                               <ul class="ride-meta">
 
                                   <li class="ride-date">
-                                      <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                          <i class="fa fa-calendar"></i>
-                                          Fecha
-                                          <%= viaje.fecha %>
-                                      </a>
+                                      <%= l viaje.fecha, locale: :es %>
                                   </li><!-- end .ride-date -->
 
                                   <li class="ride-people">
-                                      <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                          <i class="fa fa-user"></i>
-                                          Asientos Libres
-                                          <%= viaje.asientos_libres %>
-                                      </a>
+                                      Asientos Libres
+                                      <%= viaje.asientos_libres %>
                                   </li><!-- end .ride-people -->
 
                                   <li>
-                                       <%= link_to "Leer mas", viaje_path(viaje.id)  %>
+                                      <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button>
+                                  </li>
+                                  <li>
+                                    <%= link_to add_Pasajero_viaje_path(viaje), method: :put do %>
+                                      <button class="btn">
+                                        Quiero ir
+                                      </button>
+                                    <% end %>
                                   </li>
 
                               </ul><!-- end .ride-meta -->

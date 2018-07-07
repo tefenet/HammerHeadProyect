@@ -10,7 +10,7 @@ class ViajesController < ApplicationController
   def add_Pasajero
     @viaje =Viaje.find(params[:id])
     @viaje.add_Pasajero(current_user)
-    current_user.addViajeComoPasajero(@viaje)
+    User.current.viajesComoPasajero<<@viaje
   end
 
   # GET /viajes/1

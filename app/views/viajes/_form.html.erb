@@ -35,22 +35,18 @@
   </div>
 
   <div class="field-wrap">
-    <div class="field">
-      <%= form.label :fecha %><br />
+    <div class="field" style="width:50%; display:inline-block">
+      <%= form.label :fecha_y_hora %><br />
       <%= form.date_field :fecha %>
     </div>
-  </div>
-
-  <div class="field-wrap">
-    <div class="field">
-      <%= form.label :hora %><br />
+    <div class="field"style="width:40%; display:inline-block">
       <%= form.time_field :hora %>
     </div>
   </div>
 
   <div class="field-wrap">
-    <%= form.label :patente_del_vehiculo %><br>
--          <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
+  <%= form.label :patente_del_vehiculo %><br>
+   <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
   </div>
 
   <div class="field-wrap">

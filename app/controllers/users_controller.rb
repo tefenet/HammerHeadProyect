@@ -23,10 +23,7 @@ class UsersController < ApplicationController
   def viajes
     @user =User.find(params[:id])
     @viajesComoChofer = @user.viajesComoChofer
-    @viajesComoPasajero = nil
-    if (@user.viajesComoPasajero != nil)
-      @viajesComoPasajero = @user.viajesComoPasajero
-    end
+    @viajesComoPasajero = SearchHelper.viajesdeUser(current_user)
   end
 
   def cars
