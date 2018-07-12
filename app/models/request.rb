@@ -56,7 +56,7 @@ class Request < ApplicationRecord
   end
 
   def isPending
-    @state == 0
+    state == 0
   end
 
   def isAccepted

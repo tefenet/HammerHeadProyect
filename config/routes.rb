@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   get 'cards/new'
+
   get 'comments/preguntasViaje'
   resources :cards
   resources :cars
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
 
   get '/user/:id/cars', to: 'users#cars', as: 'misautos'
 
+  get 'users/:id/requests', to: 'users#requests', as: 'solicitudes'
   root "application#index"
   get "search/balance" => 'search#balance'
 

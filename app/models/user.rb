@@ -72,6 +72,9 @@ class User < ApplicationRecord
   def has_any_car
     return self.cars.any?
   end
+   def misSolicitudes
+     self.viajesComoChofer.collect{|v|v.requests}.flatten     
+   end
 
   private
 

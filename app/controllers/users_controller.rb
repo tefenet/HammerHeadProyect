@@ -31,6 +31,9 @@ class UsersController < ApplicationController
     @cars = @user.cars
   end
 
+  def requests
+    @user =User.find(params[:id])  
+  end
 
 private
   def user_params
