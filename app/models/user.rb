@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :password, presence: { message: ": Por favor ingrese una contraseña" }, on: [:create, :new]
 
   def can_publish
-    return (has_credit_card & has_any_car & pending_califications)
+    return (has_credit_card & has_any_car & !pending_califications)
   end
 
   def can_Travel(idViaje)
