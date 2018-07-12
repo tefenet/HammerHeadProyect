@@ -22,7 +22,7 @@
 
     <div class="main-baner">
 
-        <div class="fullscreen background parallax clearfix not-overflow" style="background-image:url(<%= asset_path 'camino.jpg' %>);" data-img-width="1600" data-img-height="1064">
+        <div class="background parallax clearfix not-overflow" style="background-image:url(<%= asset_path 'camino.jpg' %>);" data-img-width="1600" data-img-height="1064">
 
             <div class="main-parallax-content">
 
@@ -98,26 +98,14 @@
                                   <li>
                                       <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button>
                                   </li>
-                                  <li>
-                                    <%= link_to add_Pasajero_viaje_path(viaje), method: :put do %>
-                                      <button class="btn">
-                                        Quiero ir
-                                      </button>
-                                    <% end %>
-                                  </li>
-
                               </ul><!-- end .ride-meta -->
-
                           </article><!-- end .ride-box -->
-
                           <% end %>
-
                       <% end %>
 
                         <div class="clearfix"></div>
-
                         <div class="read-all pagination-margin">
-                            <a href="">Leer mas mas</a>
+                            <a href="">Esto es el margen inferior</a>
                         </div>
 
                 </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->

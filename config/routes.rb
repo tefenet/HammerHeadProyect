@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
 
+  resources :requests do
+    member do
+      put :change
+    end
+  end
   get 'cards/new'
   get 'comments/preguntasViaje'
   resources :cards

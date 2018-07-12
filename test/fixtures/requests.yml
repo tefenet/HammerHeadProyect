@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: 1
+  passengerScore: 1
+  driverScore: 1
+  user: 
+  viaje: 
+
+two:
+  state: 1
+  passengerScore: 1
+  driverScore: 1
+  user: 
+  viaje: 

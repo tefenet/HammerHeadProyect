@@ -10,7 +10,7 @@
 <%= form_with(model: viaje, local: true) do |form| %>
   <% if viaje.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(viaje.errors.count, "error") %> evitaron que este viaje fuera fuardado:</h2>
+      <h2><%= pluralize(viaje.errors.count, "error") %> evitaron que este viaje fuera guardado:</h2>
 
       <ul>
       <% viaje.errors.full_messages.each do |message| %>
@@ -46,7 +46,7 @@
 
   <div class="field-wrap">
   <%= form.label :patente_del_vehiculo %><br>
-   <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
+  <%= form.select :car_id, options_for_select(User.current.cars.collect{ |c| [c.plate, c.id] }),include_blank: false %>
   </div>
 
   <div class="field-wrap">
@@ -69,9 +69,11 @@
       <%= form.text_area :descripcion %>
     </div>
   </div>
+  <ul class="ride-meta">
+    <li class="ride-people"><%= form.submit %></li>
+    <li class="ride-people"><%= link_to "Cancel", url_for(:back)%></li>
+  </ul>
 
-  <button type="submit" class="button button-block"/>
-    <%= form.submit %>
-  </button>
+
 <% end %>
 </div>

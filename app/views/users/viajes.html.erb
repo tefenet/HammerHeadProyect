@@ -20,41 +20,54 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <a href="#"> <%= User.find(viaje.chofer_id).full_name %>
-                                  <%=viaje.car_plate%>
-                                 </a>
+                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <%= User.find(viaje.chofer_id).full_name %> <%=viaje.car_plate%>
+
                             </div>
                             <ul class="ride-meta">
 
                                 <li class="ride-date">
-                                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                        <%= viaje.fecha %>
-                                    </a>
+                                    <b class="tooltip-link" data-original-title="Fecha de partida" data-toggle="tooltip">
+                                        <%= l viaje.fecha, locale: :es %>
+                                    </b>
                                 </li><!-- end .ride-date -->
 
                                 <li class="ride-people">
-                                    <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
+                                    <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
                                         <%= viaje.asientos_libres %>
-                                    </a>
+                                    </b>
                                 </li><!-- end .ride-people -->
 
                                 <li>
-                                    <a href="#">
-                                        Leer mas
-                                    </a>
+                                  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button>
                                 </li>
                                 <li>
-                                    <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>
+                                  <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>
                                 </li>
-                                <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
-                                <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
+                                 <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
+                                 <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
                             </ul><!-- end .ride-meta -->
                             <br>
                             <p>Pasajeros: <% viaje.pasajeros.each do |pa| %>
                               <%= pa.full_name %>
                               <%end%></p>
                         </article><!-- end .ride-box -->
-
+                        <p>Solicitudes:<br><!-- esta seccion tiene que pasar a otra pagina donde se liste todas mis solicitudes -->
+                        <% viaje.requests.each do |rq| %>
+                          <% if rq.state==0 %>
+                          <%= link_to rq.user.full_name, rq.user %>
+                          <%= link_to 'aceptar', change_request_path(:request=>{:id=>rq.id,:cambio=>1,:viaje=>viaje.id}), method: :put %>
+                          <%= link_to 'rechazar', change_request_path(:request=>{:id=>rq.id,:cambio=>2,:viaje=>viaje.id}), method: :put %>
+                          <%else%>
+                             <%if rq.state==1%>
+                              <%= link_to rq.user.full_name, rq.user %>
+                              <%= link_to 'cancelar', change_request_path(:request=>{:id=>rq.id,:cambio=>3,:viaje=>viaje.id}), method: :put %>
+                              <br>
+                              <%else%><!-- seria bueno hacer el show, para las requests, ya esta empezado pero medio trucheli -->
+                              <%= link_to rq.user.full_name, rq.user %>
+                              cancelada
+                              <%end%>
+                          <%end%>
+                        <%end%></p>
                     <% end %>
 
                         <div class="clearfix"></div>
@@ -92,30 +105,28 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><a href="#">Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3>ride by <a href="#"> <%= User.find(viaje.chofer_id).full_name %>Auto  <%= viaje.car.brand %>  <%= viaje.car.model %>  <%= viaje.car.plate %></a>
+                                <h3>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
+                                <% if viaje.car %>Auto  <%= viaje.car.brand %>  <%= viaje.car.model %>  <%= viaje.car.plate %>
+                                <%else%> no hay registro del Auto
+                                <%end%>
                             </div>
 
                             <ul class="ride-meta">
 
                                 <li class="ride-date">
-                                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                        <i class="fa fa-calendar"></i>
+                                    <b class="tooltip-link" data-original-title="Fecha de Partida" data-toggle="tooltip">
                                         <%= viaje.fecha %>
-                                    </a>
+                                    </b>
                                 </li><!-- end .ride-date -->
 
                                 <li class="ride-people">
-                                    <a href="#" class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        <i class="fa fa-user"></i>
+                                    <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
                                         <%= viaje.asientos_libres %>
-                                    </a>
+                                    </b>
                                 </li><!-- end .ride-people -->
 
                                 <li>
-                                    <a href="#">
-                                        <i class="fa fa-file"></i>
-                                        Leer mas
-                                    </a>
+                                    <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button>
                                 </li>
 
                             </ul><!-- end .ride-meta -->

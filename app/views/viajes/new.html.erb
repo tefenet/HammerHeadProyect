@@ -1,9 +1,4 @@
 <%= stylesheet_link_tag    'form' %>
 <%= javascript_include_tag 'form' %>
-<div class="form">
-<%= render 'form', viaje: @viaje %>
 
-<button class="button button-mid" type="submit" name="button"><%= button_to "Cancel", :back,
-          method: :get %></button>
-  
-</div>
+<%= render 'form', viaje: @viaje %>

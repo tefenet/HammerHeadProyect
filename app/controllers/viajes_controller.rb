@@ -8,9 +8,7 @@ class ViajesController < ApplicationController
   end
 
   def add_Pasajero
-    @viaje =Viaje.find(params[:id])
-    @viaje.add_Pasajero(current_user)
-    User.current.viajesComoPasajero<<@viaje
+    Viaje.find(params[:id]).add_Pasajero(current_user)
   end
 
   # GET /viajes/1
@@ -63,6 +61,7 @@ class ViajesController < ApplicationController
   # PATCH/PUT /viajes/1
   # PATCH/PUT /viajes/1.json
   def update
+    @asientos_libres=@viaje.asientos_libres
     respond_to do |format|
       if @viaje.update(viaje_params)
         format.html { redirect_to @viaje, notice: 'El viaje a sido modificado.' }
