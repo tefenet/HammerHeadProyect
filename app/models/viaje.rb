@@ -18,7 +18,7 @@ class Viaje < ApplicationRecord
 
   def add_Pasajero(aUser)
     self.pasajeros<<aUser
-    self.update_column(:asientos_libres, asientos_libres-1)    
+    self.update_column(:asientos_libres, asientos_libres-1)
   end
 
   def self.searchByRange(range)
@@ -60,6 +60,10 @@ class Viaje < ApplicationRecord
         errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
       end
     end
+  end
+
+  def pending_califications
+    self.requests.select{|r| r.puntajePasajeroPendiente && self.fecha<30.days.ago}    
   end
 
   def validate_no_pending_requests

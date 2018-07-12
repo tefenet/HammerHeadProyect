@@ -38,7 +38,8 @@ class User < ApplicationRecord
   end
 
   def pending_califications
-    self.requests.select{|r| r.state==1 && r.driverScore==0 && r.viaje.fecha<30.days.ago}.empty?
+    ((self.requests.select{|r| r.puntajeChoferPendiente && r.viaje.fecha<30.days.ago}) +
+    (self.viajesComoChofer.collect{|v| v.pending_califications})).flatten.any?
     #driverScore 1 positivo; -1 negativo; 0:depende, si state=1 significa 'pendiente', si state=3 significa neutro
   end
 

@@ -13,9 +13,17 @@ class Request < ApplicationRecord
   end
 
   def pending_Score
-    unless User.current.pending_califications
+    if User.current.pending_califications
       errors.add(:base, 'tienes puntuaciones pendientes')
     end
+  end
+
+  def puntajeChoferPendiente
+    self.state==1 && self.driverScore==0
+  end
+
+  def puntajePasajeroPendiente
+    self.state==1 && self.passengerScore==0
   end
 
   def tarjeta
