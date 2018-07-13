@@ -2,20 +2,23 @@
 <div class="flex-container">
 
 
-<div class="container" style="height:230px; border:solid black; background-color:cornsilk">
+<div class="container" style="height:237px; border:solid black; background-color:cornsilk">
         <div class="col-md-6" style="display:inline-block;border: 2px black;background-color:#f7d56e">
 
             <h1 class="display-4 font-italic"> <%= @viaje.origen%> >>---->> <%= @viaje.destino%></h1>
 
-             <p class="lead my-3"><strong>Partida:</strong>
-             <%= l @viaje.fecha, locale: :es %> </p>
 
               <h3 class="mb-0">
                   <strong class="text-dark">$<%= @viaje.precio %></strong>
               </h3>
                   <b>
-                    <strong>Hora:</strong>
+                    <strong>sale:</strong><%= l @viaje.fecha, locale: :es %>,
                     <%= @viaje.hora.strftime("%H:%M") %>
+                  </b>
+                  <br>
+                  <b>
+                    <strong>llega:</strong><%= l @viaje.finishT.to_date, locale: :es %>
+                    <%= @viaje.finishT.strftime("%H:%M") %>
                   </b>
                   <br>
                     <b><strong>Chofer:</strong>
@@ -26,7 +29,11 @@
                   <strong>Duracion:</strong>
                   <%= @viaje.duracion %> Horas
                 </b>
-
+                <br>
+                <b>
+                  <strong>Duracion:</strong>
+                  Butacas disponibles  <%= @viaje.asientos_libres %>
+                </b>
                 <p>
                   <strong>Descripcion:</strong>
                   <%= @viaje.descripcion %>

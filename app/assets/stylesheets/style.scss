@@ -39,7 +39,8 @@ blockquote:before, blockquote:after, q:before, q:after
 table
 {
     border-collapse: collapse;
-    border-spacing: 0;
+    border-spacing: 0;    
+    border: 3px red solid;
 }
 
 .table-dark{
@@ -1497,7 +1498,7 @@ form textarea
     width: 100%;
     color: #606060;
     padding: 1em;
-    
+
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;

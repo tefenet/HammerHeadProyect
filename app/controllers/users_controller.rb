@@ -32,11 +32,17 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @user =User.find(params[:id])  
+    path=request.path
+
+    if params[path] && !params[path][:reqState].blank?
+        @requests = SearchHelper.request_filter(params[path][:reqState])
+    else
+        @requests = current_user.requests.all
+    end
   end
 
 private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :birth_date, :credit_card_number, :avatar)
+    params.require(:user).permit(:first_name, :last_name, :email, :birth_date, :credit_card_number, :avatar, :reqState)
   end
 end

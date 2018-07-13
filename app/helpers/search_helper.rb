@@ -21,4 +21,8 @@ end
   def self.viajesdeUser(user)
     Viaje.all.select{|v| v.pasajeros.include?user}
   end
+
+  def self.request_filter(selectedState)
+    User.current.requests.where(state: selectedState)
+  end
 end
