@@ -33,7 +33,7 @@
 
                                 <li class="ride-people">
                                     <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        <%= viaje.asientos_libres %>
+                                        <%= viaje.asientos_libres %> asientos libres
                                     </b>
                                 </li><!-- end .ride-people -->
 
@@ -46,28 +46,10 @@
                                  <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
                                  <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
                             </ul><!-- end .ride-meta -->
-                            <br>
-                            <p>Pasajeros: <% viaje.pasajeros.each do |pa| %>
-                              <%= pa.full_name %>
-                              <%end%></p>
+
+
                         </article><!-- end .ride-box -->
-                        <p>Solicitudes:<br><!-- esta seccion tiene que pasar a otra pagina donde se liste todas mis solicitudes -->
-                        <% viaje.requests.each do |rq| %>
-                          <% if rq.state==0 %>
-                          <%= link_to rq.user.full_name, rq.user %>
-                          <%= link_to 'aceptar', change_request_path(:request=>{:id=>rq.id,:cambio=>1,:viaje=>viaje.id}), method: :put %>
-                          <%= link_to 'rechazar', change_request_path(:request=>{:id=>rq.id,:cambio=>2,:viaje=>viaje.id}), method: :put %>
-                          <%else%>
-                             <%if rq.state==1%>
-                              <%= link_to rq.user.full_name, rq.user %>
-                              <%= link_to 'cancelar', change_request_path(:request=>{:id=>rq.id,:cambio=>3,:viaje=>viaje.id}), method: :put %>
-                              <br>
-                              <%else%><!-- seria bueno hacer el show, para las requests, ya esta empezado pero medio trucheli -->
-                              <%= link_to rq.user.full_name, rq.user %>
-                              cancelada
-                              <%end%>
-                          <%end%>
-                        <%end%></p>
+                        
                     <% end %>
 
                         <div class="clearfix"></div>
