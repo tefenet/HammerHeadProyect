@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     if params[path] && !params[path][:reqState].blank?
         @requests = SearchHelper.request_filter(params[path][:reqState])
     else
-        @requests = current_user.requests.all
+        @requests = SearchHelper.req_All
     end
   end
 

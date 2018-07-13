@@ -39,7 +39,7 @@ blockquote:before, blockquote:after, q:before, q:after
 table
 {
     border-collapse: collapse;
-    border-spacing: 0;    
+    border-spacing: 0;
     border: 3px red solid;
 }
 
@@ -1159,9 +1159,9 @@ input[type=submit]
 [type="submit"]:hover, .log-twitter:hover, .log-facebook:hover
 {
     color: #fff;
-    background: #7ec32a;
-    border:5px;
-    border-style: ridge;
+    background: #ef3e3e;
+    border:2px;
+    border-style: inset;
     border-color: #d9534f;
 }
 .alert

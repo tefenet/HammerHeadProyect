@@ -10,6 +10,11 @@
     </ul>
     <% end %>-->
     </div>
+    <div class="col-md-6">
+      <% if User.current.pending_califications %>
+      <strong style="color:red">  no puedes aceptar mas pasajeros porque tienes calificaciones pendientes</strong>
+      <%end%>
+    </div>
     <div class="page-content">
       <div class="last-rides">
 
@@ -57,8 +62,8 @@
                     <td> <%= req.estado %> </td>
                     <td>
                       <% if req.isPending%>
-                      <%= link_to 'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
-                      <%= link_to 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless  User.current.pending_califications,'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless User.current.pending_califications, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
                       <%elsif req.isCanceled %>
                       cancelada
                       <%else%>

@@ -23,6 +23,10 @@ end
   end
 
   def self.request_filter(selectedState)
-    User.current.requests.where(state: selectedState)
+    Request.all.select{|r| r.viaje.chofer.id==User.current.id && r.state.to_i==selectedState.to_i}
+  end
+
+  def self.req_All
+    Request.all.select{|r| r.viaje.chofer.id==User.current.id}    
   end
 end
