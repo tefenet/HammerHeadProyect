@@ -1,0 +1,90 @@
+<%= yield %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+    <%= form_for solicitudes_path, method: "get", id: "filter", class: "filter" do |f|%>
+    <%= f.select :reqState, options_for_select(requests_for_select), include_blank: 'Todas'%>
+    <ul class="ride-meta">
+      <li class="ride-people"><%= f.submit "filtrar"%></li>
+    </ul>
+    <% end %>-->
+    </div>
+    <div class="col-md-6">
+      <% if User.current.pending_califications %>
+      <strong style="color:red">  no puedes aceptar mas pasajeros porque tienes calificaciones pendientes</strong>
+      <%end%>
+    </div>
+    <div class="page-content">
+      <div class="last-rides">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="page-sub-title textcenter">
+            <h2>solicitudes</h2>
+            <div class="line"></div>
+          </div><!-- end .page-sub-title -->
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <p id="notice"><strong><%= notice %></strong></p>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Viaje</th>
+                <th scope="col">ver</th>
+                <th scope="col">Sale</th>
+                <th scope="col">Llega</th>
+                <th scope="col">Duración</th>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Reputacion</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @requests.sort_by {|e| e.created_at}.each do |req| %>
+
+              <tr>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <td>
+                      <div class="ride-content" >
+                        <h3><%= req.viaje.origen %>--><%= req.viaje.destino %></h3>
+                      </div>
+                    </td>
+                    <td><a title='<%=req.comment%>'><%if !req.comment.blank? %>si <%end%></a></td>
+                    <td><%= l req.viaje.fecha, locale: :es %>, <%= req.viaje.startT.strftime("%H:%M") %> hs </td>
+                    <td><%= l req.viaje.finishT.to_date, locale: :es %>, <%= req.viaje.finishT.strftime("%H:%M") %> hs </td>
+                    <td><%if req.viaje.duracion<24 %><%= Time.at((req.viaje.duracion)*3600).utc.strftime("%H:%M") %>Hs.<%else%><%=req.viaje.duracion%>Hs<%end%></td>
+                    <td> <%= link_to req.user.full_name, req.user %> </td>
+                    <td> <%= req.user.reputacionPA %> </td>
+                    <td> <%= req.estado %> </td>
+                    <td>
+                      <% if req.isPending%>
+                      <%= link_to_unless  User.current.pending_califications,'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless User.current.pending_califications, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
+                      <%elsif req.isCanceled %>
+                      cancelada
+                      <%else%>
+                      <%= link_to 'cancelar', change_request_path(:request=>{:id=>req.id,:cambio=>3,:viaje=>req.viaje_id}), method: :put %>
+                      <%end%>
+                    </td>
+                  </div>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+            <div class="clearfix"></div>
+
+            <!-- <div class="read-all pagination-margin">
+            <a href="">Leer mas mas</a>
+          </div> -->
+
+        </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+      </div><!-- end .last-rides -->
+
+    </div><!-- end .row -->
+
+  </div><!-- end .container -->

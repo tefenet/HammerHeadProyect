@@ -19,6 +19,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'modernizr-rails'
+gem 'rails-i18n', '~> 5.1', '>= 5.1.1'
 #compila haml y lo renderiza como html
 gem "haml"
 # Use Uglifier as compressor for JavaScript assets
@@ -36,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'googlecharts'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

@@ -3,11 +3,11 @@ class CardsController < ApplicationController
 	def index
 		@cards = Card.all
 	end
-	
+
 	def show
 		@card = Card.find(params[:id])
 	end
-	
+
 	def new
 		@card = Card.new
 	end
@@ -23,18 +23,18 @@ class CardsController < ApplicationController
 			redirect_to @card
 		else
 		 	render :edit
-		end 		
+		end
 	end
-	
+
 	def create
-		@card = current_user.card.new(card_params)
+		@card = current_user.cards.new(card_params)
 		if @card.save
 			@card.vencimiento = @card.vencimiento.change(:day => 1)
 			@card.save
 			redirect_to @card
 		else
-		 	render :new	
-		end 	
+		 	render :new
+		end
 	end
 
 	def delete
@@ -42,7 +42,7 @@ class CardsController < ApplicationController
 	end
 
 
-	def destroy   
+	def destroy
       @card = Card.find(params[:id]).destroy
       render :index
     end
@@ -51,7 +51,7 @@ class CardsController < ApplicationController
 
 	def validate_usuario
 		redirect_to new_usuario_session_path, notice: "Debes iniciar sesion"
-	end	
+	end
 
 	def card_params
 		params.require(:card).permit(:numero,:numeroSeguridad,:vencimiento)

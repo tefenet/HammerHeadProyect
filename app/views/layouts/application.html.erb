@@ -37,9 +37,9 @@
   <![endif]-->
 
 </head>
-<body>
+<body style="background-color:white">
 
-  <% if (controller_name == "application") || (controller_name == "viajes") || (controller_name == "users") || (controller_name == "search")%>
+  <% if (controller_name == "application") || (controller_name == "viajes") || (controller_name == "users") || (controller_name == "search")| (controller_name == "request")%>
 
   <!-- Desde aca pone todo lo que quieras que tenga la barra de navegacion -->
   <header class="header">
@@ -63,13 +63,21 @@
                 <a href="/">Home</a>
               </li>
               <li>
-                 <%= link_to "misviajes", misviajes_path(current_user)  %>
+                <a href="#">viajes</a>
+                <ul class="sub-menu">
+                  <li>
+                    <%= link_to "Mis Viajes", misviajes_path(current_user)  %>
+                  </li>
+                  <li>
+                    <%= link_to "Publicar viaje", new_viaje_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Mis Solicitudes", solicitudes_path(current_user) %>
+                  </li>
+                </ul>
               </li>
                <li>
                  <%= link_to "misautos", misautos_path(current_user)  %>
-              </li>
-              <li>
-                <%= link_to "Publicar viaje", new_viaje_path %>
               </li>
               <li>
                 <a href="#">opciones</a>

@@ -3,13 +3,14 @@ class Viaje < ApplicationRecord
   has_and_belongs_to_many :pasajeros, :class_name => "User"
   has_one :car
   has_many :comments
+  has_many :requests
   validates :origen, presence: { message: ": Por favor ingrese el origen del viaje"}, on: [:create, :new, :update]
 	validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
   validates :fecha, presence: {message: ": Por favor ingrese una fecha para el viaje"}, on: [:create, :new, :update]
   validates :hora, presence: {message: ": Por favor ingrese una hora para el viaje"}, on: [:create, :new, :update]
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
-  validate :validate_inicio
+  #validate :validate_inicio
   validate :validate_fecha
   validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
   validate :validate_viajes_overlaping
@@ -17,6 +18,7 @@ class Viaje < ApplicationRecord
 
   def add_Pasajero(aUser)
     self.pasajeros<<aUser
+    self.update_column(:asientos_libres, asientos_libres-1)
   end
 
   def self.searchByRange(range)
@@ -58,6 +60,10 @@ class Viaje < ApplicationRecord
         errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
       end
     end
+  end
+
+  def pending_califications
+    self.requests.select{|r| r.puntajePasajeroPendiente && self.fecha<30.days.ago}    
   end
 
   def validate_no_pending_requests

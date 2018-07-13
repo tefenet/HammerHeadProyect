@@ -13,17 +13,34 @@ class User < ApplicationRecord
   validates :password, presence: { message: ": Por favor ingrese una contraseña" }, on: [:create, :new]
 
   def can_publish
-    return (has_credit_card & has_any_car & pending_califications)
+    return (has_credit_card & has_any_car & !pending_califications)
+  end
+
+  def can_Travel(idViaje)
+    r=Viaje.find(idViaje)
+    self.viajes.find{|un_viaje| (r.startT..r.finishT).overlaps?(un_viaje.finishT..un_viaje.startT)}.nil?
+  end
+
+  def viajes
+    viajesComoChofer + viajesComoPasajero
   end
 
   def full_name
     return self.first_name+' '+self.last_name
   end
 
+  def reputacionPA
+    self.requests.inject(0) {|sum, i|  sum + i.passengerScore }
+  end
+
+  def reputacionCH
+    self.viajesComoChofer.requests.inject(0) {|sum, i|  sum + i.driverScore }
+  end
 
   def pending_califications
-    return true
-    #Temporal hasta que pongamos calificaciones
+    ((self.requests.select{|r| r.puntajeChoferPendiente && r.viaje.fecha<30.days.ago}) +
+    (self.viajesComoChofer.collect{|v| v.pending_califications})).flatten.any?
+    #driverScore 1 positivo; -1 negativo; 0:depende, si state=1 significa 'pendiente', si state=3 significa neutro
   end
 
   def self.current
@@ -41,12 +58,23 @@ class User < ApplicationRecord
   end
 
   def has_credit_card
-    return self.card.any?
+    return self.cards.any?
+  end
+
+  def can_Pay(unViaje)
+    if has_credit_card
+      self.cards.first.can_pay_when(unViaje.fecha)
+    else
+      true
+    end
   end
 
   def has_any_car
     return self.cars.any?
   end
+   def misSolicitudes
+     self.viajesComoChofer.collect{|v|v.requests}.flatten     
+   end
 
   private
 
@@ -56,11 +84,12 @@ class User < ApplicationRecord
       end
   end
 
-  has_many :viajesComoPasajero, :class_name => "Viaje", :foreign_key => 'pasajero_id'
+  has_and_belongs_to_many :viajesComoPasajero, :class_name => "Viaje"
   has_many :viajesComoChofer, :class_name => "Viaje", :foreign_key => 'chofer_id'
   has_many :cars
-  has_many :card
+  has_many :cards
   has_many :comments
+  has_many :requests
 
   #aca podes cambiar el tamañop de la imagen de usuario
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"

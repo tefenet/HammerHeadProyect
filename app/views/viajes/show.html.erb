@@ -1,63 +1,99 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Origen:</strong>
-  <%= @viaje.origen %>
-</p>
-
-<p>
-  <strong>Destino:</strong>
-  <%= @viaje.destino %>
-</p>
-
-<p>
-  <strong>Fecha:</strong>
-  <%= @viaje.fecha %>
-</p>
-
-<p>
-  <strong>Hora:</strong>
-  <%= @viaje.hora %>
-</p>
-
-<p>
-  <strong>Precio:</strong>
-  $<%= @viaje.precio %> Pesos
-</p>
-
-<p>
-  <strong>Chofer:</strong>
-  <%= link_to User.find(@viaje.chofer_id).full_name ,User.find(@viaje.chofer_id) %>
-</p>
+<body style="background-color:aliceblue">
+<div class="flex-container">
 
 
-<p>
-  <strong>Duracion:</strong>
-  <%= @viaje.duracion %> Horas
-</p>
+<div class="container" style="height:237px; border:solid black; background-color:cornsilk">
+        <div class="col-md-6" style="display:inline-block;border: 2px black;background-color:#f7d56e">
 
-<p>
-  <strong>Descripcion:</strong>
-  <%= @viaje.descripcion %>
-</p>
-
-<% if (current_user.id==@viaje.chofer_id) %>
-  <%= link_to 'Editar', edit_viaje_path(@viaje) %> |
-  <%= link_to 'Atras', viajes_path %>
-<% end %>
+            <h1 class="display-4 font-italic"> <%= @viaje.origen%> >>---->> <%= @viaje.destino%></h1>
 
 
-<h2>Seccion de preguntas</h2><br>
-<% @viaje.comments.each do |comment| %>
-    <h5> Pregunta de (nombre de usuario) <!-- #User.find(comment.user_id).full_name -->: <%= comment.pregunta %> </h5>
-    <h5> respuesta: <% if comment.respuesta.present?%> <%=comment.respuesta%>
-    <%else%>
-    <br>
-    <% end %></h5>
- <% end %>
- <% if @viaje.chofer_id != current_user.id %>
-  <%= link_to 'Realizar pregunta', new_comment_path(idViaje: @viaje.id) %>
-<%end%>
-<br>
-<br>
-<br>
+              <h3 class="mb-0">
+                  <strong class="text-dark">$<%= @viaje.precio %></strong>
+              </h3>
+                  <b>
+                    <strong>sale:</strong><%= l @viaje.fecha, locale: :es %>,
+                    <%= @viaje.hora.strftime("%H:%M") %>
+                  </b>
+                  <br>
+                  <b>
+                    <strong>llega:</strong><%= l @viaje.finishT.to_date, locale: :es %>
+                    <%= @viaje.finishT.strftime("%H:%M") %>
+                  </b>
+                  <br>
+                    <b><strong>Chofer:</strong>
+                    <%= link_to User.find(@viaje.chofer_id).full_name ,User.find(@viaje.chofer_id) %>
+                  </b>
+                  <br>
+                <b>
+                  <strong>Duracion:</strong>
+                  <%= @viaje.duracion %> Horas
+                </b>
+                <br>
+                <b>
+                  <strong>Duracion:</strong>
+                  Butacas disponibles  <%= @viaje.asientos_libres %>
+                </b>
+                <p>
+                  <strong>Descripcion:</strong>
+                  <%= @viaje.descripcion %>
+                </p>
+              </div>
+
+
+            <% if @viaje.chofer_id != current_user.id %>
+
+
+            <div class="col-md-6 px-0" style="background-color:#e1e184">
+                <h3 class="mb-0">
+                    agrega un comentario a la solicitud
+                  </h3>
+                  <%= form_for Request.new do |f| %>
+                  <div class="field-wrap">
+                    <div class="field">
+                      <%= f.label :comentario %><br />
+                      <div style="background-color:FloralWhite">
+                        <%= f.text_area :comment %>
+                      </div>
+                    </div>
+                  </div>
+                  <%= f.hidden_field :viaje, :value=> @viaje.id %>
+                  <%= f.submit "Quiero ir" %>
+                  <% end %>
+            </div>
+            <b style="color: red"> <%= notice %></b>
+            <b style="color: green"> <%= alert %></b>
+            <%else%>
+            <div class="col-md-6 px-0" style="background-color:#e1e184">
+                <h3 class="mb-0">
+                    lista de pasajeros
+                  </h3>
+                  <br>
+                  <%@viaje.pasajeros.each do |p|%>
+                    <%= p.full_name%>
+                    <br>
+                  <%end%>
+            </div>
+
+              <%= link_to 'Editar viaje', edit_viaje_path(@viaje) %> |
+              <%= link_to 'Volver', viajes_path %>
+
+            <%end%>
+  </div>
+  <div>
+
+
+            <h2>Seccion de preguntas</h2><br>
+            <% @viaje.comments.each do |comment| %>
+                <h5> Pregunta de (nombre de usuario) <!-- #User.find(comment.user_id).full_name -->: <%= comment.pregunta %> </h5>
+                <h5> respuesta: <% if comment.respuesta.present?%> <%=comment.respuesta%>
+                <%else%>
+                <br>
+                <% end %></h5>
+             <% end %>
+             <% if @viaje.chofer_id != current_user.id %>
+              <%= link_to 'Realizar pregunta', new_comment_path(idViaje: @viaje.id) %>
+            <%end%>
+          </div>
+</div>
+</body>

@@ -16,5 +16,17 @@ end
   textYear,textMonth,textDay=fecha[:m].split('-');
   f=Date.new(textYear.to_i,textMonth.to_i,textDay.to_i)
   (s..f)
-end
+  end
+
+  def self.viajesdeUser(user)
+    Viaje.all.select{|v| v.pasajeros.include?user}
+  end
+
+  def self.request_filter(selectedState)
+    Request.all.select{|r| r.viaje.chofer.id==User.current.id && r.state.to_i==selectedState.to_i}
+  end
+
+  def self.req_All
+    Request.all.select{|r| r.viaje.chofer.id==User.current.id}    
+  end
 end

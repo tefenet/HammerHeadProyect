@@ -19,7 +19,7 @@ class CarsController < ApplicationController
 
   # GET /cars/1/edit
   def edit
-    return redirect_to current_user ,notice: 'no puedes editar un auto si tiene viajes pendientes' unless (User.current.viajesPendientesCon(@car)).empty?
+    return redirect_to misautos_path(current_user) ,notice: 'no puedes editar un auto si tiene viajes pendientes' unless (User.current.viajesPendientesCon(@car)).empty?
   end
 
   # POST /cars
@@ -57,13 +57,13 @@ class CarsController < ApplicationController
   def destroy
     if (current_user.viajesPendientesCon(@car).any?)
         respond_to do |format|
-          format.html { redirect_to current_user, notice: 'no puede borrar el auto porque tiene viajes pendientes' }
+          format.html { redirect_to misautos_path(current_user), notice: 'no puede borrar el auto porque tiene viajes pendientes' }
           format.json { head :no_content }
         end
     else
       @car.destroy
       respond_to do |format|
-        format.html { redirect_to current_user, notice: 'El auto fue eliminado exitosamente.' }
+        format.html { redirect_to misautos_path(current_user), notice: 'El auto fue eliminado exitosamente.' }
         format.json { head :no_content }
       end
     end

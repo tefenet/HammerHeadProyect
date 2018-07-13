@@ -20,15 +20,16 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #2dabfb;
+  font-weight: 900;
 
   &:visited {
-    color: #666;
+    color: #1f9c36;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #f6edab;
+    background-color: #1f9c36;
   }
 }
 
@@ -58,7 +59,7 @@ div {
 }
 
 #error_explanation {
-  
+
   border: 2px solid red;
   padding: 7px 7px 0;
   margin-bottom: 20px;
