@@ -22,7 +22,7 @@
 
 <p>
   <strong>Precio:</strong>
-  <%= @viaje.precio %>
+  $<%= @viaje.precio %> Pesos
 </p>
 
 <p>
@@ -33,7 +33,7 @@
 
 <p>
   <strong>Duracion:</strong>
-  <%= @viaje.duracion %>
+  <%= @viaje.duracion %> Horas
 </p>
 
 <p>
@@ -42,8 +42,8 @@
 </p>
 
 <% if (current_user.id==@viaje.chofer_id) %>
-  <%= link_to 'Edit', edit_viaje_path(@viaje) %> |
-  <%= link_to 'Back', viajes_path %>
+  <%= link_to 'Editar', edit_viaje_path(@viaje) %> |
+  <%= link_to 'Atras', viajes_path %>
 <% end %>
 
 

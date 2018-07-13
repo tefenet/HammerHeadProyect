@@ -39,10 +39,8 @@
                                     </a>
                                 </li><!-- end .ride-people -->
 
-                                <li>
-                                    <a href="#">
-                                        Leer mas
-                                    </a>
+                                <li>    
+                                        <%= link_to "Leer mas", viaje_path(viaje.id)  %>
                                 </li>
                                 <li>
                                     <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>
