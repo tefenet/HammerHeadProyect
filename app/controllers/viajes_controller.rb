@@ -29,6 +29,9 @@ class ViajesController < ApplicationController
       unless @user.has_credit_card
         redirect_to root_path and return flash[:notice] = 'Debe cargar una tarjeta de credito antes de publicar un viaje.'
       end
+      if @user.pending_califications
+        redirect_to root_path and return flash[:notice] = 'Tienes calificaciones pendientes, no puedes publicar nuevos viajes'
+      end
     end
   end
 
