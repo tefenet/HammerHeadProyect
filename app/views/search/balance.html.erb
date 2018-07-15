@@ -13,10 +13,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <% (@viajesDeUsuarioenRango|@viajesDeUsuarioenRangoP).select{ |v| v.pasajeros.count>0}.sort_by {|e| e.created_at}.each do |viaje| %>
-
-
-
+                        <% (@viajesDeUsuarioenRango|@viajesDeUsuarioenRangoP).select{ |v| v.pasajeros.count>0}.sort_by{|fecha|  SearchHelper.fechaDePago(fecha)}.reverse!.each do |viaje| %>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                               <% if (viaje.pasajeros.include?current_user)%>
                                 <tr class="soyPasajero">

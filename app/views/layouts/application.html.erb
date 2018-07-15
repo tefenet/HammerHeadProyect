@@ -83,7 +83,7 @@
                 <a href="#">opciones</a>
                 <ul class="sub-menu">
                   <li>
-                    <%= link_to "balance", balance_path  %>
+                    <%= link_to "balance", search_balance_path(:q=>current_user.created_at.to_date, :m=>Date.today)  %>
                   </li>
                   <li>
                     <a href="single-post.html">calificaciones</a>

@@ -21,10 +21,6 @@ class Viaje < ApplicationRecord
     self.update_column(:asientos_libres, asientos_libres-1)
   end
 
-  def self.searchByRange(range)
-    where(fecha:range.begin..range.end)
-  end
-
   def validate_inicio
     if fecha && hora && (DateTime.parse(fecha.to_s + ' ' + hora.to_s) < 12.hour.from_now)
       errors.add(:inicio, ':El viaje no puede comenzar en menos de 12 horas')
