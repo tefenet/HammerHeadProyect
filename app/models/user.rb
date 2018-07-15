@@ -72,16 +72,35 @@ class User < ApplicationRecord
   def has_any_car
     return self.cars.any?
   end
-   def misSolicitudes
-     self.viajesComoChofer.collect{|v|v.requests}.flatten     
-   end
+
+  def misSolicitudes
+    self.viajesComoChofer.collect{|v|v.requests}.flatten
+  end
+
+  def search_Pas_ByRange(rango)
+    if rango.end <Date.today
+      viajesComoPasajero.where(fecha:rango.begin..rango.end)
+    else
+      viajesComoPasajero.where(fecha:rango.begin..Date.yesterday) + viajesComoPasajero.select{|v| v.fecha==Date.today && v.startT < DateTime.now }
+    end
+  end
+
+  def search_Ch_ByRange(rango)
+
+    if rango.end <Date.today
+      viajesComoChofer.where(fecha:rango.begin..rango.end)
+    else
+      viajesComoChofer.where(fecha:rango.begin..Date.yesterday) + viajesComoChofer.select{|v| v.fecha==Date.today && v.finishT < DateTime.now }
+    end
+
+  end
 
   private
 
   def validate_age
-      if birth_date.present? && birth_date.to_date > 18.years.ago.to_date
-          errors.add(:birth_date, 'Deberias ser mayor de 18 años.')
-      end
+    if birth_date.present? && birth_date.to_date > 18.years.ago.to_date
+      errors.add(:birth_date, 'Deberias ser mayor de 18 años.')
+    end
   end
 
   has_and_belongs_to_many :viajesComoPasajero, :class_name => "Viaje"

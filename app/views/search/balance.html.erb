@@ -7,33 +7,27 @@
 <table class="table table-hover table-dark">
                       <thead>
                         <tr>
-                          <th scope="col">Trayecto</th>
-                          <th scope="col">Fecha</th>
-                          <th scope="col">Precio</th>
-                          <th scope="col">Detalle</th>
-                          <th scope="col">Transacción</th>
+                          <th scope="col">Fecha de transacción</th>
+                          <th scope="col">importe</th>
+                          <th scope="col">Detalle de viaje</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <% (@viajesDeUsuarioenRango|@viajesDeUsuarioenRangoP).sort_by {|e| e.created_at}.each do |viaje| %>
+                        <% (@viajesDeUsuarioenRango|@viajesDeUsuarioenRangoP).select{ |v| v.pasajeros.count>0}.sort_by {|e| e.created_at}.each do |viaje| %>
 
-                            <tr>
+
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
-
-                                  <td>
-                                  <div class="ride-content">
-                                      <h3>Desde <%= viaje.origen %> a <%= viaje.destino %></h3></div>
-                                  </td>
-                                  <td>  <%= l viaje.fecha, locale: :es %> </td>
-                                  <td>  <%= viaje.precio %> </td>
+                              <% if (viaje.pasajeros.include?current_user)%>
+                                <tr class="soyPasajero">
+                                  <td>  <%= l viaje.startT.to_date %> </td>
+                                  <td> $ <%= viaje.precio %> <b style="color:#ffedcd"></b>   out</td>
+                              <%else%>
+                                    <tr class="soyChofer">
+                                    <td>  <%= l viaje.finishT.to_date %> </td>
+                                    <td> $ <%= viaje.precio * viaje.pasajeros.count %> <b style="color:#ff9803">    in</b></td>
+                              <%end%>
                                   <td>  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button> </td>
-                                  <td>   <% if (viaje.pasajeros.include?current_user)%>
-                                            out
-                                          <%else%>
-                                            in
-                                          <%end%>
-                                  </td>
                               </div>
                           <% end %>
                           </tr>

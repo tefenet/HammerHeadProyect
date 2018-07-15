@@ -10,15 +10,11 @@ class SearchController < ApplicationController
       return redirect_to balance_path, notice: 'ingrese fechas validas'
     end
     if helpers.validarRango(rango)
-        @viajesDeUsuarioenRangoP = User.current.viajesComoPasajero.searchByRange(rango)
+        @viajesDeUsuarioenRangoP = User.current.search_Pas_ByRange(rango)
         @gasto=helpers.gastoEnViajes(@viajesDeUsuarioenRangoP)
-        @viajesDeUsuarioenRango = current_user.viajesComoChofer.searchByRange(rango)
+        @viajesDeUsuarioenRango = current_user.search_Ch_ByRange(rango)
         @ahorro=helpers.ahorroEnViajes(@viajesDeUsuarioenRango)
-        @bar = Gchart.pie_3d(:size =>'400x400',:title => "balance en Pesos",:bg => 'efefef',:legend => ['Ahorro '+@ahorro.to_s, 'Gasto '+@gasto.to_s], :data => [@ahorro, @gasto])
-        #respond_to do |format|
-        #  format.html # balance.html.erb
-        #  format.json { render json: @viajesDeUsuarioenRango }
-        #end
+        @bar = Gchart.pie_c(:size =>'400x400',:title => "balance en Pesos",:chart_background => 'FF9994',:custom => "chdls=0000CC,25", :legend_size => '30',:legend => ['Ahorro $'+@ahorro.to_s, 'Gasto $'+@gasto.to_s], :data => [@ahorro, @gasto])
     else
       return redirect_to balance_path, notice: 'Rango invalido'
     end
