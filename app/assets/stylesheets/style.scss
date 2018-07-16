@@ -44,19 +44,15 @@ table
 }
 
 .table-dark{
-  background-color: #aee4cf;
+  background-color: #cccccc;
   &:hover {
     color: #b1d0a1;
   }
 }
-tr.soyPasajero{ background-color: #ffedcd;
-&:hover {
-  color: #b1d0a1;
-}}
-tr.soyChofer{ background-color: #ff9803;
-&:hover {
-  color: #b1d0a5;
-}}
+td.soyPasajero{ background-color: #aaa8dd;
+}
+td.soyChofer{ background-color: #a9dbdc;
+}
 th{padding: .75rem; vertical-align: top; border-top: 1px solid #e9ecef;}
 td{padding: .75rem; vertical-align: top; text-align: left;border-top: 1px solid #e9ecef;}
 /* === End Reset === */

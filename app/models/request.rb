@@ -72,10 +72,11 @@ class Request < ApplicationRecord
   end
 
   def cancel(usuario)
+    viaje.removePasajero(user)
     if usuario=self.user
-      self.update(:passengerScore=>-1,:state=>3)
+      self.update_columns(:passengerScore=>-1,:state=>3)
     else
-      self.update(:driverScore=>-1,:state=>3)
+      self.update_columns(:driverScore=>-1,:state=>3)
     end
   end
 
@@ -91,13 +92,18 @@ class Request < ApplicationRecord
   end
 
   def accept
-    if viaje.asientos_libres>0
-      self.update(:state=>1)
-      self.viaje.add_Pasajero(self.user)
+    if viaje.asientos_libres>0 && user.can_Travel(viaje_id)
+      if self.update(:state=>1)
+        self.viaje.add_Pasajero(self.user)
+      end
+    elsif viaje.asientos_libres == 0
+      errors.add(:base,'no puedes aceptar este pasajero porque no hay mas lugar en tu vehiculo')
+    else
+      errors.add(:base,'no puedes aceptar este pasajero porque tiene otro viaje')
     end
   end
 
   def refuse
-    self.update(:state=>2)
+    self.update_column(:state,2)
   end
 end

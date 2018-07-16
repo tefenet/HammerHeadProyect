@@ -22,6 +22,7 @@ class RequestsController < ApplicationController
 
     def change
       @request.change(request_params[:cambio].to_i)
+      redirect_to solicitudes_path(current_user), notice: (@request.errors.full_messages.inject('') {|str, error_explanation|  str << error_explanation } )
     end
 
     def show

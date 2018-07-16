@@ -4,11 +4,11 @@
     <div class="col-md-4">
 
     <%= form_for solicitudes_path, method: "get", id: "filter", class: "filter" do |f|%>
-    <%= f.select :reqState, options_for_select(requests_for_select), include_blank: 'Todas'%>
+    <%= f.select :reqState, options_for_select(RequestsHelper.requests_for_select), include_blank: 'Todas'%>
     <ul class="ride-meta">
       <li class="ride-people"><%= f.submit "filtrar"%></li>
     </ul>
-    <% end %>-->
+    <% end %>
     </div>
     <div class="col-md-6">
       <% if User.current.pending_califications %>
@@ -66,8 +66,10 @@
                       <%= link_to_unless User.current.pending_califications, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
                       <%elsif req.isCanceled %>
                       cancelada
-                      <%else%>
+                      <%elsif req.isAccepted%>
                       <%= link_to 'cancelar', change_request_path(:request=>{:id=>req.id,:cambio=>3,:viaje=>req.viaje_id}), method: :put %>
+                      <%else%>
+                      rechazada
                       <%end%>
                     </td>
                   </div>

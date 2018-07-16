@@ -5,28 +5,28 @@
 <br>
 <br><br>
 <table class="table table-hover table-dark">
-                      <thead>
-                        <tr>
-                          <th scope="col">Fecha de transacción</th>
-                          <th scope="col">importe</th>
-                          <th scope="col">Detalle de viaje</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% (@viajesDeUsuarioenRango|@viajesDeUsuarioenRangoP).select{ |v| v.pasajeros.count>0}.sort_by{|fecha|  SearchHelper.fechaDePago(fecha)}.reverse!.each do |viaje| %>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                              <% if (viaje.pasajeros.include?current_user)%>
-                                <tr class="soyPasajero">
-                                  <td>  <%= l viaje.startT.to_date %> </td>
-                                  <td> $ <%= viaje.precio %> <b style="color:#ffedcd"></b>   out</td>
-                              <%else%>
-                                    <tr class="soyChofer">
-                                    <td>  <%= l viaje.finishT.to_date %> </td>
-                                    <td> $ <%= viaje.precio * viaje.pasajeros.count %> <b style="color:#ff9803">    in</b></td>
-                              <%end%>
-                                  <td>  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button> </td>
-                              </div>
-                          <% end %>
-                          </tr>
-                      </tbody>
-                    </table>
+  <thead>
+    <tr>
+      <th scope="col">Fecha de transacción</th>
+      <th scope="col">importe</th>
+      <th scope="col">Detalle de viaje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |viaje| %>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <% if (viaje.pasajeros.include?current_user)%>
+      <tr>
+        <td>  <%= l viaje.startT.to_date %> </td>
+        <td class="soyPasajero"><strong> $ <%= viaje.precio %>   out </strong></td>
+        <%else%>
+        <tr >
+          <td>  <%= l viaje.finishT.to_date %> </td>
+          <td class="soyChofer"><strong> $ <%= viaje.precio * viaje.pasajeros.count %> <b >    in</b> </strong></td>
+          <%end%>
+          <td>  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button> </td>
+        </div>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
