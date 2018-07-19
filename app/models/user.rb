@@ -30,11 +30,21 @@ class User < ApplicationRecord
   end
 
   def reputacionPA
-    self.requests.inject(0) {|sum, i|  sum + i.passengerScore }
+    pa=self.requests.inject(0) {|sum, i|  sum + i.passengerScore }
+    if pa > 0
+      pa
+    else
+      0
+    end
   end
 
   def reputacionCH
-    self.viajesComoChofer.requests.inject(0) {|sum, i|  sum + i.driverScore }
+    ch=self.viajesComoChofer.map{|travel|travel.requests.inject(0) {|sum, i|  sum + i.driverScore }}.sum
+    if ch > 0
+      ch
+    else
+      0
+    end
   end
 
   def pending_califications

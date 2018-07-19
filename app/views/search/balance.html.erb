@@ -7,8 +7,9 @@
 <table class="table table-hover table-dark">
   <thead>
     <tr>
-      <th scope="col">Fecha de transacción</th>
+      <th scope="col">Fecha y hora de transacción</th>
       <th scope="col">importe</th>
+      <th scope="col"></th>
       <th scope="col">Detalle de viaje</th>
     </tr>
   </thead>
@@ -17,16 +18,19 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <% if (viaje.pasajeros.include?current_user)%>
       <tr>
-        <td>  <%= l viaje.startT.to_date %> </td>
-        <td class="soyPasajero"><strong> $ <%= viaje.precio %>   out </strong></td>
-        <%else%>
+        <td>  <%= l viaje.startT.to_date %> <%= viaje.startT.strftime("%H:%M")%> Hs.</td>
+        <td class="soyPasajero"><strong> $ <%= viaje.precio %>    </strong></td>
+        <td><b>egreso</b> </td>
+      <%else%>
         <tr >
-          <td>  <%= l viaje.finishT.to_date %> </td>
-          <td class="soyChofer"><strong> $ <%= viaje.precio * viaje.pasajeros.count %> <b >    in</b> </strong></td>
-          <%end%>
+          <td>  <%= l viaje.finishT.to_date %>  <%= viaje.finishT.strftime("%H:%M")%> Hs.</td>
+          <td class="soyChofer"><strong> $ <%= (viaje.precio * viaje.pasajeros.count * 0.95).truncate(2) %>  </strong></td>
+          <td><b >    ingreso</b></td>
+      <%end%>
           <td>  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button> </td>
-        </div>
-        <% end %>
+
+    <% end %>
       </tr>
+     </div>
     </tbody>
   </table>
