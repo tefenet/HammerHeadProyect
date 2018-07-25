@@ -43,8 +43,12 @@
                                 <li>
                                   <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>
                                 </li>
+                                <li>
                                  <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
+                                 </li>
+                                 <li>
                                  <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
+                                 </li>
                             </ul><!-- end .ride-meta -->
 
 
@@ -108,7 +112,7 @@
                                 </li><!-- end .ride-people -->
 
                                 <li>
-                                    <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button>
+                                    <%= button_to "Leer mas", viaje_path(viaje.id), :class => "btn2", :method => :get%>
                                 </li>
 
                             </ul><!-- end .ride-meta -->
