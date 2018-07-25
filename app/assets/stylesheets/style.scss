@@ -44,11 +44,15 @@ table
 }
 
 .table-dark{
-  background-color: #868da9;
+  background-color: #cccccc;
   &:hover {
     color: #b1d0a1;
-
-  }}
+  }
+}
+td.soyPasajero{ background-color: #aaa8dd;
+}
+td.soyChofer{ background-color: #a9dbdc;
+}
 th{padding: .75rem; vertical-align: top; border-top: 1px solid #e9ecef;}
 td{padding: .75rem; vertical-align: top; text-align: left;border-top: 1px solid #e9ecef;}
 /* === End Reset === */
@@ -532,7 +536,7 @@ div[class*="col-xs-"], div[class*="col-sm-"], div[class*="col-md-"], div[class*=
     position: absolute;
     left: 2px;
     z-index: 6;
-    top: 100px;
+    top: 70px;
 }
 .main-navigation ul > li ul li:last-child
 {

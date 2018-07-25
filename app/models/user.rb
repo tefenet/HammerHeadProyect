@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :password, presence: { message: ": Por favor ingrese una contraseña" }, on: [:create, :new]
 
   def can_publish
-    return (has_credit_card & has_any_car & !pending_califications)
+    return (has_credit_card && has_any_car && (pending_califications.!))
   end
 
   def can_Travel(idViaje)
@@ -30,11 +30,21 @@ class User < ApplicationRecord
   end
 
   def reputacionPA
-    self.requests.inject(0) {|sum, i|  sum + i.passengerScore }
+    pa=self.requests.inject(0) {|sum, i|  sum + i.passengerScore }
+    if pa > 0
+      pa
+    else
+      0
+    end
   end
 
   def reputacionCH
-    self.viajesComoChofer.requests.inject(0) {|sum, i|  sum + i.driverScore }
+    ch=self.viajesComoChofer.map{|travel|travel.requests.inject(0) {|sum, i|  sum + i.driverScore }}.sum
+    if ch > 0
+      ch
+    else
+      0
+    end
   end
 
   def pending_califications
@@ -72,16 +82,35 @@ class User < ApplicationRecord
   def has_any_car
     return self.cars.any?
   end
-   def misSolicitudes
-     self.viajesComoChofer.collect{|v|v.requests}.flatten     
-   end
+
+  def misSolicitudes
+    self.viajesComoChofer.collect{|v|v.requests}.flatten
+  end
+
+  def search_Pas_ByRange(rango)
+    if rango.end <Date.today
+      viajesComoPasajero.where(fecha:rango.begin..rango.end)
+    else
+      viajesComoPasajero.where(fecha:rango.begin..Date.yesterday) + viajesComoPasajero.select{|v| v.fecha==Date.today && v.startT < DateTime.now }
+    end
+  end
+
+  def search_Ch_ByRange(rango)
+
+    if rango.end <Date.today
+      viajesComoChofer.where(fecha:rango.begin..rango.end)
+    else
+      viajesComoChofer.where(fecha:rango.begin..Date.yesterday) + viajesComoChofer.select{|v| v.fecha==Date.today && v.finishT < DateTime.now }
+    end
+
+  end
 
   private
 
   def validate_age
-      if birth_date.present? && birth_date.to_date > 18.years.ago.to_date
-          errors.add(:birth_date, 'Deberias ser mayor de 18 años.')
-      end
+    if birth_date.present? && birth_date.to_date > 18.years.ago.to_date
+      errors.add(:birth_date, 'Deberias ser mayor de 18 años.')
+    end
   end
 
   has_and_belongs_to_many :viajesComoPasajero, :class_name => "Viaje"

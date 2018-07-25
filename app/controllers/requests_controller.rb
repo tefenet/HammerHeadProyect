@@ -11,6 +11,7 @@ class RequestsController < ApplicationController
       @request =current_user.requests.build(request_params)
       respond_to do |format|
         if @request.save
+          MyMailer.nueva_Solicitud(@request).deliver_later(wait: 0.001.second)
           format.html { redirect_to viaje_path(@request.viaje.id), alert: 'enviamos tu solicitud puedes comunicarte con el chofer en la seccion preguntas aqui abajo' }
           format.json { render :show, status: :created, location: @request }
         else
@@ -22,6 +23,7 @@ class RequestsController < ApplicationController
 
     def change
       @request.change(request_params[:cambio].to_i)
+      redirect_to solicitudes_path(current_user), notice: (@request.errors.full_messages.inject('') {|str, error_explanation|  str << error_explanation } )
     end
 
     def show

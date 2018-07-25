@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> <%= @viaje.chofer.full_name%></h1>
+    <p title="tostada con manteca y dejeló no más">
+      El usuario <%= @pasajero.full_name %> ha cancelado la solicitud para el viaje <%= @viaje.origen %>--<%= @viaje.destino %> del dia <%= l @viaje.fecha, locale: :es %>
+      Si tienes alguna consulta, queja o sugerencia no dudes en contactarnos en nuestra pagina
+    </p>
+  </body>
+</html>

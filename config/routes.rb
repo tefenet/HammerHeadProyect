@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/user/:id/cars', to: 'users#cars', as: 'misautos'
 
   get '/user/:id/requests', to: 'users#requests', as: 'solicitudes'
+  get '/user/:id/pasajeSolicitud', to: 'users#pasajeSolicitud', as: 'solicitud_pasajero'
   root "application#index"
   get "search/balance" => 'search#balance'
 

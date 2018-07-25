@@ -3,24 +3,20 @@
   <div class="row">
     <div class="col-md-4">
 
-    <%= form_for solicitudes_path, method: "get", id: "filter", class: "filter" do |f|%>
+    <%= form_for solicitud_pasajero_path, method: "get", id: "filter", class: "filter" do |f|%>
     <%= f.select :reqState, options_for_select(RequestsHelper.requests_for_select), include_blank: 'Todas'%>
     <ul class="ride-meta">
       <li class="ride-people"><%= f.submit "filtrar"%></li>
     </ul>
     <% end %>
     </div>
-    <div class="col-md-6">
-      <% if User.current.pending_califications %>
-      <strong style="color:red">  no puedes aceptar mas pasajeros porque tienes calificaciones pendientes</strong>
-      <%end%>
-    </div>
+
     <div class="page-content">
       <div class="last-rides">
 
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="page-sub-title textcenter">
-            <h2>solicitudes de Chofer</h2>
+            <h2>Solicitudes de Pasajero</h2>
             <div class="line"></div>
           </div><!-- end .page-sub-title -->
         </div>
@@ -35,14 +31,14 @@
                 <th scope="col">Sale</th>
                 <th scope="col">Llega</th>
                 <th scope="col">Duración</th>
-                <th scope="col">Solicitante</th>
+                <th scope="col">Chofer</th>
                 <th scope="col">Reputacion</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <% @requests.sort_by {|e| e.viaje_id}.each do |req| %>
+              <% @requests.sort_by {|e| e.created_at}.each do |req| %>
 
               <tr>
 
@@ -57,19 +53,12 @@
                     <td><%= l req.viaje.fecha, locale: :es %>, <%= req.viaje.startT.strftime("%H:%M") %> hs </td>
                     <td><%= l req.viaje.finishT.to_date, locale: :es %>, <%= req.viaje.finishT.strftime("%H:%M") %> hs </td>
                     <td><%if req.viaje.duracion<24 %><%= Time.at((req.viaje.duracion)*3600).utc.strftime("%H:%M") %>Hs.<%else%><%=req.viaje.duracion%>Hs<%end%></td>
-                    <td> <%= link_to req.user.full_name, req.user %> </td>
-                    <td> <%= req.user.reputacionPA %> </td>
+                    <td> <%= link_to req.viaje.chofer.full_name, req.viaje.chofer %> </td>
+                    <td> <%= req.viaje.chofer.reputacionCH %> </td>
                     <td> <%= req.estado %> </td>
                     <td>
-                      <% if req.isPending%>
-                      <%= link_to_unless  User.current.pending_califications,'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
-                      <%= link_to_unless User.current.pending_califications, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
-                      <%elsif req.isCanceled %>
-                      cancelada
-                      <%elsif req.isAccepted%>
+                      <% if req.isPending || req.isAccepted %>
                       <%= link_to 'cancelar', change_request_path(:request=>{:id=>req.id,:cambio=>3,:viaje=>req.viaje_id}), method: :put %>
-                      <%else%>
-                      rechazada
                       <%end%>
                     </td>
                   </div>

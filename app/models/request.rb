@@ -72,10 +72,17 @@ class Request < ApplicationRecord
   end
 
   def cancel(usuario)
-    if usuario=self.user
-      self.update(:passengerScore=>-1,:state=>3)
+    viaje.removePasajero(user) unless self.isPending
+    if usuario==self.user
+      MyMailer.pasajero_cancela(self).deliver_later(wait: 0.001.second)
+      if self.isPending
+        self.update_columns(:state=>3)
+      else
+        self.update_columns(:passengerScore=>-1,:state=>3)
+      end
     else
-      self.update(:driverScore=>-1,:state=>3)
+      MyMailer.unaFugazza(self).deliver_later(wait: 0.001.second)
+      self.update_columns(:driverScore=>-1,:state=>3)
     end
   end
 
@@ -91,13 +98,19 @@ class Request < ApplicationRecord
   end
 
   def accept
-    if viaje.asientos_libres>0
-      self.update(:state=>1)
-      self.viaje.add_Pasajero(self.user)
+    if viaje.asientos_libres>0 && user.can_Travel(viaje_id)
+      if self.update(:state=>1)
+        self.viaje.add_Pasajero(self.user)
+        MyMailer.announce(self).deliver_later(wait: 0.001.second)
+      end
+    elsif viaje.asientos_libres == 0
+      errors.add(:base,'no puedes aceptar este pasajero porque no hay mas lugar en tu vehiculo')
+    else
+      errors.add(:base,'no puedes aceptar este pasajero porque tiene otro viaje')
     end
   end
 
   def refuse
-    self.update(:state=>2)
+    self.update_column(:state,2)
   end
 end

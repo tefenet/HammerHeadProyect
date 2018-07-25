@@ -38,7 +38,7 @@
                                 </li><!-- end .ride-people -->
 
                                 <li>
-                                  <button class="btn2"> <strong>  <%= link_to "Leer mas", viaje_path(viaje.id)  %> </strong></button>
+                                  <%= button_to "Leer mas", viaje_path(viaje.id), :class => "btn2", :method => :get%>
                                 </li>
                                 <li>
                                   <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>

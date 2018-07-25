@@ -21,8 +21,9 @@ class Viaje < ApplicationRecord
     self.update_column(:asientos_libres, asientos_libres-1)
   end
 
-  def self.searchByRange(range)
-    where(fecha:range.begin..range.end)
+  def removePasajero(aUser)
+    self.pasajeros.delete(aUser)
+    self.update_column(:asientos_libres, asientos_libres+1)
   end
 
   def validate_inicio

@@ -41,6 +41,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def pasajeSolicitud
+    path=request.path
+
+    if params[path] && !params[path][:reqState].blank?
+        @requests = SearchHelper.request_pas_filter(params[path][:reqState])
+    else
+        @requests = current_user.requests
+    end
+  end
+
 private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :birth_date, :credit_card_number, :avatar, :reqState)

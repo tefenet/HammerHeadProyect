@@ -25,6 +25,7 @@
                                   <% if (current_user.id == @user.id) %>
 
                                       <%= link_to 'Eliminar Auto', car, method: :delete, data: { confirm: 'si vas a eliminar el auto de tu cuenta, no debes tener viajes publicados con el mismo' } %>
+                                      <%= link_to 'Editar auto', edit_car_path(car) %>
 
                                   <% end %>
                               </div>
