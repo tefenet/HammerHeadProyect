@@ -2,6 +2,9 @@ class CommentsController < ApplicationController
 
     def preguntasViaje
 		@comments = Viaje.find(params[:id]).comments
+		@comments.each do |comment|
+			print comment.user_id #borrar
+		end
 	end
 
 	def update
@@ -17,12 +20,14 @@ class CommentsController < ApplicationController
     def new
     	@viaje = Viaje.find(params[:idViaje])
 		@comment = Comment.new
+		@comment.user_id = current_user.id
     end
     def create
     	@usuarios = User.all
 		@viaje = Viaje.find(params[:comment][:viaje_id])   	
 		@comment = @viaje.comments.new(comment_params)
 		current_user.comments.new(comment_params)
+		@comment.user_id = current_user.id
 		if @comment.save
 			redirect_to viaje_path(@viaje.id)
 		else

@@ -85,8 +85,8 @@
 
             <h2>Seccion de preguntas</h2><br>
             <% @viaje.comments.each do |comment| %>
-                <h5> Pregunta de (nombre de usuario) <!-- #User.find(comment.user_id).full_name -->: <%= comment.pregunta %> </h5>
-                <h5> respuesta: <% if comment.respuesta.present?%> <%=comment.respuesta%>
+                <h5> Pregunta de <%= link_to (User.find(comment.user_id)).full_name, User.find(comment.user_id) %>: <%= comment.pregunta %> </h5>
+                <h5> Respuesta: <% if comment.respuesta.present?%> <%=comment.respuesta%>
                 <%else%>
                 <br>
                 <% end %></h5>

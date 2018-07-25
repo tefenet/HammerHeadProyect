@@ -6,7 +6,7 @@
 <%end%>
 <% @comments.each do |comment| %>
     <%if comment.respondida == false %>    
-        <h5> pregunta: <%=comment.pregunta%><h5>
+        <h5> Pregunta de <%= link_to (User.find(comment.user_id)).full_name, User.find(comment.user_id) %>: <%=comment.pregunta%><h5>
         	<%= form_for(comment) do |f| %>
     			<div class="field">
        				<%= f.text_field :respuesta, autofocus: true, autocomplete: "respuesta",:size=>"100" %>
@@ -19,4 +19,4 @@
    			<%end%>	<br>
     <%end%>    
 <%end%> 
-<%= link_to 'Back', root_path %>
+<%= link_to 'Cancelar', misviajes_path(current_user) %>
