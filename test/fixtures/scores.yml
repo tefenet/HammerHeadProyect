@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario_puntuador: one
+  usuario_puntuado: one
+  positivo: false
+  negativo: false
+  neutro: false
+  estado: 1
+  comentario: MyString
+
+two:
+  usuario_puntuador: two
+  usuario_puntuado: two
+  positivo: false
+  negativo: false
+  neutro: false
+  estado: 1
+  comentario: MyString
