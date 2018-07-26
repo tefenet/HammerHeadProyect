@@ -64,10 +64,14 @@ class Viaje < ApplicationRecord
   end
 
   def pending_califications
-    self.requests.select{|r| r.puntajePasajeroPendiente && self.fecha<30.days.ago}    
+    self.requests.select{|r| r.puntajePasajeroPendiente && self.fecha<30.days.ago}
   end
 
+  #esto no esta terminado
   def validate_no_pending_requests
+    if
+      errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
+    end
   end
 
 end

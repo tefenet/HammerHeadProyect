@@ -5,7 +5,8 @@ class Car < ApplicationRecord
   validates :seats, numericality: {greater_than: 0, message:"El minimo de acientos es 1"}
   before_validation :clean_data
 
-def clean_data
-  self.plate = self.plate.gsub(/[ \-]/, '').upcase unless self.plate.nil?
-end
+  def clean_data
+    self.plate = self.plate.gsub(/[ \-]/, '').upcase unless self.plate.nil?
+  end
+
 end
