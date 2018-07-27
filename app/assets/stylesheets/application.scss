@@ -19,3 +19,10 @@
  @import "slicknav";
  @import "style";
  @import "bootstrap-datepicker";
+
+ /*
+ *= require_tree .
+ *= require_self
+ */
+
+input, textarea { display: block; }

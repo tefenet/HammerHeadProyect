@@ -33,5 +33,9 @@ Rails.application.routes.draw do
   root "application#index"
   get "search/balance" => 'search#balance'
 
+  get 'contacto', to: 'messages#new', as: 'new_message'
+  post 'contacto', to: 'messages#create', as: 'create_message'
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

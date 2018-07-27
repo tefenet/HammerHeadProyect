@@ -1,0 +1,9 @@
+<%= form_for @message, url: create_message_url do |f| %>
+  <%= notice %>
+  <%= @message.errors.full_messages.join(', ') %>
+
+  <%= f.text_field :name, placeholder: 'Nombre y apellido' %>
+  <%= f.email_field :email, placeholder: 'Email' %>
+  <%= f.text_area :body, placeholder: 'Mensaje' %>
+  <%= f.submit 'Enviar' %>
+<% end %>
