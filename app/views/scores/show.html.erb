@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Usuario puntuador:</strong>
+  <%= @score.usuario_puntuador %>
+</p>
+
+<p>
+  <strong>Usuario puntuado:</strong>
+  <%= @score.usuario_puntuado %>
+</p>
+
+<p>
+  <strong>Positivo:</strong>
+  <%= @score.positivo %>
+</p>
+
+<p>
+  <strong>Negativo:</strong>
+  <%= @score.negativo %>
+</p>
+
+<p>
+  <strong>Neutro:</strong>
+  <%= @score.neutro %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @score.estado %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @score.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_score_path(@score) %> |
+<%= link_to 'Back', scores_path %>

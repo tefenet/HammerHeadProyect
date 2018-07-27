@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_212906) do
+ActiveRecord::Schema.define(version: 2018_07_26_222246) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2018_07_10_212906) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "viaje_id"
+  end
+
+  create_table "comentarios", force: :cascade do |t|
+    t.text "text"
+    t.integer "viaje_id"
+    t.integer "user_id"
+    t.integer "comentario_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -56,6 +63,20 @@ ActiveRecord::Schema.define(version: 2018_07_10_212906) do
     t.string "comment"
     t.index ["user_id"], name: "index_requests_on_user_id"
     t.index ["viaje_id"], name: "index_requests_on_viaje_id"
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "usuario_puntuador_id"
+    t.integer "usuario_puntuado_id"
+    t.boolean "positivo"
+    t.boolean "negativo"
+    t.boolean "neutro"
+    t.integer "estado"
+    t.string "comentario"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["usuario_puntuado_id"], name: "index_scores_on_usuario_puntuado_id"
+    t.index ["usuario_puntuador_id"], name: "index_scores_on_usuario_puntuador_id"
   end
 
   create_table "users", force: :cascade do |t|
