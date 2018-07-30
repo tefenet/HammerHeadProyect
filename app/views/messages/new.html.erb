@@ -2,8 +2,9 @@
   <%= notice %>
   <%= @message.errors.full_messages.join(', ') %>
 
-  <%= f.text_field :name, placeholder: 'Nombre y apellido' %>
+  <%= f.text_field :nombre, placeholder: 'Nombre y apellido' %>
   <%= f.email_field :email, placeholder: 'Email' %>
-  <%= f.text_area :body, placeholder: 'Mensaje' %>
+  <%= f.text_field :mensaje, placeholder: 'Mensaje' %>
   <%= f.submit 'Enviar' %>
+  <%= link_to 'Cancelar', current_user %>
 <% end %>

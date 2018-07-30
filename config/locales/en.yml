@@ -51,3 +51,8 @@ en:
         seats: "Asientos"
         brand: "Marca"
         model: "Modelo"
+
+en:
+  errors:
+    messages:
+      blank: "no puede estar vacio"

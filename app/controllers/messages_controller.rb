@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     @message = Message.new message_params
 
     if @message.valid?
-      redirect_to new_message_url, notice: "Message received, thanks!"
+      redirect_to new_message_url, notice: "Mensaje recibido, gracias!"
     else
       render :new
     end
@@ -17,6 +17,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:name, :email, :body)
+    params.require(:message).permit(:nombre, :email, :mensaje)
   end
 end
