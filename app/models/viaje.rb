@@ -80,4 +80,8 @@ class Viaje < ApplicationRecord
     end
   end
 
+  def generarPuntajesPasajero
+    
+  end
+
 end
