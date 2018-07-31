@@ -7,14 +7,16 @@ class Score < ApplicationRecord
   # 1 = pendiente
   # 2 = realizado
 
-  def generarPuntajes
-  	#self generarPuntajesChofer
+  def calificacion_neutral(usuario, tipo)
+  	
   end
 
-  def generarPuntajesChofer(pasajero, viaje)
-  	#self.usuario_puntuador = pasajero.id
-  	#self.usuario_puntuado = viaje.chofer_id
-    #self.estado = 1
-    #self.viaje_id = viaje.id
+  def calificacion_positiva(usuario, tipo)
+  	
   end
+
+  def calificacion_negativa(usuario, tipo)
+  	
+  end
+
 end

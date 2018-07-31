@@ -1,6 +1,10 @@
 <h1>Calificaciones pendientes</h1>
 	<ul>
 		<% @puntajes_pendientes.each do |puntaje| %>
-			<li> <%= link_to (User.find(puntaje.usuario_puntuado.id)).full_name, User.find(puntaje.usuario_puntuado.id) %> Negativo Neutral Positivo </li>
+			<li>Calificar <%= puntaje.tipo %> <%= link_to (User.find(puntaje.usuario_puntuado.id)).full_name, User.find(puntaje.usuario_puntuado.id) %>
+			 Negativo 
+			 Neutral 
+			 Positivo 
+			 <%= link_to 'X', realizar_path(puntaje), :method => :post %> </li>
 		<% end %>
 	</ul>

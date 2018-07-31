@@ -61,6 +61,13 @@ class ScoresController < ApplicationController
     end
   end
 
+  def pasar_a_realizado
+    score = Score.find(params[:id])
+    score.estado = 2
+    score.save
+    redirect_to puntajes_pendientes_path(current_user)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_score

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get "search/balance" => 'search#balance'
 
   get 'users/:id/puntajesPendientes', to: 'users#puntajesPendientes', as: 'puntajes_pendientes'
+  post 'scores/:id', to: 'scores#pasar_a_realizado', as: 'realizar'
 
   get 'contacto', to: 'messages#new', as: 'new_message'
   post 'contacto', to: 'messages#create', as: 'create_message'
