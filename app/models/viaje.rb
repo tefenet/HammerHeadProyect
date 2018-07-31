@@ -74,4 +74,10 @@ class Viaje < ApplicationRecord
     end
   end
 
+  def generarPuntajesChofer
+    self.pasajeros.each do |pasajero|
+      Score.create(usuario_puntuador_id: pasajero.id, usuario_puntuado_id: self.chofer_id, estado: 1, viaje_id: self.id)
+    end
+  end
+
 end

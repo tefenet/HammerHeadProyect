@@ -87,6 +87,10 @@ class User < ApplicationRecord
     self.viajesComoChofer.collect{|v|v.requests}.flatten
   end
 
+  def calificaciones_pendientes
+    return Score.where(usuario_puntuador: self.id, estado: 1)
+  end
+
   def search_Pas_ByRange(rango)
     if rango.end <Date.today
       viajesComoPasajero.where(fecha:rango.begin..rango.end)

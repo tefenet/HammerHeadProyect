@@ -1,0 +1,6 @@
+<h1>Calificaciones pendientes</h1>
+	<ul>
+		<% @puntajes_pendientes.each do |puntaje| %>
+			<li> <%= link_to (User.find(puntaje.usuario_puntuado.id)).full_name, User.find(puntaje.usuario_puntuado.id) %> Negativo Neutral Positivo </li>
+		<% end %>
+	</ul>
