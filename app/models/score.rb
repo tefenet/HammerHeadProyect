@@ -7,16 +7,21 @@ class Score < ApplicationRecord
   # 1 = pendiente
   # 2 = realizado
 
-  def calificacion_neutral(usuario, tipo)
-  	
+  def calificacion_neutral
+  	self.estado = 2
+  	self.save
   end
 
-  def calificacion_positiva(usuario, tipo)
-  	
+  def calificacion_positiva
+  	self.usuario_puntuado.calificacion_positiva(self.tipo)
+  	self.estado = 2
+	self.save  	
   end
 
-  def calificacion_negativa(usuario, tipo)
-  	
+  def calificacion_negativa
+  	self.usuario_puntuado.calificacion_negativa(self.tipo)
+  	self.estado = 2
+  	self.save
   end
 
 end
