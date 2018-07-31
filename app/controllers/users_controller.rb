@@ -51,6 +51,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def puntajesPendientes
+    @user = User.find(params[:id])
+    @puntajes_pendientes = @user.calificaciones_pendientes
+  end
+
 private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :birth_date, :credit_card_number, :avatar, :reqState)
