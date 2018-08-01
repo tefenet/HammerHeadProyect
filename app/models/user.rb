@@ -88,7 +88,7 @@ class User < ApplicationRecord
   end
 
   def calificaciones_pendientes
-    return Score.where(usuario_puntuador: self.id, estado: 1)
+    return scores_pendientes = Score.where(usuario_puntuador: self.id, estado: 1).order("fecha")
   end
 
   def search_Pas_ByRange(rango)

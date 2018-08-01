@@ -76,17 +76,17 @@ class Viaje < ApplicationRecord
 
   def generarPuntajes
     self.generarPuntajesChofer
-    self.generarPuntajesPasajero
+    #self.generarPuntajesPasajero
   end
 
   def generarPuntajesChofer
     #Genera puntaje de los pasajeros hacia el chofer
     self.pasajeros.each do |pasajero|
-      Score.create(usuario_puntuador_id: pasajero.id, usuario_puntuado_id: self.chofer_id, estado: 1, viaje_id: self.id, tipo: "Chofer")
+      Score.create(usuario_puntuador_id: pasajero.id, usuario_puntuado_id: self.chofer_id, estado: 1, viaje_id: self.id, tipo: "Chofer", fecha: self.fecha)
     end
     #Genera puntaje del chofer hacia los pasajeros
     self.pasajeros.each do |pasajero|
-      Score.create(usuario_puntuador_id: self.chofer_id, usuario_puntuado_id: pasajero.id, estado: 1, viaje_id: self.id, tipo: "Pasajero")
+      Score.create(usuario_puntuador_id: self.chofer_id, usuario_puntuado_id: pasajero.id, estado: 1, viaje_id: self.id, tipo: "Pasajero", fecha: self.fecha)
     end
   end
 
@@ -95,7 +95,7 @@ class Viaje < ApplicationRecord
     self.pasajeros.each do |pasajeroPuntuador|
       self.pasajeros.each do |pasajeroPuntuado|
         if (pasajeroPuntuador.id != pasajeroPuntuado.id)
-          Score.create(usuario_puntuador_id: pasajeroPuntuador.id, usuario_puntuado_id: pasajeroPuntuado.id, estado: 1, viaje_id: self.id, tipo: "Pasajero")
+          Score.create(usuario_puntuador_id: pasajeroPuntuador.id, usuario_puntuado_id: pasajeroPuntuado.id, estado: 1, viaje_id: self.id, tipo: "Pasajero", fecha: self.fecha)
         end
       end
     end

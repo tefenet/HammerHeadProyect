@@ -1,7 +1,7 @@
 class Score < ApplicationRecord
   belongs_to :usuario_puntuador, :class_name => 'User'
   belongs_to :usuario_puntuado, :class_name => 'User'
-  has_one :viaje
+  has_one :viaje, class_name: 'Viaje',  foreign_key: "viaje_id"
 
   #ACLARACION ESTADOS
   # 1 = pendiente
