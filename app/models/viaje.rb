@@ -70,7 +70,7 @@ class Viaje < ApplicationRecord
   #esto no esta terminado
   def validate_no_pending_requests
     if
-      errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
+      errors.add(:base, '')
     end
   end
 
