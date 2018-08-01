@@ -61,6 +61,34 @@ class ScoresController < ApplicationController
     end
   end
 
+  #Metodo que agregue para debuguear
+  def pasar_a_realizado
+    score = Score.find(params[:id])
+    score.estado = 2
+    score.save
+    redirect_to puntajes_pendientes_path(current_user)
+  end
+
+  def calificacion_neutral
+    score = Score.find(params[:id])
+    score.calificacion_neutral
+    redirect_to puntajes_pendientes_path(current_user)
+  end
+
+  def calificacion_positiva
+    score = Score.find(params[:id])
+    #usuario_puntuado = User.find(score.usuario_puntuado_id)
+    #usuario_puntuado.calificacion_positiva
+    score.calificacion_positiva
+    redirect_to puntajes_pendientes_path(current_user)
+  end
+
+  def calificacion_negativa
+    score = Score.find(params[:id])
+    score.calificacion_negativa
+    redirect_to puntajes_pendientes_path(current_user)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_score

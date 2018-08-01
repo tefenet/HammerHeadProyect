@@ -20,10 +20,22 @@
 
 
             <article class="ride-box clearfix">
-
                 <div class="ride-content">
                     <h3><%=@user.first_name%> <%=@user.last_name%></h3>nacido el <h3><%=@user.birth_date%></h3>
                 </div>
+            </article>
+
+            <article class="ride-box clearfix">
+                <div class="ride-content">
+                    <h3>Reputacion como Chofer: <%= @user.reputacion_chofer %></h3>
+                </div>
+            </article>
+
+            <article class="ride-box clearfix">
+                <div class="ride-content">
+                    <h3>Reputacion como Pasajero: <%= @user.reputacion_pasajero %></h3>
+                </div>
+            </article>
 
                 <% if (current_user.id == @user.id) %>
 

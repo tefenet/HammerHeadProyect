@@ -109,6 +109,29 @@ class User < ApplicationRecord
 
   end
 
+  def calificacion_positiva(tipo)
+    if (tipo == "Chofer")
+      print ("tipo == Chofer tipo == Chofer tipo == Chofer tipo == Chofer tipo == Chofer tipo == Chofer tipo == Chofer ")
+      self.reputacion_chofer = self.reputacion_chofer + 1
+    else
+      print ("tipo != Chofer tipo != Chofer tipo != Chofer tipo != Chofer tipo != Chofer tipo != Chofer tipo != Chofer ")
+      self.reputacion_pasajero = self.reputacion_pasajero + 1
+    end
+    print ("Hago save de usuario Hago save de usuario Hago save de usuario Hago save de usuario Hago save de usuario ")
+    self.save   
+  end
+
+  def calificacion_negativa(tipo)
+    if (tipo == "Chofer")
+      if (self.reputacion_chofer != 0)
+        self.reputacion_chofer -= 1
+      end
+    elsif (self.reputacion_pasajero != 0)
+      self.reputacion_pasajero -= 1
+    end
+    self.save
+  end
+
   private
 
   def validate_age
