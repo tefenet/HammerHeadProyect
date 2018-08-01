@@ -39,7 +39,8 @@ Rails.application.routes.draw do
   get 'contacto', to: 'messages#new', as: 'new_message'
   post 'contacto', to: 'messages#create', as: 'create_message'
 
-  get "/:page" => 'faq#show'
+  get '/:page', to: 'faq#show', as: 'faq_page'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

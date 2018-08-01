@@ -1,32 +1,85 @@
-  <dt>
-      ¿Pregunta 1?
-  </dt>
-  <dd>
-    <p id="faq1_desc" class="desc">
-      respuesta 1
-    </p>
-  </dd>
-  <dt>
-    ¿Pregunta 2?
-  </dt>
-  <dd>
-    <p id="faq2_desc" class="desc">
-      respuesta 2
-    </p>
-  </dd>
-  <dt>
-    ¿Pregunta 3?
-  </dt>
-  <dd>
-    <p id="faq3_desc" class="desc">
-      respuesta 3
-    </p>
-  </dd>
-  <dt>
-    ¿Pregunta 4?
-  </dt>
-  <dd>
-    <p id="faq4_desc" class="desc">
-      respuesta 4
-    </p>
-  </dd>
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+  <script>
+   $(document).ready(function() {
+
+      $('.faq_question').click(function() {
+
+          if ($(this).parent().is('.open')){
+              $(this).closest('.faq').find('.faq_answer_container').animate({'height':'0'},500);
+              $(this).closest('.faq').removeClass('open');
+
+              }else{
+                  var newHeight =$(this).closest('.faq').find('.faq_answer').height() +'px';
+                  $(this).closest('.faq').find('.faq_answer_container').animate({'height':newHeight},500);
+                  $(this).closest('.faq').addClass('open');
+              }
+
+      });
+
+  });
+  </script>
+  <style>
+  /*FAQS*/
+  .faq_question {
+      margin: 0px;
+      padding: 0px 0px 5px 0px;
+      display: inline-block;
+      cursor: pointer;
+      font-weight: bold;
+  }
+
+  .faq_answer_container {
+      height: 0px;
+      overflow: hidden;
+      padding: 0px;
+  }
+  </style>
+
+  <section class="main-content">
+    <div class="container">
+      <div class="page-content">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+          <div class="page-sub-title textcenter">
+            <h2>Preguntas Frecuentes</h2>
+          </div><!-- end .page-sub-title -->
+
+            <article class="ride-box clearfix">
+              <h3>
+                <div class="faq_container">
+                  <div class="faq">
+                    <div class="faq_question">¿Pregunta 1?</div>
+                    <div class="faq_answer_container">
+                      <div class="faq_answer">Respuesta 1</div>
+                    </div>
+                  </div><!-- end .faq -->
+              </h3>
+            </article><!-- end .ride-box -->
+
+            <div class="ride-content"></div> <!-- pone esto para separar los casilleros -->
+
+            <article class="ride-box clearfix">
+                <h3>
+                  <div class="faq">
+                    <div class="faq_question">¿Pregunta 2?</div>
+                    <div class="faq_answer_container">
+                      <div class="faq_answer">Respuesta 2</div>
+                    </div>
+                  </div><!-- end .faq -->
+                </h3>
+            </article><!-- end .ride-box -->
+
+          </div><!-- end .faq_container -->
+
+        </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      </div><!-- end .row -->
+    </div><!-- end .container -->
+  </section><!-- end .main-content -->
+
+      <article class="ride-box clearfix">
+        <h3>FAQ</h3>
+      </article><!-- end .ride-box -->
+      <div class="clearfix"></div>
+
+      <div class="ride-content"></div>
