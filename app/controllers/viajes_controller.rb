@@ -37,6 +37,12 @@ class ViajesController < ApplicationController
 
   # GET /viajes/1/edit
   def edit
+    @viaje = Viaje.find(params[:id])
+		if @viaje.can_be_edited then
+      @viaje= Viaje.update
+		else
+			redirect_to root_path and return flash[:notice] = 'No se puede modificar el viaje.'
+		end
   end
 
   # POST /viajes
