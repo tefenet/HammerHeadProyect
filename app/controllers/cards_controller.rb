@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
 
 	def index
-		@cards = Card.all
+		@cards = Card.where(user_id: current_user.id)
 	end
 
 	def show
@@ -44,7 +44,7 @@ class CardsController < ApplicationController
 
 	def destroy
       @card = Card.find(params[:id]).destroy
-      render :index
+      redirect_to cards_path
     end
 
 	private

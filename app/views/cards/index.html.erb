@@ -17,7 +17,15 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <% current_user.cards.each do |card| %>
+                    <% if @cards != nil then
+                     @cards.each do |card| %>
+
+                         <% if card.errors.any? %>
+                            <div id="error_explanation">
+                                <% card.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                            <% end %>
+                        <% end %>
 
                         <article class="ride-box clearfix">
 
@@ -43,6 +51,7 @@
                         </article><!-- end .ride-box -->
 
                     <% end %>
+                <% end %>
 
                     <div class="read-all pagination-margin">
                         <%= link_to "Agregar tarjeta", cards_new_path %>

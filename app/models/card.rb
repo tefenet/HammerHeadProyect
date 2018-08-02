@@ -17,6 +17,10 @@ class Card < ApplicationRecord
 		#if usuario.solicitud.where(card_id: to_param).where(finalizado: false).count >= 1
 		#	throw(:abort)
 		#end
+		if User.find(self.user_id).viajesPendientes != true
+			errors.add(:base, 'No puede eliminar la tarjeta porque tiene viajes pendientes')
+			throw(:abort)
+		end
 	end
 
 	def validate_vencimiento
