@@ -14,9 +14,18 @@ class Viaje < ApplicationRecord
   validate :validate_fecha
   validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
   validate :validate_viajes_overlaping
+  before_destroy :check_solicitudes_aprobadas
 
   def can_be_edited
     return (self.pasajeros.any? or Request.where("viaje_id = ? AND state = ?", self.id , 1).any?)
+  end
+  
+  def check_solicitudes_aprobadas
+    if self.pasajeros.any?
+      chofer = User.find(self.chofer_id)
+      chofer.reputacion_chofer -= 1
+      chofer.save
+    end
   end
 
   def add_Pasajero(aUser)
