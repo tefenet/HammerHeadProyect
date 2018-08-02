@@ -56,8 +56,8 @@ class Request < ApplicationRecord
   end
 
   def isPending
-    #state == 0
-    return true #comentar y descomentar esto para aceptar solicitudes a viajes pasados
+    state == 0
+    #return true #comentar y descomentar esto para aceptar solicitudes a viajes pasados
   end
 
   def isAccepted

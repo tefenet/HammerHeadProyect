@@ -24,6 +24,14 @@ class Viaje < ApplicationRecord
     end
   end
 
+  def cant_be_edited
+    if (self.pasajeros.any? or Request.where("viaje_id = ? AND state = ?", self.id, 1).any?)
+      return true
+    else
+      return false
+    end
+  end
+
   def add_Pasajero(aUser)
     self.pasajeros<<aUser
     self.update_column(:asientos_libres, asientos_libres-1)
