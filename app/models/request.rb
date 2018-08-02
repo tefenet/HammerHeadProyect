@@ -13,7 +13,7 @@ class Request < ApplicationRecord
   end
 
   def pending_Score
-    if User.current.pending_califications
+    if User.current.pending_califications > 0
       errors.add(:base, 'tienes puntuaciones pendientes')
     end
   end
@@ -56,7 +56,8 @@ class Request < ApplicationRecord
   end
 
   def isPending
-    state == 0
+    #state == 0
+    return true #comentar y descomentar esto para aceptar solicitudes a viajes pasados
   end
 
   def isAccepted

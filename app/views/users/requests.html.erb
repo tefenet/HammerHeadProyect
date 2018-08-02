@@ -11,7 +11,7 @@
     <% end %>
     </div>
     <div class="col-md-6">
-      <% if User.current.pending_califications %>
+      <% if User.current.pending_califications > 0  %>
       <strong style="color:red">  no puedes aceptar mas pasajeros porque tienes calificaciones pendientes</strong>
       <%end%>
     </div>
@@ -62,8 +62,8 @@
                     <td> <%= req.estado %> </td>
                     <td>
                       <% if req.isPending%>
-                      <%= link_to_unless  User.current.pending_califications,'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
-                      <%= link_to_unless User.current.pending_califications, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless  User.current.pending_califications > 0,'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless User.current.pending_califications > 0, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
                       <%elsif req.isCanceled %>
                       cancelada
                       <%elsif req.isAccepted%>

@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :password, presence: { message: ": Por favor ingrese una contraseña" }, on: [:create, :new]
 
   def can_publish
-    return (has_credit_card && has_any_car && (pending_califications.!))
+    return (has_credit_card && has_any_car && (self.pending_califications == 0))
   end
 
   def can_Travel(idViaje)
@@ -48,8 +48,10 @@ class User < ApplicationRecord
   end
 
   def pending_califications
-    ((self.requests.select{|r| r.puntajeChoferPendiente && r.viaje.fecha<30.days.ago}) +
-    (self.viajesComoChofer.collect{|v| v.pending_califications})).flatten.any?
+    return Score.where("usuario_puntuador_id = ? AND estado = ? AND fecha < ?", self.id, 1, 30.days.ago).count
+    #Score.where(usuario_puntuador: self.id, estado: 1, fecha: (<30.days ago)).any?
+    #((self.requests.select{|r| r.puntajeChoferPendiente && r.viaje.fecha<30.days.ago}) +
+    #(self.viajesComoChofer.collect{|v| v.pending_califications})).flatten.any?
     #driverScore 1 positivo; -1 negativo; 0:depende, si state=1 significa 'pendiente', si state=3 significa neutro
   end
 
@@ -88,7 +90,7 @@ class User < ApplicationRecord
   end
 
   def calificaciones_pendientes
-    return scores_pendientes = Score.where(usuario_puntuador: self.id, estado: 1).order("fecha")
+    return scores_pendientes = Score.where(usuario_puntuador_id: self.id, estado: 1).order("fecha")
   end
 
   def search_Pas_ByRange(rango)
