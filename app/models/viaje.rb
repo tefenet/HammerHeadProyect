@@ -16,6 +16,10 @@ class Viaje < ApplicationRecord
   validate :validate_viajes_overlaping
   before_destroy :check_solicitudes_aprobadas
 
+  def can_be_edited
+    return (self.pasajeros.any? or Request.where("viaje_id = ? AND state = ?", self.id , 1).any?)
+  end
+  
   def check_solicitudes_aprobadas
     if self.pasajeros.any?
       chofer = User.find(self.chofer_id)
@@ -83,26 +87,19 @@ class Viaje < ApplicationRecord
     self.requests.select{|r| r.puntajePasajeroPendiente && self.fecha<30.days.ago}
   end
 
-  #esto no esta terminado
-  def validate_no_pending_requests
-    if
-      errors.add(:base, '')
-    end
-  end
-
   def generarPuntajes
     self.generarPuntajesChofer
-    #self.generarPuntajesPasajero
+    self.generarPuntajesPasajero
   end
 
   def generarPuntajesChofer
     #Genera puntaje de los pasajeros hacia el chofer
     self.pasajeros.each do |pasajero|
-      Score.create(usuario_puntuador_id: pasajero.id, usuario_puntuado_id: self.chofer_id, estado: 1, viaje_id: self.id, tipo: "Chofer", fecha: self.fecha)
+      Score.create(usuario_puntuador_id: pasajero.id, usuario_puntuado_id: self.chofer_id, estado: 1, viaje_id: self.id, tipo: "Chofer")
     end
     #Genera puntaje del chofer hacia los pasajeros
     self.pasajeros.each do |pasajero|
-      Score.create(usuario_puntuador_id: self.chofer_id, usuario_puntuado_id: pasajero.id, estado: 1, viaje_id: self.id, tipo: "Pasajero", fecha: self.fecha)
+      Score.create(usuario_puntuador_id: self.chofer_id, usuario_puntuado_id: pasajero.id, estado: 1, viaje_id: self.id, tipo: "Pasajero")
     end
   end
 
@@ -111,7 +108,7 @@ class Viaje < ApplicationRecord
     self.pasajeros.each do |pasajeroPuntuador|
       self.pasajeros.each do |pasajeroPuntuado|
         if (pasajeroPuntuador.id != pasajeroPuntuado.id)
-          Score.create(usuario_puntuador_id: pasajeroPuntuador.id, usuario_puntuado_id: pasajeroPuntuado.id, estado: 1, viaje_id: self.id, tipo: "Pasajero", fecha: self.fecha)
+          Score.create(usuario_puntuador_id: pasajeroPuntuador.id, usuario_puntuado_id: pasajeroPuntuado.id, estado: 1, viaje_id: self.id, tipo: "Pasajero")
         end
       end
     end

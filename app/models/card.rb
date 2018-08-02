@@ -9,7 +9,6 @@ class Card < ApplicationRecord
  		length: { is: 3, message: ": el numero de seguridad de la tarjeta debe tener 3 numeros" }
  	validates :vencimiento, presence: { message: ": Por favor ingrese la fecha de vencimiento de la tarjeta" }
  	validate :validate_vencimiento
-
  	before_destroy :check_if_can_be_destroyed
 
 
@@ -17,9 +16,9 @@ class Card < ApplicationRecord
 		#if usuario.solicitud.where(card_id: to_param).where(finalizado: false).count >= 1
 		#	throw(:abort)
 		#end
-		if User.find(self.user_id).viajesPendientes != true
+		if !User.find(self.user_id).viajesPendientes
 			errors.add(:base, 'No puede eliminar la tarjeta porque tiene viajes pendientes')
-			throw(:abort)
+			return false
 		end
 	end
 

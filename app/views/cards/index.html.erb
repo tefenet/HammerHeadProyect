@@ -1,5 +1,5 @@
 <% flash.each do |name, msg| -%>
-      <h1><%= content_tag :div, msg, class: name %></h1>
+      <%= content_tag :div, msg, class: name %>
 <% end -%>
 <div class="container">
         <div class="row">
@@ -20,11 +20,15 @@
                     <% if @cards != nil then
                      @cards.each do |card| %>
 
-                         <% if card.errors.any? %>
-                            <div id="error_explanation">
-                                <% card.errors.full_messages.each do |message| %>
-                            <li><%= message %></li>
-                            <% end %>
+                        <% if card.errors.any? %>
+                          <div id="error_explanation">
+                            <h2><%= pluralize(card.errors.count, "error") %> evitaron que esta tarjeta fuera eliminada:</h2>
+                            <ul>
+                              <% card.errors.full_messages.each do |message| %>
+                                <li><%= message %></li>
+                              <% end %>
+                            <ul>
+                          </div>
                         <% end %>
 
                         <article class="ride-box clearfix">
