@@ -58,7 +58,7 @@
                     <td><%= l req.viaje.finishT.to_date, locale: :es %>, <%= req.viaje.finishT.strftime("%H:%M") %> hs </td>
                     <td><%if req.viaje.duracion<24 %><%= Time.at((req.viaje.duracion)*3600).utc.strftime("%H:%M") %>Hs.<%else%><%=req.viaje.duracion%>Hs<%end%></td>
                     <td> <%= link_to req.user.full_name, req.user %> </td>
-                    <td> <%= req.user.reputacionPA %> </td>
+                    <td> <%= req.user.reputacion_pasajero %> </td>
                     <td> <%= req.estado %> </td>
                     <td>
                       <% if req.isPending%>
