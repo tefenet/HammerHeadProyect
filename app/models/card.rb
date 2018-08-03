@@ -11,14 +11,10 @@ class Card < ApplicationRecord
  	validate :validate_vencimiento
  	before_destroy :check_if_can_be_destroyed
 
-
  	def check_if_can_be_destroyed
-		#if usuario.solicitud.where(card_id: to_param).where(finalizado: false).count >= 1
-		#	throw(:abort)
-		#end
 		if !User.find(self.user_id).viajesPendientes
-			errors.add(:base, 'No puede eliminar la tarjeta porque tiene viajes pendientes')
-			return false
+			errors.add(:base, 'No puede eliminar la tarjeta porque tiene viajes pendientes.')
+			throw(:abort)
 		end
 	end
 

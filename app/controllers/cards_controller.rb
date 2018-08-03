@@ -14,7 +14,7 @@ class CardsController < ApplicationController
 
 	def edit
       @card =Card.find(params[:id])
-    end
+  end
 
 	def update
     @usuario = current_user
@@ -38,20 +38,17 @@ class CardsController < ApplicationController
 	end
 
 	def delete
-
-		@usuario = current_user
-
-		if @usuario.viajesPendientes then
-			redirect_to cards_path and return flash[:notice] = 'No puede eliminar la tarjeta porque tiene viajes pendientes'
-		else
-			@card= Card.delete
-		end
+		@card = Card.delete
 	end
 
 
 	def destroy
-				@card = Card.find(params[:id]).destroy
-	      redirect_to cards_path
+		if current_user.viajesPendientes then
+			redirect_to cards_path and return flash[:notice] = 'No puede eliminar la tarjeta porque tiene viajes pendientes'
+		else
+			@card = Card.find(params[:id]).destroy
+			redirect_to cards_path
+		end
 	end
 
 	private
