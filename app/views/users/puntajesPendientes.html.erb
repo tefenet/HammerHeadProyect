@@ -1,9 +1,9 @@
 <h1>Calificaciones pendientes</h1>
 	<ul>
 		<% @puntajes_pendientes.each do |puntaje| %>
-			<li>Viaje del <%= puntaje.fecha %> .Calificar <%= puntaje.tipo %> <%= link_to (User.find(puntaje.usuario_puntuado.id)).full_name, User.find(puntaje.usuario_puntuado.id) %>
-			 <%= link_to 'Negativo', calificacion_negativa_path(puntaje), :method => :post %> 
-			 <%= link_to 'Neutral', calificacion_neutral_path(puntaje), :method => :post %> 
+			<li>Viaje del <%= (Viaje.find(puntaje.viaje_id)).fecha %> .Calificar <%= puntaje.tipo %> <%= link_to (User.find(puntaje.usuario_puntuado.id)).full_name, User.find(puntaje.usuario_puntuado.id) %>
+			 <%= link_to 'Negativo', calificacion_negativa_path(puntaje), :method => :post %>
+			 <%= link_to 'Neutral', calificacion_neutral_path(puntaje), :method => :post %>
 			 <%= link_to 'Positivo', calificacion_positiva_path(puntaje), :method => :post %>
 			  </li>
 		<% end %>
