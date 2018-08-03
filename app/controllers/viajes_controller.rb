@@ -37,7 +37,7 @@ class ViajesController < ApplicationController
 
   # GET /viajes/1/edit
   def edit
-    @viaje=Viaje.find(current_user.id)
+    @viaje=Viaje.find(params[:id])
     if @viaje.cant_be_edited then
       redirect_to root_path and return flash[:notice] = 'No se puede modificar el viaje porque tiene solicitudes aceptadas o pendientes.'
     else

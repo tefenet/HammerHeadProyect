@@ -67,7 +67,7 @@ class User < ApplicationRecord
   end
 
   def viajesPendientes
-    return (self.viajesComoChofer.where('fecha>=?', Date.today).any? and self.viajesComoPasajero.where('fecha>=?', Date.today).any?)
+    return (self.viajesComoChofer.where('fecha>=?', Date.today).any? or self.viajesComoPasajero.where('fecha>=?', Date.today).any?)
   end
 
   def addViajeComoPasajero(unViaje)
@@ -125,7 +125,7 @@ class User < ApplicationRecord
       self.reputacion_pasajero = self.reputacion_pasajero + 1
     end
     print ("Hago save de usuario Hago save de usuario Hago save de usuario Hago save de usuario Hago save de usuario ")
-    self.save   
+    self.save
   end
 
   def calificacion_negativa(tipo)

@@ -17,9 +17,8 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <% if @cards != nil then
+                    <% if !@cards.nil? then
                      @cards.each do |card| %>
-
                         <% if card.errors.any? %>
                           <div id="error_explanation">
                             <h2><%= pluralize(card.errors.count, "error") %> evitaron que esta tarjeta fuera eliminada:</h2>

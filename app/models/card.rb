@@ -12,7 +12,7 @@ class Card < ApplicationRecord
  	before_destroy :check_if_can_be_destroyed
 
  	def check_if_can_be_destroyed
-		if !User.find(self.user_id).viajesPendientes
+		if User.find(self.user_id).viajesPendientes
 			errors.add(:base, 'No puede eliminar la tarjeta porque tiene viajes pendientes.')
 			throw(:abort)
 		end

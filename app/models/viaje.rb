@@ -23,8 +23,10 @@ class Viaje < ApplicationRecord
   def check_solicitudes_aprobadas
     if self.pasajeros.any?
       chofer = User.find(self.chofer_id)
-      chofer.reputacion_chofer -= 1
-      chofer.save
+      if (chofer.reputacion_chofer != 0)
+        chofer.reputacion_chofer -= 1
+        chofer.save
+      end
     end
   end
 
@@ -69,8 +71,11 @@ class Viaje < ApplicationRecord
       if (self.startT > self.finishT)
         errors.add(:base, 'El viaje no puede terminar antes de la hora de inicio(ingrese un numero mayor a 0)')
       end
-      if (chofer.viajesComoChofer.select{ |un_viaje| (startT..finishT).overlaps?(un_viaje.finishT..un_viaje.startT)}.any?)
+      if (chofer.viajesComoChofer.select{ |un_viaje| (startT..finishT).overlaps?(un_viaje.finishT..un_viaje.startT) && (self.id != un_viaje.id) }.any?)
         errors.add(:base, 'El usuario posee 1 o mas viajes en este momento')
+      end
+      if self.cant_be_edited
+        errors.add(:base, 'Este viaje tiene solicitudes pendientes o aprobadas')
       end
     end
   end

@@ -43,8 +43,13 @@ class CardsController < ApplicationController
 
 
 	def destroy
+		@user = current_user
+		if @user.viajesPendientes then
+			redirect_to cards_path and return flash[:notice] = 'No puede eliminar la tarjeta porque tiene viajes pendientes'
+		else
 			@card = Card.find(params[:id]).destroy
-			redirect_to cards_path
+			redirect_to cards_path and return flash[:notice] = 'Tarjeta eliminada'
+		end
 	end
 
 	private
