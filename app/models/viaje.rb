@@ -25,8 +25,9 @@ class Viaje < ApplicationRecord
       chofer = User.find(self.chofer_id)
       if (chofer.reputacion_chofer != 0)
         chofer.reputacion_chofer -= 1
-        chofer.save
       end
+      self.pasajeros.each { |pas|  MyMailer.viajeBaja(pas, self).deliver_later(wait: 0.001.second)}
+      chofer.save
     end
   end
 

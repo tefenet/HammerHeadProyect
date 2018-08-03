@@ -27,4 +27,9 @@ class MyMailer < Devise::Mailer
     mail(:to => @viaje.chofer.email , subject: 'solicitud cancelada')
   end
 
+  def viajeBaja(pasajero , viaje)
+    @vi=viaje
+    @pas=pasajero
+    mail(:to => pasajero.email , subject: 'viaje cancelado')
+  end
 end
