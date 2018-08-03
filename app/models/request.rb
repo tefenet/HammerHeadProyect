@@ -79,11 +79,13 @@ class Request < ApplicationRecord
       if self.isPending
         self.update_columns(:state=>3)
       else
-        self.update_columns(:passengerScore=>-1,:state=>3)
+        usuario.calificacion_negativa("Pasajero")
+        self.update_column(:state=>3)
       end
     else
       MyMailer.unaFugazza(self).deliver_later(wait: 0.001.second)
-      self.update_columns(:driverScore=>-1,:state=>3)
+      usuario.calificacion_negativa("Chofer")
+      self.update_column(:state=>3)
     end
   end
 

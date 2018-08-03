@@ -9,7 +9,7 @@ class Card < ApplicationRecord
  		length: { is: 3, message: ": el numero de seguridad de la tarjeta debe tener 3 numeros" }
  	validates :vencimiento, presence: { message: ": Por favor ingrese la fecha de vencimiento de la tarjeta" }
  	validate :validate_vencimiento
- 	before_destroy :check_if_can_be_destroyed
+ 	#before_destroy :check_if_can_be_destroyed
 
  	def check_if_can_be_destroyed
 		if User.find(self.user_id).viajesPendientes
