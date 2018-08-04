@@ -3,7 +3,7 @@ class Viaje < ApplicationRecord
   has_and_belongs_to_many :pasajeros, :class_name => "User"
   has_one :car
   has_many :comments
-  has_many :requests
+  has_many :requests, :dependent=> :destroy
   validates :origen, presence: { message: ": Por favor ingrese el origen del viaje"}, on: [:create, :new, :update]
 	validates :destino, presence: { message: ": Por favor ingrese el destino del viaje"}, on: [:create, :new, :update]
   validates :fecha, presence: {message: ": Por favor ingrese una fecha para el viaje"}, on: [:create, :new, :update]

@@ -82,6 +82,36 @@ namespace :usuarios do
       a.asientos_libres = auto.seats
       a.car_plate= auto.plate
       auto.viajes<<a
+    b=User.find_by_first_name("Facundo").viajesComoChofer.build(
+        :origen=>"la plata",
+        :destino=>"villa elisa",
+        :fecha=>Date.new(2018, 5, 27),
+        :hora=> Time.new.midday,
+        :precio=>200,
+        :duracion=>3,
+        :descripcion=>"ninguna",
+        :car_id=>User.find_by_first_name("Facundo").cars.first.id)
+        auto=Car.find(b.car_id)
+        b.car = auto
+        b.asientos_libres = auto.seats
+        b.car_plate= auto.plate
+        auto.viajes<<b
+    c=User.find_by_first_name("Facundo").viajesComoChofer.build(
+      :origen=>"la plata",
+      :destino=>"villa elisa",
+      :fecha=>Date.new(2018, 8, 6),
+      :hora=> Time.new.midday,
+      :duracion=>3,
+      :precio=>200,
+      :descripcion=>"ninguna",
+      :car_id=>User.find_by_first_name("Facundo").cars.first.id)
+      auto=Car.find(a.car_id)
+      c.car = auto
+      c.asientos_libres = auto.seats
+      c.car_plate= auto.plate
+      auto.viajes<<c
       a.save
+      b.save
+      c.save
     end
 end
