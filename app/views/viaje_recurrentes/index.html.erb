@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Viaje Recurrentes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Semanas</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @viaje_recurrentes.each do |viaje_recurrente| %>
+      <tr>
+        <td><%= viaje_recurrente.semanas %></td>
+        <td><%= link_to 'Show', viaje_recurrente %></td>
+        <td><%= link_to 'Edit', edit_viaje_recurrente_path(viaje_recurrente) %></td>
+        <td><%= link_to 'Destroy', viaje_recurrente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Viaje Recurrente', new_viaje_recurrente_path %>

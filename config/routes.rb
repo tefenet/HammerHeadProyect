@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :viaje_recurrentes
   resources :scores
   resources :requests do
     member do

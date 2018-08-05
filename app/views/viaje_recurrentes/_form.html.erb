@@ -1,0 +1,22 @@
+<%= form_with(model: viaje_recurrente, local: true) do |form| %>
+  <% if viaje_recurrente.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(viaje_recurrente.errors.count, "error") %> prohibited this viaje_recurrente from being saved:</h2>
+
+      <ul>
+      <% viaje_recurrente.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :semanas %>
+    <%= form.number_field :semanas %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

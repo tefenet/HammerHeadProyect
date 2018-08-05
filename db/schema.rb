@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_01_230422) do
+ActiveRecord::Schema.define(version: 2018_08_05_192430) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -118,6 +118,27 @@ ActiveRecord::Schema.define(version: 2018_08_01_230422) do
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_users_viajes_on_user_id"
     t.index ["viaje_id"], name: "index_users_viajes_on_viaje_id"
+  end
+
+  create_table "viaje_recurrentes", force: :cascade do |t|
+    t.integer "semanas"
+    t.string "origen"
+    t.string "destino"
+    t.date "fecha"
+    t.time "hora"
+    t.float "precio"
+    t.time "duracion"
+    t.text "descripcion"
+    t.boolean "lunes", default: false, null: false
+    t.boolean "martes", default: false, null: false
+    t.boolean "miercoles", default: false, null: false
+    t.boolean "jueves", default: false, null: false
+    t.boolean "viernes", default: false, null: false
+    t.boolean "sabado", default: false, null: false
+    t.boolean "domingo", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "viaje_id"
   end
 
   create_table "viajes", force: :cascade do |t|
