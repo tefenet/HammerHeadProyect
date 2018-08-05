@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Semanas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Viaje recurrentes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @semanas.each do |semana| %>
+      <tr>
+        <td><%= semana.viaje_recurrentes %></td>
+        <td><%= link_to 'Show', semana %></td>
+        <td><%= link_to 'Edit', edit_semana_path(semana) %></td>
+        <td><%= link_to 'Destroy', semana, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Semana', new_semana_path %>

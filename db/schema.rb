@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_211254) do
+ActiveRecord::Schema.define(version: 2018_08_05_224222) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 2018_08_05_211254) do
     t.date "fecha"
     t.index ["usuario_puntuado_id"], name: "index_scores_on_usuario_puntuado_id"
     t.index ["usuario_puntuador_id"], name: "index_scores_on_usuario_puntuador_id"
+  end
+
+  create_table "semanas", force: :cascade do |t|
+    t.integer "viaje_recurrentes_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "viajes_id"
+    t.index ["viaje_recurrentes_id"], name: "index_semanas_on_viaje_recurrentes_id"
+    t.index ["viajes_id"], name: "index_semanas_on_viajes_id"
   end
 
   create_table "users", force: :cascade do |t|

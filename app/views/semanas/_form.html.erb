@@ -1,0 +1,22 @@
+<%= form_with(model: semana, local: true) do |form| %>
+  <% if semana.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(semana.errors.count, "error") %> prohibited this semana from being saved:</h2>
+
+      <ul>
+      <% semana.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :viaje_recurrentes_id %>
+    <%= form.text_field :viaje_recurrentes_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
