@@ -26,6 +26,64 @@ class ViajeRecurrentesController < ApplicationController
   def create
     @viaje_recurrente = ViajeRecurrente.new(viaje_recurrente_params)
 
+    #ya se que es una catarata de ifs y hubiera convenido un vector de 7 (facu no rompas las bolas)
+    if (@viaje_recurrente.lunes == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el lunes que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+    if (@viaje_recurrente.martes == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el martes que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+    if (@viaje_recurrente.miercoles == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el miercoles que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+    if (@viaje_recurrente.jueves == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el jueves que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+    if (@viaje_recurrente.viernes == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el viernes que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+    if (@viaje_recurrente.sabado == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el sabado que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+    if (@viaje_recurrente.domingo == true) then
+      Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+        fecha: @viaje_recurrente.fecha#aca hacer metodo en viaje_recurrente que calcule el domingo que sigue
+        ,hora: @viaje_recurrente.hora,
+        car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
+        duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+    end
+
+
     respond_to do |format|
       if @viaje_recurrente.save
         format.html { redirect_to @viaje_recurrente, notice: 'Viaje recurrente was successfully created.' }
