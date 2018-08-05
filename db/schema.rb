@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_224222) do
+ActiveRecord::Schema.define(version: 2018_08_05_224619) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 2018_08_05_224222) do
   end
 
   create_table "viaje_recurrentes", force: :cascade do |t|
-    t.integer "semanas"
+    t.integer "cant_semanas"
     t.string "origen"
     t.string "destino"
     t.date "fecha"
@@ -150,7 +150,9 @@ ActiveRecord::Schema.define(version: 2018_08_05_224222) do
     t.integer "viaje_id"
     t.integer "car_id"
     t.integer "viajes_id"
+    t.integer "semanas_id"
     t.index ["car_id"], name: "index_viaje_recurrentes_on_car_id"
+    t.index ["semanas_id"], name: "index_viaje_recurrentes_on_semanas_id"
     t.index ["viajes_id"], name: "index_viaje_recurrentes_on_viajes_id"
   end
 

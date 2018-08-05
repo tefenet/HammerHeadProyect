@@ -6,9 +6,9 @@ class ViajeRecurrente < ApplicationRecord
 	#link de donde saque este metodo 
 	# https://stackoverflow.com/questions/7930370/ruby-code-to-get-the-date-of-next-monday-or-any-day-of-the-week
 
-	def date_of_next(day)
+	def date_of_next(day, semana)
   		date  = Date.parse(day)
-  		delta = date > Date.today ? 0 : 7
+  		delta = date > Date.today ? 0 : (7*semana)
   		return date + delta
 	end
 end
