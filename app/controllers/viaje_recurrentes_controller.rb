@@ -91,6 +91,9 @@ class ViajeRecurrentesController < ApplicationController
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
+        @viaje_recurrente.semanas << Semana.find(semana.id)
+        @viaje_recurrente.save
+
       end
 
         format.html { redirect_to @viaje_recurrente, notice: 'Viaje recurrente was successfully created.' }
