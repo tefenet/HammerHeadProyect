@@ -8,22 +8,13 @@ class Request < ApplicationRecord
 
   def iniciar
     self.state||=0
-    self.passengerScore||=0
-    self.driverScore||=0
+
   end
 
   def pending_Score
     if User.current.pending_califications > 0
       errors.add(:base, 'tienes puntuaciones pendientes')
     end
-  end
-
-  def puntajeChoferPendiente
-    self.state==1 && self.driverScore==0
-  end
-
-  def puntajePasajeroPendiente
-    self.state==1 && self.passengerScore==0
   end
 
   def tarjeta
@@ -33,8 +24,14 @@ class Request < ApplicationRecord
   end
 
   def vencimiento
-    unless User.current.can_Pay(viaje)
-      errors.add(:base, 'tu tarjeta de credito caduca antes del viaje')
+    if !viaje.es_recurrente
+      unless User.current.can_Pay(viaje)
+        errors.add(:base, 'tu tarjeta de credito caduca antes del viaje')
+      end
+    else
+      unless User.current.can_Pay(ViajeRecurrente.find(viaje.padreID).lastTravel)
+        errors.add(:base, 'tu tarjeta de credito caduca antes del viaje')
+      end
     end
   end
 
@@ -73,20 +70,31 @@ class Request < ApplicationRecord
   end
 
   def cancel(usuario)
-    viaje.removePasajero(user) unless self.isPending
-    if usuario==self.user
-      MyMailer.pasajero_cancela(self).deliver_later(wait: 0.001.second)
-      if self.isPending
-        self.update_columns(:state=>3)
+
+    if !viaje.es_recurrente
+      viaje.removePasajero(user) unless self.isPending
+      if usuario==self.user
+        MyMailer.pasajero_cancela(self).deliver_later(wait: 0.001.second)
+        if !self.isPending
+          usuario.calificacion_negativa("Pasajero")
+        end
       else
-        usuario.calificacion_negativa("Pasajero")
-        self.update_column(:state=>3)
+        MyMailer.unaFugazza(self).deliver_later(wait: 0.001.second)
+        usuario.calificacion_negativa("Chofer")
       end
     else
-      MyMailer.unaFugazza(self).deliver_later(wait: 0.001.second)
-      usuario.calificacion_negativa("Chofer")
-      self.update_column(:state=>3)
+      ViajeRecurrente.find(viaje.padreID).removePasajero(user) unless self.isPending
+      if usuario==self.user
+        #MyMailer.pasajero_cancela_rec(self, ViajeRecurrente.find(viaje.padreID)).deliver_later(wait: 0.001.second)
+        if !self.isPending
+          usuario.calificacion_negativa("Pasajero")
+        end
+      else
+        #MyMailer.chofer_cancela_rec(self, ViajeRecurrente.find(viaje.padreID)).deliver_later(wait: 0.001.second)
+        usuario.calificacion_negativa("Chofer")
+      end
     end
+    self.update_column(:state=>3)
   end
 
   def change(code)
@@ -101,16 +109,29 @@ class Request < ApplicationRecord
   end
 
   def accept
-    if viaje.asientos_libres>0 && user.can_Travel(viaje_id)
-      if self.update(:state=>1)
-        self.viaje.add_Pasajero(self.user)
-        MyMailer.announce(self).deliver_later(wait: 0.001.second)
+    if !viaje.es_recurrente
+      if viaje.asientos_libres>0 && user.can_Travel(viaje_id)
+        if self.update(:state=>1)
+          self.viaje.add_Pasajero(self.user)
+          MyMailer.announce(self).deliver_later(wait: 0.001.second)
+        end
+      elsif viaje.asientos_libres == 0
+        errors.add(:base,'no puedes aceptar este pasajero porque no hay mas lugar en tu vehiculo')
+      else
+        errors.add(:base,'no puedes aceptar este pasajero porque tiene otro viaje')
       end
-    elsif viaje.asientos_libres == 0
-      errors.add(:base,'no puedes aceptar este pasajero porque no hay mas lugar en tu vehiculo')
     else
-      errors.add(:base,'no puedes aceptar este pasajero porque tiene otro viaje')
-    end
+      travelR=ViajeRecurrente.find(viaje.padreID)
+      if travelR.next.asientos_libres>0 && user.can_TravelR(travelR.id)
+        if self.update(:state=>1)
+          self.travelR.add_Pasajero(self.user)
+          #MyMailer.announce(self).deliver_later(wait: 0.001.second)
+        end
+      elsif travelR.asientos_libres == 0
+        errors.add(:base,'no puedes aceptar este pasajero porque no hay mas lugar en tu vehiculo')
+      else
+        errors.add(:base,'no puedes aceptar este pasajero porque tiene otro viaje')
+      end
   end
 
   def refuse

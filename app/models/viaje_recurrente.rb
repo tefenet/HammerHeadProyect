@@ -33,6 +33,24 @@ class ViajeRecurrente < ApplicationRecord
 		return self.semanas.map{|s| s.viajes}.flatten
 	end
 
+	def lastTravel
+		viajesSimples.last
+	end
+
+	def removePasajero(user)
+		#lo quita de todos a partir del proximo
+		#suma un lugar
+	end
+
+	def add_Pasajero(aPassenger)
+		#lo agrega a todos a partir del proximo
+		#resta un lugar
+	end
+
+	def asientos_libres
+		next_travel.asientos_libres
+	end
+
 	def next_travel
 		return (self.viajesSimples.select{ |un_viaje| un_viaje.not_started }.first)
 	end

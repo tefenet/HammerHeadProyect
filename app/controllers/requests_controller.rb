@@ -49,8 +49,14 @@ class RequestsController < ApplicationController
     end
     def superpocision
       idViaje=params[:request][:viaje]
-      unless User.current.can_Travel(idViaje)
-        redirect_to viaje_path(idViaje), notice: 'tienes otro viaje que se superpone con este'
+      if !Viaje.find(idViaje).es_recurrente
+        unless User.current.can_Travel(idViaje)
+          redirect_to viaje_path(idViaje), notice: 'tienes otro viaje que se superpone con este'
+        end
+      else
+        unless User.current.can_TravelR(idViaje)
+          redirect_to viaje_path(idViaje), notice: 'tienes otro viaje que se superpone con este'
+        end
       end
     end
 
