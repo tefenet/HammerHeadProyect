@@ -37,43 +37,43 @@ class ViajeRecurrentesController < ApplicationController
         semana.save
 
         if (@viaje_recurrente.lunes == true) then
-          if !create_viaje("Monday",i,semana.id)
+          if !create_viaje(1,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.martes == true) then
-          if !create_viaje("Tuesday",i,semana.id)
+          if !create_viaje(2,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.miercoles == true) then
-          if !create_viaje("Wednesday",i,semana.id)
+          if !create_viaje(3,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.jueves == true) then
-          if !create_viaje("Thursday",i,semana.id)
+          if !create_viaje(4,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.viernes == true) then
-          if !create_viaje("Friday",i,semana.id)
+          if !create_viaje(5,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.sabado == true) then
-          if !create_viaje("Saturday",i,semana.id)
+          if !create_viaje(6,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.domingo == true) then
-          if !create_viaje("Sunday",i,semana.id)
+          if !create_viaje(0,i,semana.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
@@ -119,7 +119,7 @@ class ViajeRecurrentesController < ApplicationController
 
   def create_viaje(day,i,semID)
     viaje=current_user.viajesComoChofer.build(viaje_params)
-    viaje.fecha=@viaje_recurrente.date_of_next(day, i)
+    viaje.fecha=@viaje_recurrente.get_next_day(@viaje_recurrente.fecha, day, i)
     viaje.chofer_id = current_user.id
     auto=Car.find(viaje.car_id)
     viaje.car = auto
