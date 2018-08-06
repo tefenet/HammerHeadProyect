@@ -24,8 +24,23 @@ class ViajeRecurrentesController < ApplicationController
   # POST /viaje_recurrentes
   # POST /viaje_recurrentes.json
   def create
-    @viaje_recurrente = ViajeRecurrente.new(viaje_recurrente_params)
 
+    @user = current_user
+    if (@user.can_publish())
+      @viaje = current_user.viajesComoChofer.build
+    else
+      unless @user.has_any_car
+        redirect_to root_path and return flash[:notice] = 'Debe cargar un auto antes de publicar un viaje.'
+      end
+      unless @user.has_credit_card
+        redirect_to root_path and return flash[:notice] = 'Debe cargar una tarjeta de credito antes de publicar un viaje.'
+      end
+      if (@user.pending_califications > 0)
+        redirect_to root_path and return flash[:notice] = 'Tienes calificaciones pendientes, no puedes publicar nuevos viajes'
+      end
+    end
+
+    @viaje_recurrente = ViajeRecurrente.new(viaje_recurrente_params)
     respond_to do |format|
       if @viaje_recurrente.save
 
