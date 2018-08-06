@@ -119,6 +119,7 @@ class ViajeRecurrentesController < ApplicationController
 
   def create_viaje(day,i,semID)
     viaje=current_user.viajesComoChofer.build(viaje_params)
+    viaje.es_recurrente = true
     viaje.fecha=@viaje_recurrente.get_next_day(@viaje_recurrente.fecha, day, i)
     viaje.chofer_id = current_user.id
     auto=Car.find(viaje.car_id)
