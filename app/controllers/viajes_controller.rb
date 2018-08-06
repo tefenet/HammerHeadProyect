@@ -91,7 +91,7 @@ class ViajesController < ApplicationController
   def destroy
     @viaje.destroy
     respond_to do |format|
-      format.html { redirect_to viajes_url, notice: 'El viaje se a eliminado correctamente.' }
+      format.html { redirect_to misviajes_path(current_user), notice: 'El viaje se a eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
