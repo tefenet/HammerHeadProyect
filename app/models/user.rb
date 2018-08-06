@@ -21,6 +21,11 @@ class User < ApplicationRecord
     self.viajes.find{|un_viaje| (r.startT..r.finishT).overlaps?(un_viaje.finishT..un_viaje.startT)}.nil?
   end
 
+  def can_TravelR(idViaje)
+    r=ViajeRecurrente.find(idViaje)
+    r.viajesSimples.all? { |vi| User.current.can_travel(vi.id) }
+  end
+
   def viajes
     viajesComoChofer + viajesComoPasajero
   end
@@ -29,23 +34,6 @@ class User < ApplicationRecord
     return self.first_name+' '+self.last_name
   end
 
-  def reputacionPA
-    pa=self.requests.inject(0) {|sum, i|  sum + i.passengerScore }
-    if pa > 0
-      pa
-    else
-      0
-    end
-  end
-
-  def reputacionCH
-    ch=self.viajesComoChofer.map{|travel|travel.requests.inject(0) {|sum, i|  sum + i.driverScore }}.sum
-    if ch > 0
-      ch
-    else
-      0
-    end
-  end
 
   def pending_califications
     return Score.where("usuario_puntuador_id = ? AND estado = ? AND fecha < ?", self.id, 1, 30.days.ago).count
