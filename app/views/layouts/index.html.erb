@@ -122,14 +122,15 @@
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><b> Viaje recurrente </b> <% if viaje.lunes == true %> Lunes <% end %>
+                                <h3><b> Viaje recurrente </b> 
+                                  <% if viaje.lunes == true %> Lunes <% end %>
                                   <% if viaje.martes == true %> Martes <% end %>
                                   <% if viaje.miercoles == true %> Miercoles <% end %>
                                   <% if viaje.jueves == true %> Jueves <% end %>
                                   <% if viaje.viernes == true %> Viernes <% end %>
                                   <% if viaje.sabado == true %> Sabado <% end %>
                                   <% if viaje.domingo == true %> Domingo <% end %>
-                                  a las <%= viaje.hora %> Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de
+                                  a las <%= viaje.hora.strftime("%H:%M") %> Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de
                             </div>
                             <ul class="ride-meta">
 
@@ -146,8 +147,8 @@
                                 </li><!-- end .ride-people -->
 
                                 <li>
-                                  
-                                </li>
+                                    <%= button_to "Leer mas", viaje_path(viaje.next_travel), :class => "btn2", :method => :get%>
+                                  </li>
                                 <li>
                                  
                                 </li>

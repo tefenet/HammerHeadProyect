@@ -26,15 +26,19 @@ class ViajeRecurrente < ApplicationRecord
 	def only_mondays
 		if !self.fecha.monday?
 			errors.add(:inicio, 'Solo puede comenzar un lunes')
-    end
+    	end
+	end
+
+	def viajesSimples
+		return self.semanas.map{|s| s.viajes}.flatten
 	end
 
 	def next_travel
-		return (self.semanas.viajes.select{ |un_viaje| un_viaje.not_started }.first)
+		return (self.viajesSimples.select{ |un_viaje| un_viaje.not_started }.first)
 	end
 
 	def start_time
-		return self.next_travel
+		return self.next_travel.startT
 	end
 
 end

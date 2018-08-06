@@ -61,7 +61,7 @@ class Viaje < ApplicationRecord
   end
 
   def startT
-    return
+    return (DateTime.parse(fecha.to_s + ' ' + hora.to_s))
   end
 
   def finishT
