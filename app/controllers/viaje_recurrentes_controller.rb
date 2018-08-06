@@ -38,60 +38,121 @@ class ViajeRecurrentesController < ApplicationController
 
         if (@viaje_recurrente.lunes == true) then
           viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Tuesday", i)
+          viaje.fecha=@viaje_recurrente.date_of_next("Monday", i)
           viaje.chofer_id = current_user.id
           auto=Car.find(viaje.car_id)
           viaje.car = auto
           viaje.asientos_libres = auto.seats
           viaje.car_plate= auto.plate
-          auto.viajes<<viaje
-          semana.viajes<<viaje
-            if !viaje.save                
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
               redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
             end
 
         end
 
         if (@viaje_recurrente.martes == true) then
-          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Tuesday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Tuesday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
         if (@viaje_recurrente.miercoles == true) then
-          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Wednesday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Wednesday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
         if (@viaje_recurrente.jueves == true) then
-          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Thursday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Thursday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
         if (@viaje_recurrente.viernes == true) then
-          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Friday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Friday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
         if (@viaje_recurrente.sabado == true) then
-          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Saturday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Saturday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
         if (@viaje_recurrente.domingo == true) then
-          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Sunday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Sunday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.semana_id=semana.id
+            if !viaje.save
+              auto.viajes<<viaje
+              semana.viajes<<viaje
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
 
