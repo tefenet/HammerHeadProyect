@@ -305,7 +305,8 @@ button[disabled], input[disabled]
 }
 input[type="checkbox"], input[type="radio"]
 {
-    padding: 0
+    padding: 0;
+    height: 27px;
 }
 input[type="search"]
 {
