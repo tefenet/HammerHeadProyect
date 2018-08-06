@@ -33,4 +33,8 @@ class ViajeRecurrente < ApplicationRecord
 		return (self.semanas.viajes.select{ |un_viaje| un_viaje.not_started }.first)
 	end
 
+	def start_time
+		return self.next_travel
+	end
+
 end
