@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_125711) do
+ActiveRecord::Schema.define(version: 2018_08_06_190737) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2018_08_06_125711) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "viaje_id"
+  end
+
+  create_table "comentarios", force: :cascade do |t|
+    t.text "text"
+    t.integer "viaje_id"
+    t.integer "user_id"
+    t.integer "comentario_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -165,6 +172,7 @@ ActiveRecord::Schema.define(version: 2018_08_06_125711) do
     t.integer "asientos_libres"
     t.integer "car_id"
     t.integer "semana_id"
+    t.boolean "es_recurrente", default: false, null: false
     t.index ["car_id"], name: "index_viajes_on_car_id"
     t.index ["chofer_id"], name: "index_viajes_on_chofer_id"
     t.index ["pasajero_id"], name: "index_viajes_on_pasajero_id"
