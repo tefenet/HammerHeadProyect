@@ -2,7 +2,11 @@
 
 <p>
   <strong>Semanas:</strong>
-  <%= @viaje_recurrente.semanas %>
+  <%= @viaje_recurrente.semanas.each do |s| %>
+          <%= s.viajes.each do |v|%>
+            <%= v.fecha %>
+          <% end %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_viaje_recurrente_path(@viaje_recurrente) %> |

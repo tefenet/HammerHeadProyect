@@ -55,6 +55,7 @@ class ViajesController < ApplicationController
     @viaje.asientos_libres = auto.seats
     @viaje.car_plate= auto.plate
     auto.viajes<<@viaje
+    @viaje.semana=Semana.new
 
     respond_to do |format|
       if @viaje.save

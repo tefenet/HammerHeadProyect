@@ -68,7 +68,7 @@ class SemanasController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def semana_params
-      params.require(:semana).permit(:viaje_recurrente)
-    end
+  #  def semana_params
+  #    params.require(:semana).permit(:viaje_recurrente).merge(viaje: ViajeRecurrente.find(params[:semana][:viaje_recurrente]))
+  #  end
 end

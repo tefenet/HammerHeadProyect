@@ -32,7 +32,7 @@ class ViajeRecurrentesController < ApplicationController
         @viaje_recurrente.cant_semanas.times do |i|
         #ya se que es una catarata de ifs y hubiera convenido un vector de 7 (facu no rompas las bolas)
 
-        semana = @viaje_recurrente.semanas.new(ActionController::Parameters.new(semana:{viaje_recurrente: @viaje_recurrente.id}))
+        semana = @viaje_recurrente.semanas.build(:viaje_recurrente=> @viaje_recurrente)
 
         semana.save
 
@@ -47,6 +47,7 @@ class ViajeRecurrentesController < ApplicationController
           viaje.save
           auto.viajes<<viaje
           semana.viajes<<viaje
+          semana.acanosvimo
         end
 
         if (@viaje_recurrente.martes == true) then

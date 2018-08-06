@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_224619) do
+ActiveRecord::Schema.define(version: 2018_08_06_125711) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "numero"
@@ -31,13 +31,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_224619) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "viaje_id"
-  end
-
-  create_table "comentarios", force: :cascade do |t|
-    t.text "text"
-    t.integer "viaje_id"
-    t.integer "user_id"
-    t.integer "comentario_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -83,11 +76,10 @@ ActiveRecord::Schema.define(version: 2018_08_05_224619) do
   end
 
   create_table "semanas", force: :cascade do |t|
-    t.integer "viaje_recurrentes_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "viajes_id"
-    t.index ["viaje_recurrentes_id"], name: "index_semanas_on_viaje_recurrentes_id"
+    t.integer "viaje_recurrente_id"
     t.index ["viajes_id"], name: "index_semanas_on_viajes_id"
   end
 
@@ -172,6 +164,7 @@ ActiveRecord::Schema.define(version: 2018_08_05_224619) do
     t.string "car_plate"
     t.integer "asientos_libres"
     t.integer "car_id"
+    t.integer "semana_id"
     t.index ["car_id"], name: "index_viajes_on_car_id"
     t.index ["chofer_id"], name: "index_viajes_on_chofer_id"
     t.index ["pasajero_id"], name: "index_viajes_on_pasajero_id"
