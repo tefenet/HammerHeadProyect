@@ -37,124 +37,46 @@ class ViajeRecurrentesController < ApplicationController
         semana.save
 
         if (@viaje_recurrente.lunes == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Monday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Monday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
 
         if (@viaje_recurrente.martes == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Tuesday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Tuesday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
 
         if (@viaje_recurrente.miercoles == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Wednesday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Wednesday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
 
         if (@viaje_recurrente.jueves == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Thursday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Thursday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
 
         if (@viaje_recurrente.viernes == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Friday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Friday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
 
         if (@viaje_recurrente.sabado == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Saturday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Saturday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
 
         if (@viaje_recurrente.domingo == true) then
-          viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Sunday", i)
-          viaje.chofer_id = current_user.id
-          auto=Car.find(viaje.car_id)
-          viaje.car = auto
-          viaje.asientos_libres = auto.seats
-          viaje.car_plate= auto.plate
-          viaje.semana_id=semana.id
-            if !viaje.save
-              auto.viajes<<viaje
-              semana.viajes<<viaje
-              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
-            end
-
+          if !create_viaje("Sunday",i,semana.id)
+              redirect_to @viaje_recurrente, notice: @errors  and return
+          end
         end
-
 
         @viaje_recurrente.semanas<<semana
 
@@ -176,6 +98,7 @@ class ViajeRecurrentesController < ApplicationController
       if @viaje_recurrente.update(viaje_recurrente_params)
         format.html { redirect_to @viaje_recurrente, notice: 'Viaje recurrente was successfully updated.' }
         format.json { render :show, status: :ok, location: @viaje_recurrente }
+        return
       else
         format.html { render :edit }
         format.json { render json: @viaje_recurrente.errors, status: :unprocessable_entity }
@@ -192,6 +115,26 @@ class ViajeRecurrentesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def create_viaje(day,i,semID)
+    viaje=current_user.viajesComoChofer.build(viaje_params)
+    viaje.fecha=@viaje_recurrente.date_of_next(day, i)
+    viaje.chofer_id = current_user.id
+    auto=Car.find(viaje.car_id)
+    viaje.car = auto
+    viaje.asientos_libres = auto.seats
+    viaje.car_plate= auto.plate
+    viaje.semana_id=semID
+      if !viaje.save
+        @errors=viaje.errors.full_messages
+        return false
+      else
+        auto.viajes<<viaje
+        Semana.find(semID).viajes<<viaje
+      end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
