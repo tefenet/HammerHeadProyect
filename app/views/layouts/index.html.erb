@@ -78,7 +78,7 @@
                           <article class="ride-box clearfix">
 
                               <div class="ride-content">
-                                  <h3>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
+                                  <h3> <% if viaje.es_recurrente %><b> Viaje recurrente </b> <% end %>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
                               </div>
 
                               <ul class="ride-meta">
