@@ -132,6 +132,7 @@ class Request < ApplicationRecord
       else
         errors.add(:base,'no puedes aceptar este pasajero porque tiene otro viaje')
       end
+    end
   end
 
   def refuse
