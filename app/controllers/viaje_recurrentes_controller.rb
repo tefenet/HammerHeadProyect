@@ -37,43 +37,43 @@ class ViajeRecurrentesController < ApplicationController
         semana.save
 
         if (@viaje_recurrente.lunes == true) then
-          if !create_viaje(1,i,semana.id)
+          if !create_viaje(1,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.martes == true) then
-          if !create_viaje(2,i,semana.id)
+          if !create_viaje(2,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.miercoles == true) then
-          if !create_viaje(3,i,semana.id)
+          if !create_viaje(3,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.jueves == true) then
-          if !create_viaje(4,i,semana.id)
+          if !create_viaje(4,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.viernes == true) then
-          if !create_viaje(5,i,semana.id)
+          if !create_viaje(5,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.sabado == true) then
-          if !create_viaje(6,i,semana.id)
+          if !create_viaje(6,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
 
         if (@viaje_recurrente.domingo == true) then
-          if !create_viaje(0,i,semana.id)
+          if !create_viaje(0,i,semana.id, @viaje_recurrente.id)
               redirect_to @viaje_recurrente, notice: @errors  and return
           end
         end
@@ -117,8 +117,9 @@ class ViajeRecurrentesController < ApplicationController
   end
 
 
-  def create_viaje(day,i,semID)
+  def create_viaje(day,i,semID, viajePadreID)
     viaje=current_user.viajesComoChofer.build(viaje_params)
+    viaje.padreID = viajePadreID
     viaje.es_recurrente = true
     viaje.fecha=@viaje_recurrente.get_next_day(@viaje_recurrente.fecha, day, i)
     viaje.chofer_id = current_user.id
