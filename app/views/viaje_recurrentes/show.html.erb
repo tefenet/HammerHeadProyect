@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Semanas:</strong>
-  <%= @viaje_recurrente.semanas.each do |s| %>
-          <%= s.viajes.each do |v|%>
-            <%= v.fecha %>
+  <strong>viajes del viaje recurrente <% @viaje_recurrente.id %>:</strong><br>
+  <% @viaje_recurrente.semanas.each do |s| %>
+          <% s.viajes.each do |v|%>
+            viaje fecha <%= l v.fecha,locale: :es %><br>
           <% end %>
   <% end %>
 </p>
