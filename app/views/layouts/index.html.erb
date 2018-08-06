@@ -73,12 +73,12 @@
                     </div>
                     <% Viaje.all.order(created_at: :desc).each do |viaje| %>
 
-                        <% if (viaje.asientos_libres !=0) and (viaje.startT>DateTime.now)%>
+                        <% if (viaje.asientos_libres !=0) and (viaje.startT>DateTime.now) and (viaje.es_recurrente != true) %>
                           <div class="col-md-12 col-sm-12 col-xs-12">
                           <article class="ride-box clearfix">
 
                               <div class="ride-content">
-                                  <h3> <% if viaje.es_recurrente %><b> Viaje recurrente </b> <% end %>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
+                                  <h3> Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
                               </div>
 
                               <ul class="ride-meta">
@@ -101,11 +101,68 @@
                       <% end %>
 
                         <div class="clearfix"></div>
-                        <div class="read-all pagination-margin">
-                            <a href=""></a>
-                        </div>
+                        <div class="read-all pagination-margin"></div>
+
 
                 </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="page-sub-title textcenter">
+                            <h2>Viajes recurrentes</h2>
+                            <div class="line"></div>
+                        </div><!-- end .page-sub-title -->
+
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <% ViajeRecurrente.all.order(created_at: :desc).each do |viaje| %>
+
+                        <article class="ride-box clearfix">
+
+                            <div class="ride-content">
+                                <h3><b> Viaje recurrente </b> <% if viaje.lunes == true %> Lunes <% end %>
+                                  <% if viaje.martes == true %> Martes <% end %>
+                                  <% if viaje.miercoles == true %> Miercoles <% end %>
+                                  <% if viaje.jueves == true %> Jueves <% end %>
+                                  <% if viaje.viernes == true %> Viernes <% end %>
+                                  <% if viaje.sabado == true %> Sabado <% end %>
+                                  <% if viaje.domingo == true %> Domingo <% end %>
+                                  a las <%= viaje.hora %> Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de
+                            </div>
+                            <ul class="ride-meta">
+
+                                <li class="ride-date">
+                                    <b class="tooltip-link" data-original-title="Fecha de partida" data-toggle="tooltip">
+                                        
+                                    </b>
+                                </li><!-- end .ride-date -->
+
+                                <li class="ride-people">
+                                    <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
+                                        
+                                    </b>
+                                </li><!-- end .ride-people -->
+
+                                <li>
+                                  
+                                </li>
+                                <li>
+                                 
+                                </li>
+                                <li>
+                                
+                                 </li>
+                                 <li>
+                                 
+                            </ul><!-- end .ride-meta -->
+
+
+                        </article><!-- end .ride-box -->
+
+                    <% end %>
+
 
             </div><!-- end .last-rides -->
 
