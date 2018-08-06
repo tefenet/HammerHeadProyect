@@ -15,6 +15,18 @@
                   <strong class="text-dark">$<%= @viaje.precio %></strong>
               </h3>
                   <b>
+                    <% if @viaje.es_recurrente %>
+                      Dias de semana:
+                      <% if @viaje_recurrente.lunes == true %> Lunes <% end %>
+                        <% if @viaje_recurrente.martes == true %> Martes <% end %>
+                        <% if @viaje_recurrente.miercoles == true %> Miercoles <% end %>
+                        <% if @viaje_recurrente.jueves == true %> Jueves <% end %>
+                        <% if @viaje_recurrente.viernes == true %> Viernes <% end %>
+                        <% if @viaje_recurrente.sabado == true %> Sabado <% end %>
+                        <% if @viaje_recurrente.domingo == true %> Domingo <% end %>
+                      <% end %>
+                  </b>
+                  <b>
                     <strong>sale:</strong><%= l @viaje.fecha, locale: :es %>,
                     <%= @viaje.hora.strftime("%H:%M") %>
                   </b>

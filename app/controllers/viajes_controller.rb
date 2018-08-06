@@ -15,6 +15,9 @@ class ViajesController < ApplicationController
   # GET /viajes/1.json
   def show
     @viaje = Viaje.find(params[:id])
+    if @viaje.es_recurrente
+      @viaje_recurrente = ViajeRecurrente.find(@viaje.padreID)
+    end
   end
 
   # GET /viajes/new
