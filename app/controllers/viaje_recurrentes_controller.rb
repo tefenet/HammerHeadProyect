@@ -131,7 +131,9 @@ class ViajeRecurrentesController < ApplicationController
         return false
       else
         auto.viajes<<viaje
-        Semana.find(semID).viajes<<viaje
+        s=Semana.find(semID)
+        s.viajes<<viaje
+        s.save
       end
   end
 
