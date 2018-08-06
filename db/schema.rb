@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 2018_08_06_125711) do
     t.integer "viaje_id"
   end
 
+  create_table "comentarios", force: :cascade do |t|
+    t.text "text"
+    t.integer "viaje_id"
+    t.integer "user_id"
+    t.integer "comentario_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "pregunta"
     t.string "respuesta", default: ""
