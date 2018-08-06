@@ -38,16 +38,18 @@ class ViajeRecurrentesController < ApplicationController
 
         if (@viaje_recurrente.lunes == true) then
           viaje=current_user.viajesComoChofer.build(viaje_params)
-          viaje.fecha=@viaje_recurrente.date_of_next("Monday", i)
+          viaje.fecha=@viaje_recurrente.date_of_next("Tuesday", i)
           viaje.chofer_id = current_user.id
           auto=Car.find(viaje.car_id)
           viaje.car = auto
           viaje.asientos_libres = auto.seats
           viaje.car_plate= auto.plate
-          viaje.save
           auto.viajes<<viaje
           semana.viajes<<viaje
-          semana.acanosvimo
+            if !viaje.save                
+              redirect_to @viaje_recurrente, notice: viaje.errors.full_messages   and return
+            end
+
         end
 
         if (@viaje_recurrente.martes == true) then

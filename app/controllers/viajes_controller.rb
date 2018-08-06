@@ -55,8 +55,11 @@ class ViajesController < ApplicationController
     @viaje.asientos_libres = auto.seats
     @viaje.car_plate= auto.plate
     auto.viajes<<@viaje
-    @viaje.semana=Semana.new
-
+    if !@viaje.semana_id.nil?
+      @viaje.semana=Semana.find(@viaje.semana_id)
+    else
+      @viaje.semana=Semana.new
+    end
     respond_to do |format|
       if @viaje.save
         format.html { redirect_to @viaje, notice: 'Viaje creado con exito.' }
@@ -101,6 +104,4 @@ class ViajesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def viaje_params
-      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_id)
-    end
-end
+      params.require(:viaje).permit(:origen, :destino, :fecha, :hora, :precio, :duracion, :descripcion, :car_id,:semana_id)
