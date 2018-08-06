@@ -61,11 +61,15 @@ class Viaje < ApplicationRecord
   end
 
   def startT
-    return (DateTime.parse(fecha.to_s + ' ' + hora.to_s))
+    return
   end
 
   def finishT
     return DateTime.parse(fecha.to_s + ' ' + hora.to_s).advance(:hours => +duracion)
+  end
+
+  def not_started
+    return (DateTime.now < (DateTime.parse(fecha.to_s + ' ' + hora.to_s)))
   end
 
   def validate_viajes_overlaping
