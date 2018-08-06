@@ -1,4 +1,4 @@
 class Semana < ApplicationRecord
-  belongs_to :viaje_recurrentes
-  has_many :viajes, class_name: 'Viaje',  foreign_key: "viaje_id"
+  belongs_to :viaje_recurrente
+  has_many :viajes, class_name: 'Viaje'
 end

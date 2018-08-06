@@ -24,7 +24,7 @@ class SemanasController < ApplicationController
   # POST /semanas
   # POST /semanas.json
   def create
-    @semana = Semana.new(semana_params)
+    @semana = Semana.new
 
     respond_to do |format|
       if @semana.save
@@ -69,6 +69,6 @@ class SemanasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def semana_params
-      params.require(:semana).permit(:viaje_recurrentes_id)
+      params.require(:semana).permit(:viaje_recurrente)
     end
 end

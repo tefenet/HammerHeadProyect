@@ -32,60 +32,67 @@ class ViajeRecurrentesController < ApplicationController
         @viaje_recurrente.cant_semanas.times do |i|
         #ya se que es una catarata de ifs y hubiera convenido un vector de 7 (facu no rompas las bolas)
 
-        semana = Semana.new
+        semana = @viaje_recurrente.semanas.new(ActionController::Parameters.new(semana:{viaje_recurrente: @viaje_recurrente.id}))
+
         semana.save
 
         if (@viaje_recurrente.lunes == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
-          fecha: @viaje_recurrente.date_of_next("Monday", i)          ,hora: @viaje_recurrente.hora,
-          car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
-          duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
+          viaje=current_user.viajesComoChofer.build(viaje_params)
+          viaje.fecha=@viaje_recurrente.date_of_next("Monday", i)
+          viaje.chofer_id = current_user.id
+          auto=Car.find(viaje.car_id)
+          viaje.car = auto
+          viaje.asientos_libres = auto.seats
+          viaje.car_plate= auto.plate
+          viaje.save
+          auto.viajes<<viaje
+          semana.viajes<<viaje
         end
 
         if (@viaje_recurrente.martes == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
           fecha: @viaje_recurrente.date_of_next("Tuesday", i)          ,hora: @viaje_recurrente.hora,
           car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
         if (@viaje_recurrente.miercoles == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
           fecha: @viaje_recurrente.date_of_next("Wednesday", i)          ,hora: @viaje_recurrente.hora,
           car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
         if (@viaje_recurrente.jueves == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
           fecha: @viaje_recurrente.date_of_next("Thursday", i)          ,hora: @viaje_recurrente.hora,
           car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
         if (@viaje_recurrente.viernes == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
           fecha: @viaje_recurrente.date_of_next("Friday", i)          ,hora: @viaje_recurrente.hora,
           car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
         if (@viaje_recurrente.sabado == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
           fecha: @viaje_recurrente.date_of_next("Saturday", i)          ,hora: @viaje_recurrente.hora,
           car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
         if (@viaje_recurrente.domingo == true) then
-          semana.viajes.Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
+          semana.viajes<<Viaje.create(origen: @viaje_recurrente.origen, destino: @viaje_recurrente.destino,
           fecha: @viaje_recurrente.date_of_next("Sunday", i)          ,hora: @viaje_recurrente.hora,
           car_id: @viaje_recurrente.car_id, precio: @viaje_recurrente.precio,
           duracion: @viaje_recurrente.duracion, descripcion: @viaje_recurrente.descripcion)
         end
 
-        @viaje_recurrente.semanas << Semana.find(semana.id)
-        @viaje_recurrente.save
+
+        @viaje_recurrente.semanas<<semana
 
       end
 
@@ -131,5 +138,8 @@ class ViajeRecurrentesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def viaje_recurrente_params
       params.require(:viaje_recurrente).permit!
+    end
+    def viaje_params
+      params.require(:viaje_recurrente).permit(:origen, :destino, :hora,:fecha, :precio, :duracion, :descripcion, :car_id)
     end
 end
