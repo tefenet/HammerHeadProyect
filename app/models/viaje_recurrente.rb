@@ -34,7 +34,7 @@ class ViajeRecurrente < ApplicationRecord
 	end
 
 	def start_time
-		return self.next_travel
+		return self.next_travel.startT
 	end
 
 end
