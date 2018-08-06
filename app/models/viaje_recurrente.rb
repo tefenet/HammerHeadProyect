@@ -4,6 +4,7 @@ class ViajeRecurrente < ApplicationRecord
 	has_many :semanas, :class_name => "Semana", :dependent=> :destroy
 	validate :only_mondays
 
+
 	#link de donde saque este metodo
 	# https://stackoverflow.com/questions/7930370/ruby-code-to-get-the-date-of-next-monday-or-any-day-of-the-week
 
@@ -26,6 +27,10 @@ class ViajeRecurrente < ApplicationRecord
 		if !self.fecha.monday?
 			errors.add(:inicio, 'Solo puede comenzar un lunes')
     end
+	end
+
+	def next_travel
+		return (self.semanas.viajes.select{ |un_viaje| un_viaje.not_started }.first)
 	end
 
 end
