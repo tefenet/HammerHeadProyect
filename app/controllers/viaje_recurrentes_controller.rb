@@ -24,25 +24,10 @@ class ViajeRecurrentesController < ApplicationController
   # POST /viaje_recurrentes
   # POST /viaje_recurrentes.json
   def create
-
     @user = current_user
     if (@user.can_publish())
-      @viaje = current_user.viajesComoChofer.build
-    else
-      unless @user.has_any_car
-        redirect_to root_path and return flash[:notice] = 'Debe cargar un auto antes de publicar un viaje.'
-      end
-      unless @user.has_credit_card
-        redirect_to root_path and return flash[:notice] = 'Debe cargar una tarjeta de credito antes de publicar un viaje.'
-      end
-      if (@user.pending_califications > 0)
-        redirect_to root_path and return flash[:notice] = 'Tienes calificaciones pendientes, no puedes publicar nuevos viajes'
-      end
-    end
-
-    @viaje_recurrente = ViajeRecurrente.new(viaje_recurrente_params)
-
-    respond_to do |format|
+      @viaje_recurrente = ViajeRecurrente.new(viaje_recurrente_params)
+      respond_to do |format|
 
       if @viaje_recurrente.save
         @viaje_recurrente.cant_semanas.times do |i|
@@ -112,6 +97,17 @@ class ViajeRecurrentesController < ApplicationController
         format.json { render json: @viaje_recurrente.errors, status: :unprocessable_entity }
       end
     end
+    else
+      unless @user.has_any_car
+        redirect_to root_path and return flash[:notice] = 'Debe cargar un auto antes de publicar un viaje.'
+      end
+      unless @user.has_credit_card
+        redirect_to root_path and return flash[:notice] = 'Debe cargar una tarjeta de credito antes de publicar un viaje.'
+      end
+      if (@user.pending_califications > 0)
+        redirect_to root_path and return flash[:notice] = 'Tienes calificaciones pendientes, no puedes publicar nuevos viajes'
+      end
+    end
   end
 
   # PATCH/PUT /viaje_recurrentes/1
@@ -119,7 +115,7 @@ class ViajeRecurrentesController < ApplicationController
   def update
     respond_to do |format|
       if @viaje_recurrente.update(viaje_recurrente_params)
-        format.html { redirect_to @viaje_recurrente, notice: 'Viaje recurrente was successfully updated.' }
+        format.html { redirect_to @viaje_recurrente, notice: 'El viaje recurrente fue edidato con exito.' }
         format.json { render :show, status: :ok, location: @viaje_recurrente }
         return
       else
@@ -132,10 +128,14 @@ class ViajeRecurrentesController < ApplicationController
   # DELETE /viaje_recurrentes/1
   # DELETE /viaje_recurrentes/1.json
   def destroy
-    @viaje_recurrente.destroy
-    respond_to do |format|
-      format.html { redirect_to viaje_recurrentes_url, notice: 'Viaje recurrente was successfully destroyed.' }
-      format.json { head :no_content }
+    if !@viaje_recurrente.lastTravel.finished
+       redirect_to viaje_recurrentes_url, notice: 'El viaje recurrente no pudo se eliminado.'
+    else
+      @viaje_recurrente.destroy
+      respond_to do |format|
+        format.html { redirect_to viaje_recurrentes_url, notice: 'El viaje recurrente fue eliminado con exito.' }
+        format.json { head :no_content }
+      end
     end
   end
 
