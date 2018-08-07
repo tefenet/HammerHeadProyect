@@ -11,7 +11,7 @@ class Viaje < ApplicationRecord
   validates :hora, presence: {message: ": Por favor ingrese una hora para el viaje"}, on: [:create, :new, :update]
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
-  validate :validate_inicio
+  #validate :validate_inicio
   validate :validate_fecha
   validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
   #validate :validate_viajes_overlaping
@@ -23,8 +23,9 @@ class Viaje < ApplicationRecord
   end
 
   def eliminarSiNoComenzo
-    if startT > DateTime.now
+    if startT < DateTime.now
       errors.add(:base,"no puede borrar este viaje porque ya pasó")
+      return false
     end
   end
 
