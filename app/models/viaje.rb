@@ -11,18 +11,25 @@ class Viaje < ApplicationRecord
   validates :hora, presence: {message: ": Por favor ingrese una hora para el viaje"}, on: [:create, :new, :update]
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
-  validate :validate_inicio
+  #validate :validate_inicio
   validate :validate_fecha
   validates :car_id, presence: { message: ":Por favor elija un auto"}, on: [:create, :new, :update]
-  validate :validate_viajes_overlaping
+  #validate :validate_viajes_overlaping
   before_destroy :check_solicitudes_aprobadas
+  before_destroy :eliminarSiNoComenzo
 
   def cant_be_edited
     return (self.pasajeros.any? or Request.where("viaje_id = ? AND state = ?", self.id , 1).any?)
   end
 
+  def eliminarSiNoComenzo
+    if startT > DateTime.now
+      errors.add(:base,"no puede borrar este viaje porque ya pasó")
+    end
+  end
+
   def check_solicitudes_aprobadas
-    if self.pasajeros.any?
+    if self.pasajeros.any? && es_recurrente.!
       chofer = User.find(self.chofer_id)
       if (chofer.reputacion_chofer != 0)
         chofer.reputacion_chofer -= 1
@@ -67,6 +74,7 @@ class Viaje < ApplicationRecord
   def finishT
     return DateTime.parse(fecha.to_s + ' ' + hora.to_s).advance(:hours => +duracion)
   end
+
 
   def not_started
     return (DateTime.now < (DateTime.parse(fecha.to_s + ' ' + hora.to_s)))

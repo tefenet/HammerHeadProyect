@@ -9,5 +9,6 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_viaje_recurrente_path(@viaje_recurrente) %> |
-<%= link_to 'Back', viaje_recurrentes_path %>
+<%= link_to 'Editar', edit_viaje_recurrente_path(@viaje_recurrente) %> |
+<%= link_to 'mis viajes', misviajes_path(current_user) %>  |  |
+<%= link_to 'Volver', url_for(:back) %>

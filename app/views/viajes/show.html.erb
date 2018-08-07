@@ -90,8 +90,8 @@
                   <%end%>
             </div>
 
-              <%= link_to 'Editar viaje', edit_viaje_path(@viaje) %> |
-              <%= link_to 'Volver', viajes_path %>
+              <%= link_to_unless @viaje.not_started.!, 'Editar viaje', edit_viaje_path(@viaje) %> |
+              <%= link_to 'Volver', url_for(:back) %>
 
             <%end%>
   </div>

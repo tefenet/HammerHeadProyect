@@ -1,136 +1,148 @@
 
 <div class="container"style="background-color:white">
-        <div class="row">
-            <div class="page-content">
-                <div class="last-rides">
+  <div class="row">
+    <div class="page-content">
+      <div class="last-rides">
 
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        <div class="page-sub-title textcenter">
-                            <h2>Viajes como Chofer</h2>
-                            <div class="line"></div>
-                        </div><!-- end .page-sub-title -->
+          <div class="page-sub-title textcenter">
+            <h2>Viajes como Chofer</h2>
+            <div class="line"></div>
+          </div><!-- end .page-sub-title -->
 
-                    </div>
+        </div>
 
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <% @viajesComoChofer.each do |viaje| %>
+          <% @viajesComoChofer.each do |viaje| %>
 
-                        <article class="ride-box clearfix">
+          <article class="ride-box clearfix">
 
-                            <div class="ride-content">
-                                <h3><a href="#"><% if viaje.es_recurrente %><b> Viaje recurrente </b> <% end %>Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <%= User.find(viaje.chofer_id).full_name %> <%=viaje.car_plate%>
+            <div class="ride-content">
+              <h3><a href="#"><% if viaje.es_recurrente %><b> Viaje recurrente </b> <% end %>Desde <%= viaje.origen %> a <%= viaje.destino %></a></h3> viaje de <%= User.find(viaje.chofer_id).full_name %> <%=viaje.car_plate%>
 
-                            </div>
-                            <ul class="ride-meta">
+            </div>
+            <ul class="ride-meta">
 
-                                <li class="ride-date">
-                                    <b class="tooltip-link" data-original-title="Fecha de partida" data-toggle="tooltip">
-                                        <%= l viaje.fecha, locale: :es %>
-                                    </b>
-                                </li><!-- end .ride-date -->
+              <li class="ride-date">
+                <b class="tooltip-link" data-original-title="Fecha de partida" data-toggle="tooltip">
+                  <%= l viaje.fecha, locale: :es %>
+                </b>
+              </li><!-- end .ride-date -->
 
-                                <li class="ride-people">
-                                    <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        <%= viaje.asientos_libres %> asientos libres
-                                    </b>
-                                </li><!-- end .ride-people -->
+              <li class="ride-people">
+                <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
+                  <%= viaje.asientos_libres %> asientos libres
+                </b>
+              </li><!-- end .ride-people -->
+              <% if (viaje.es_recurrente & !viaje.padreID.nil?)|| viaje.es_recurrente.!%>
+              <li>
+                <%= button_to "Leer mas", viaje_path(viaje.id), :class => "btn2", :method => :get%>
+              </li>
+              <% end %>
+              <li>
+                <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>
+              </li>
+              <% if viaje.es_recurrente.! %>
+              <li>
+                <%= link_to_unless viaje.not_started.!, 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
+              </li>
+              <li>
+                <%= link_to_unless viaje.not_started.!, 'Editar viaje', edit_viaje_path(viaje) %>
+              </li>
+              <% else %>
+              <% if !viaje.padreID.nil?%>
+              <%= link_to_unless viaje.not_started.!, 'Eliminar viaje', viaje_recurrente_path(viaje.padreID), method: :delete, data: { confirm: 'Estas seguro?' } %>
+              </li>
+              <li>
+              <%= link_to_unless viaje.not_started.!, 'Editar viaje', edit_viaje_recurrente_path(viaje.padreID) %>
+              </li>
+              <% end %>
+              <% end %>
 
-                                <li>
-                                  <%= button_to "Leer mas", viaje_path(viaje.id), :class => "btn2", :method => :get%>
-                                </li>
-                                <li>
-                                  <%= link_to 'Ver preguntas', comments_preguntasViaje_url(:id => viaje)%>
-                                </li>
-                                <li>
-                                 <%= link_to 'Eliminar viaje', viaje, method: :delete, data: { confirm: 'Estas seguro?' } %>
-                                 </li>
-                                 <li>
-                                 <%= link_to 'Editar viaje', edit_viaje_path(viaje) %>
-                                 </li>
-                            </ul><!-- end .ride-meta -->
+            </ul><!-- end .ride-meta -->
 
 
-                        </article><!-- end .ride-box -->
+          </article><!-- end .ride-box -->
 
-                    <% end %>
+          <% end %>
 
-                        <div class="clearfix"></div>
+          <div class="clearfix"></div>
 
-                       <!-- <div class="read-all pagination-margin">
-                            <a href="">Leer mas mas</a>
-                        </div> -->
+          <!-- <div class="read-all pagination-margin">
+          <a href="">Leer mas mas</a>
+        </div> -->
 
-                </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
 
-            </div><!-- end .last-rides -->
+    </div><!-- end .last-rides -->
 
-        </div><!-- end .row -->
+  </div><!-- end .row -->
 
-    </div><!-- end .container -->
+</div><!-- end .container -->
 
 <div class="container">
-        <div class="row">
-            <div class="page-content">
-                <div class="last-rides">
+  <div class="row">
+    <div class="page-content">
+      <div class="last-rides">
 
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-                        <div class="page-sub-title textcenter">
-                            <h2>Viajes como Pasajero</h2>
-                            <div class="line"></div>
-                        </div><!-- end .page-sub-title -->
+          <div class="page-sub-title textcenter">
+            <h2>Viajes como Pasajero</h2>
+            <div class="line"></div>
+          </div><!-- end .page-sub-title -->
 
-                    </div>
+        </div>
 
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
 
-                    <% @viajesComoPasajero.each do |viaje| %>
+          <% @viajesComoPasajero.each do |viaje| %>
 
-                        <article class="ride-box clearfix">
+          <article class="ride-box clearfix">
 
-                            <div class="ride-content">
-                                <h3><% if viaje.es_recurrente %><b> Viaje recurrente </b> <% end %>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
-                                <% if viaje.car %>Auto  <%= viaje.car.brand %>  <%= viaje.car.model %>  <%= viaje.car.plate %>
-                                <%else%> no hay registro del Auto
-                                <%end%>
-                            </div>
+            <div class="ride-content">
+              <h3><% if viaje.es_recurrente %><b> Viaje recurrente </b> <% end %>Desde <%= viaje.origen %> a <%= viaje.destino %></h3>ride by <%= User.find(viaje.chofer_id).full_name %>
+              <% if viaje.car %>Auto  <%= viaje.car.brand %>  <%= viaje.car.model %>  <%= viaje.car.plate %>
+              <%else%> no hay registro del Auto
+              <%end%>
+            </div>
 
-                            <ul class="ride-meta">
+            <ul class="ride-meta">
 
-                                <li class="ride-date">
-                                    <b class="tooltip-link" data-original-title="Fecha de Partida" data-toggle="tooltip">
-                                        <%= viaje.fecha %>
-                                    </b>
-                                </li><!-- end .ride-date -->
+              <li class="ride-date">
+                <b class="tooltip-link" data-original-title="Fecha de Partida" data-toggle="tooltip">
+                  <%= viaje.fecha %>
+                </b>
+              </li><!-- end .ride-date -->
 
-                                <li class="ride-people">
-                                    <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        <%= viaje.asientos_libres %>
-                                    </b>
-                                </li><!-- end .ride-people -->
+              <li class="ride-people">
+                <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
+                  <%= viaje.asientos_libres %>
+                </b>
+              </li><!-- end .ride-people -->
 
-                                <li>
-                                    <%= button_to "Leer mas", viaje_path(viaje.id), :class => "btn2", :method => :get%>
-                                </li>
+              <li>
+                <%= button_to "Leer mas", viaje_path(viaje.id), :class => "btn2", :method => :get%>
+              </li>
 
-                            </ul><!-- end .ride-meta -->
+            </ul><!-- end .ride-meta -->
 
-                        </article><!-- end .ride-box -->
+          </article><!-- end .ride-box -->
 
-                    <% end %>
+          <% end %>
 
-                        <div class="clearfix"></div>
+          <div class="clearfix"></div>
 
-                       <!-- <div class="read-all pagination-margin">
-                            <a href="">Leer mas mas</a>
-                        </div> -->
+          <!-- <div class="read-all pagination-margin">
+          <a href="">Leer mas mas</a>
+        </div> -->
 
-                </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
 
-            </div><!-- end .last-rides -->
+    </div><!-- end .last-rides -->
 
-        </div><!-- end .row -->
+  </div><!-- end .row -->
 
-    </div><!-- end .container -->
+</div><!-- end .container -->
