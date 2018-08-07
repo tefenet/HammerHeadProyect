@@ -38,7 +38,7 @@
   <div class="field-wrap">
     <div class="field">
       <%= form.label "Cantidad de semanas" %><br />
-      <%= form.number_field :cant_semanas %>
+      <%= form.number_field :cant_semanas, min:1, max:4 %>
     </div>
   </div>
 

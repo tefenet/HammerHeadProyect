@@ -9,6 +9,7 @@ class ViajeRecurrente < ApplicationRecord
   validates :hora, presence: {message: ": Por favor ingrese una hora para el viaje"}, on: [:create, :new, :update]
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
+	validates :cant_semanas, presence: { message: ":Por favor elija un cantidad de semanas"}, on: [:create, :new, :update]
 
 	def anular
 			self.semanas.each do |s|
