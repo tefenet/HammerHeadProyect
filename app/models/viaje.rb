@@ -125,4 +125,8 @@ class Viaje < ApplicationRecord
     end
   end
 
+  def finished
+    return (DateTime.now >= self.finishT)
+  end
+
 end

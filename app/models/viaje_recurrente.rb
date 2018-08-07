@@ -3,28 +3,7 @@ class ViajeRecurrente < ApplicationRecord
 	has_one :car
 	has_many :semanas, :class_name => "Semana", :dependent=> :destroy
 	validate :only_mondays
-	before_destroy :check_solicitudes_aprobadas
-	before_destroy :anular, prepend: true
 
-	def anular
-		viajesSimples.select{|v| v.not_started.!}.each do |viajePasado|
-		viajePasado.semana_id=nil
-		viajePasado.padreID=nil
-		end
-	end
-	def check_solicitudes_aprobadas
-		prox= self.next_travel
-		if !prox.nil?
-		if prox.pasajeros.any?
-      chofer = User.find(prox.chofer_id)
-      if (chofer.reputacion_chofer != 0)
-        chofer.reputacion_chofer -= 1
-      end
-      prox.pasajeros.each { |pas|  MyMailer.viajeBaja(pas, self).deliver_later(wait: 0.001.second)}
-      chofer.save
-    end
-	end
-	end
 
 	#link de donde saque este metodo
 	# https://stackoverflow.com/questions/7930370/ruby-code-to-get-the-date-of-next-monday-or-any-day-of-the-week
