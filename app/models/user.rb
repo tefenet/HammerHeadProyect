@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   def can_TravelR(idViaje)
     r=ViajeRecurrente.find(idViaje)
-    r.viajesSimples.all? { |vi| User.current.can_travel(vi.id) }
+    r.proximos.all? { |vi| can_Travel(vi.id) }
   end
 
   def viajes

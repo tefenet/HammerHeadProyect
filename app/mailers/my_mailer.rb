@@ -34,7 +34,6 @@ class MyMailer < Devise::Mailer
   end
 
   def pasajero_cancela_rec(req,viajerrec)
-    @.......
     mail(:to => viajerec.chofer.email , subject: 'viaje cancelado')
   end
 end

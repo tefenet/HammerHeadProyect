@@ -54,7 +54,7 @@ class RequestsController < ApplicationController
           redirect_to viaje_path(idViaje), notice: 'tienes otro viaje que se superpone con este'
         end
       else
-        unless User.current.can_TravelR(idViaje)
+        unless User.current.can_TravelR(Viaje.find(idViaje).padreID)
           redirect_to viaje_path(idViaje), notice: 'tienes otro viaje que se superpone con este'
         end
       end

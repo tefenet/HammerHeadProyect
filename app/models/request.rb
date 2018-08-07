@@ -94,7 +94,7 @@ class Request < ApplicationRecord
         usuario.calificacion_negativa("Chofer")
       end
     end
-    self.update_column(:state=>3)
+    self.update_column(:state,3)
   end
 
   def change(code)
@@ -122,9 +122,9 @@ class Request < ApplicationRecord
       end
     else
       travelR=ViajeRecurrente.find(viaje.padreID)
-      if travelR.next.asientos_libres>0 && user.can_TravelR(travelR.id)
+      if travelR.next_travel.asientos_libres>0 && user.can_TravelR(travelR.id)
         if self.update(:state=>1)
-          self.travelR.add_Pasajero(self.user)
+          travelR.add_Pasajero(self.user)
           #MyMailer.announce(self).deliver_later(wait: 0.001.second)
         end
       elsif travelR.asientos_libres == 0

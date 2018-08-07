@@ -37,12 +37,17 @@ class ViajeRecurrente < ApplicationRecord
 		viajesSimples.last
 	end
 
-	def removePasajero(user)
+	def removePasajero(aPassenger)
+		proximos.each do |v| v.removePasajero(aPassenger) end
 		#lo quita de todos a partir del proximo
 		#suma un lugar
 	end
+	def proximos
+		viajesSimples.select{|v| v.fecha >= next_travel.fecha}
+	end
 
 	def add_Pasajero(aPassenger)
+		proximos.each do |v| v.add_Pasajero(aPassenger) end
 		#lo agrega a todos a partir del proximo
 		#resta un lugar
 	end
