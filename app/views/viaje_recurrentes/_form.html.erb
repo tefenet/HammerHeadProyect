@@ -19,10 +19,8 @@
       <% end %>
       </ul>
     </div>
-    <% flash.each do |key, value| %>
-       <div class="alert alert-<%= key %>"><%= value %></div>
-     <% end %>
   <% end %>
+  <%= notice%>
   <div class="field-wrap">
     <div class="field">
         <%= form.label :origen %><br />

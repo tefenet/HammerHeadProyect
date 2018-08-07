@@ -99,13 +99,13 @@ class ViajeRecurrentesController < ApplicationController
     		end
 
         #termina el loop
-        #if simplesComplete(@viaje_recurrente)
+        if simplesComplete(@viaje_recurrente)
           format.html { redirect_to @viaje_recurrente, notice: 'Viaje recurrente was successfully created.' }
           format.json { render :show, status: :created, location: @viaje_recurrente }
-        #else
-        #  format.html { redirect_to @viaje_recurrente, notice: 'algunos viajes no pueden ser creados'  }
-        #  @viaje_recurrente.destroy
-        #end
+        else
+          format.html { redirect_to new_viaje_recurrente_path, notice: 'algunos viajes no pueden ser creados'  }
+          @viaje_recurrente.destroy
+        end
       else
 
         format.html { render :new }
@@ -185,7 +185,11 @@ class ViajeRecurrentesController < ApplicationController
 		if v.domingo
 			porSemana+=1
 		end
-		v.viajesSimples.count!=(porSemana* v.cant_semanas)#esto no esta funcionando
+		if v.viajesSimples.count==(porSemana * v.cant_semanas)#esto no esta funcionando
+      return true
+    else
+      return false
+    end
 	end
 
 
