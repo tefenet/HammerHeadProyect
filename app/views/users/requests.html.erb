@@ -62,12 +62,12 @@
                     <td> <%= req.estado %> </td>
                     <td>
                       <% if req.isPending%>
-                      <%= link_to_unless  User.current.pending_califications > 0,'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
-                      <%= link_to_unless User.current.pending_califications > 0, 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless  ((User.current.pending_califications > 0) || (req.viaje.finished)),'aceptar', change_request_path(:request=>{:id=>req.id,:cambio=>1,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless ((User.current.pending_califications > 0) || (req.viaje.finished)), 'rechazar', change_request_path(:request=>{:id=>req.id,:cambio=>2,:viaje=>req.viaje_id}), method: :put %>
                       <%elsif req.isCanceled %>
                       cancelada
                       <%elsif req.isAccepted%>
-                      <%= link_to 'cancelar', change_request_path(:request=>{:id=>req.id,:cambio=>3,:viaje=>req.viaje_id}), method: :put %>
+                      <%= link_to_unless req.viaje.finished, 'cancelar', change_request_path(:request=>{:id=>req.id,:cambio=>3,:viaje=>req.viaje_id}), method: :put %>
                       <%else%>
                       rechazada
                       <%end%>
