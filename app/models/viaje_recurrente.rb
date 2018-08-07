@@ -10,8 +10,6 @@ class ViajeRecurrente < ApplicationRecord
   validates :precio, presence: { message: ": Por favor ingrese el precio del viaje"}, on: [:create, :new, :update]
   validates :duracion, presence: { message: ": Por favor ingrese una duracion para el viaje"}, on: [:create, :new, :update]
 
-<<<<<<< Updated upstream
-=======
 	def anular
 			self.semanas.each do |s|
 				s.viajes.reject{|v| v.fecha > Date.today}.each do |vi| vi.update_column(:padreID,nil) end
@@ -30,7 +28,6 @@ class ViajeRecurrente < ApplicationRecord
     end
 		end
 	end
->>>>>>> Stashed changes
 
 	#link de donde saque este metodo
 	# https://stackoverflow.com/questions/7930370/ruby-code-to-get-the-date-of-next-monday-or-any-day-of-the-week

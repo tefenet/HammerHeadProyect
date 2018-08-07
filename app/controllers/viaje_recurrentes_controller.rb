@@ -128,16 +128,6 @@ class ViajeRecurrentesController < ApplicationController
   # DELETE /viaje_recurrentes/1
   # DELETE /viaje_recurrentes/1.json
   def destroy
-<<<<<<< Updated upstream
-    if !@viaje_recurrente.lastTravel.finished
-       redirect_to viaje_recurrentes_url, notice: 'El viaje recurrente no pudo se eliminado.'
-    else
-      @viaje_recurrente.destroy
-      respond_to do |format|
-        format.html { redirect_to viaje_recurrentes_url, notice: 'El viaje recurrente fue eliminado con exito.' }
-        format.json { head :no_content }
-      end
-=======
     @viaje_recurrente.proximos.each do |v|
       v.destroy
     end
@@ -145,7 +135,6 @@ class ViajeRecurrentesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to viaje_recurrentes_url, notice: 'Viaje recurrente was successfully destroyed.' }
       format.json { head :no_content }
->>>>>>> Stashed changes
     end
   end
 
