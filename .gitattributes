@@ -1,5 +1,4 @@
-app/views/layouts/* linguist-vendored
-app/views/devise/* linguist-generated
+app/views/ linguist-generated
 test/* linguist-generated
 bin/* linguist-generated
 log/* linguist-generated
