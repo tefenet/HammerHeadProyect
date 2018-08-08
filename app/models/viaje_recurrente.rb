@@ -30,6 +30,11 @@ class ViajeRecurrente < ApplicationRecord
 		end
 	end
 
+def finished
+	return viajesSimples.last.finishT <= DateTime.now
+end
+
+
 	#link de donde saque este metodo
 	# https://stackoverflow.com/questions/7930370/ruby-code-to-get-the-date-of-next-monday-or-any-day-of-the-week
 
@@ -50,8 +55,8 @@ class ViajeRecurrente < ApplicationRecord
 
 	def only_mondays
 		if !self.fecha.monday?
-			errors.add(:inicio, 'Solo puede comenzar un lunes')
-    	end
+			errors.add(:inicio, 'seleccione el lunes de la semana que inicia el viaje')
+    end
 	end
 
 	def viajesSimples

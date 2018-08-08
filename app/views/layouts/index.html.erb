@@ -118,11 +118,11 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
                     <% ViajeRecurrente.all.order(created_at: :desc).each do |viaje| %>
-
+                    <% if !viaje.finished %>
                         <article class="ride-box clearfix">
 
                             <div class="ride-content">
-                                <h3><b> Viaje recurrente </b> 
+                                <h3><b> Viaje recurrente </b>
                                   <% if viaje.lunes == true %> Lunes <% end %>
                                   <% if viaje.martes == true %> Martes <% end %>
                                   <% if viaje.miercoles == true %> Miercoles <% end %>
@@ -136,31 +136,32 @@
 
                                 <li class="ride-date">
                                     <b class="tooltip-link" data-original-title="Fecha de partida" data-toggle="tooltip">
-                                        
+
                                     </b>
                                 </li><!-- end .ride-date -->
 
                                 <li class="ride-people">
                                     <b class="tooltip-link" data-original-title="Numero de asientos" data-toggle="tooltip">
-                                        
+
                                     </b>
                                 </li><!-- end .ride-people -->
 
                                 <li>
-                                    <%= button_to "Leer mas", viaje_path(viaje.next_travel), :class => "btn2", :method => :get%>
+                                    <%= button_to "Leer mas", viaje_path(viaje.next_travel.id), :class => "btn2", :method => :get%>
                                   </li>
                                 <li>
-                                 
+
                                 </li>
                                 <li>
-                                
+
                                  </li>
                                  <li>
-                                 
+
                             </ul><!-- end .ride-meta -->
 
 
                         </article><!-- end .ride-box -->
+                    <% end %>
 
                     <% end %>
 

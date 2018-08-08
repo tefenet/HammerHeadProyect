@@ -127,7 +127,11 @@ class Viaje < ApplicationRecord
   end
 
   def finished
-    return (DateTime.now >= self.finishT)
+    if es_recurrente && !padreID.nil?
+      return ViajeRecurrente.find(self.padreID).finished
+    else
+      return (DateTime.now >= self.finishT)
+    end
   end
 
 end
