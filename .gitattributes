@@ -1,4 +1,4 @@
-app/views/ linguist-generated
+app/views/* linguist-generated
 test/* linguist-generated
 bin/* linguist-generated
 log/* linguist-generated
