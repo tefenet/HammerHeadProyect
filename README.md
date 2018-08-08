@@ -1,39 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version 2.5.1
+* Rails version 5.2.0
 
-Things you may want to cover:
+* System dependencies: postfix or any similary service
 
-* Ruby version
+* Database SQLite
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# aventonSQLite
-
+* On Deployment
 
 # Aventón
 
 Comparti tu viaje y ahorra plata
+Carpool
 
-## Autores
+Autores
 
 * **Santiago Losa**
 
-* **Pablo Kepes**
+* **Pablo**
 
 * **Facundo Olasagarre**
->>>>>>> 0798c5ae25639b62c3ac4d56c8928369a56a6b52
