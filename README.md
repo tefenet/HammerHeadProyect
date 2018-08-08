@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -24,7 +23,8 @@ Things you may want to cover:
 
 * ...
 # aventonSQLite
-=======
+
+
 # Aventón
 
 Comparti tu viaje y ahorra plata
