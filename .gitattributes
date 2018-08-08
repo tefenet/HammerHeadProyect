@@ -4,3 +4,4 @@ bin/* linguist-generated
 log/* linguist-generated
 app/assets/* linguist-vendored
 db/*  linguist-generated
+public/* linguist-vendored
