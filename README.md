@@ -13,11 +13,3 @@
 
 Comparti tu viaje y ahorra plata
 Carpool
-
-Autores
-
-* **Santiago Losa**
-
-* **Pablo**
-
-* **Facundo Olasagarre**
